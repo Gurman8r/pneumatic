@@ -18,6 +18,10 @@ includedirs{
 
 files{
 	"%{_MODULES}lua/lua.premake5.lua",
+	"%{_MODULES}lua/lua.ini",
+	"%{_MODULES}lua/**.hpp",
+	"%{_MODULES}lua/**.cpp",
+
 	"%{_THIRDPARTY}lua/lapi.h", "%{_THIRDPARTY}lua/lauxlib.h", "%{_THIRDPARTY}lua/lcode.h", "%{_THIRDPARTY}lua/lctype.h",
 	"%{_THIRDPARTY}lua/ldebug.h", "%{_THIRDPARTY}lua/ldo.h", "%{_THIRDPARTY}lua/lfunc.h", "%{_THIRDPARTY}lua/lgc.h",
 	"%{_THIRDPARTY}lua/ljumptab.h", "%{_THIRDPARTY}lua/llex.h", "%{_THIRDPARTY}lua/llimits.h", "%{_THIRDPARTY}lua/lmem.h",

@@ -21,6 +21,7 @@ includedirs{
 
 files{
 	"%{_MODULES}mono/mono.premake5.lua",
+	"%{_MODULES}mono/mono.ini",
 	"%{_MODULES}mono/**.hpp",
 	"%{_MODULES}mono/**.cpp",
 }
@@ -35,4 +36,11 @@ postbuildcommands{
 	"{COPYFILE} %{_MODULES}mono/mono.ini %{_BUILD_CFG}",
 }
 	
+-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * --
+
+-- pneumatic-CS
+csharp_project_common("", "pneumatic-CS", "SharedLib", "%{_BUILD_BIN}")
+
+files{ "%{_MODULES}mono/**.cs" }
+
 -- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * --
