@@ -30,6 +30,8 @@ prebuildcommands{
 -- demo-CS
 csharp_project_common("Demo", "demo-CS", "SharedLib", "%{_BUILD_BIN}")
 
+links{ "pneumatic-CS" }
+
 files{ "%{_SLN}demo/**.cs" }
 
 -- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * --

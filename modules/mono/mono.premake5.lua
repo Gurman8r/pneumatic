@@ -7,17 +7,13 @@ targetdir("%{_BUILD_BIN}")
 
 manifest("mono-2.0-sgen")
 
-dependson{ "pneumatic", }
+dependson{ "pneumatic", "pneumatic-CS", }
 
 links{ "assimp%{LIB}", "freetype", "glfw", "imgui", "IrrXML", "pneumatic", "mono-2.0-sgen", "zip", "zlibstatic", }
 
-defines{
-	"PNU_MOD_API=PNU_API_EXPORT",
-}
+defines{ "PNU_MOD_API=PNU_API_EXPORT", }
 
-includedirs{
-	"%{_THIRDPARTY}mono/include/",
-}
+includedirs{ "%{_THIRDPARTY}mono/include/", }
 
 files{
 	"%{_MODULES}mono/mono.premake5.lua",
@@ -39,7 +35,7 @@ postbuildcommands{
 -- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * --
 
 -- pneumatic-CS
-csharp_project_common("", "pneumatic-CS", "SharedLib", "%{_BUILD_BIN}")
+csharp_project_common("Engine", "pneumatic-CS", "SharedLib", "%{_BUILD_BIN}")
 
 files{ "%{_MODULES}mono/**.cs" }
 
