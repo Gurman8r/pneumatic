@@ -1,9 +1,7 @@
 -- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * --
 
 -- glfw
-cpp_project_common("Modules", "glfw", "SharedLib")
-
-targetdir("%{_BUILD_BIN}")
+cpp_project_common("Modules", "glfw", "SharedLib", "%{_BUILD_BIN}")
 
 manifest("glfw")
 

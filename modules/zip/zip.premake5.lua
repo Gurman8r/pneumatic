@@ -1,9 +1,7 @@
 -- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * --
 
 -- zip
-cpp_project_common("Modules", "zip", "StaticLib")
-
-targetdir("%{_BUILD_BIN}")
+cpp_project_common("Modules", "zip", "StaticLib", "%{_BUILD_BIN}")
 
 includedirs{
 	"%{_THIRDPARTY}minizip/",

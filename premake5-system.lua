@@ -56,15 +56,17 @@ end
 -- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * --
 
 -- C++ project common
-function cpp_project_common(grp, prj, knd)
-	group			(grp)
-	project			(prj)
-	kind			(knd)
+function cpp_project_common(_group, _project, _kind, _targetdir)
+	group			(_group)
+	project			(_project)
+	kind			(_kind)
 	language		("C++")
 	cppdialect		("C++17")
 	systemversion	("latest")
 	staticruntime	("Off")
 	rtti			("On")
+	targetname		("%{prj.name}")
+	targetdir		(_targetdir)
 	objdir			("%{_TEMPS}")
 	location		("%{_PROJECT}")
 	prebuildcommands{
@@ -78,19 +80,21 @@ function cpp_project_common(grp, prj, knd)
 end
 
 -- C# project common
-function csharp_project_common(grp, prj, knd)
-	group		(grp)
-	project		(prj)
-	kind		(knd)
+function csharp_project_common(_group, _project, _kind, _targetdir)
+	group		(_group)
+	project		(_project)
+	kind		(_kind)
 	language	("C#")
 	framework	("4.0")
+	targetname	("%{prj.name}")
+	targetdir	(_targetdir)
 	objdir		("%{_TEMPS}")
 	location	("%{_PROJECT}")
 end
 
 -- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * --
 
--- graphics linker settings
+-- graphics links
 function links_graphics()
 	filter{ "language:C++", "options:gfxapi=opengl" } links{ "opengl32" } defines{ "OPENGL_ENABLED=1" }
 	filter{ "language:C++", "options:gfxapi=opengl", "options:glapi=glad" } dependson{ "glad" } links{ "glad" } defines{ "OPENGL_LOADER_GLAD=1" }
@@ -102,7 +106,7 @@ function links_graphics()
 	filter{}
 end
 
--- windows linker settings
+-- windows links
 function links_win32()
 	filter{ "language:C++", "system:windows" } links{ "dwmapi", } buildoptions{ "/bigobj" } defines{ "_CRT_SECURE_NO_WARNINGS" } undefines{ "NDEBUG" }
 	filter{ "language:C++", "system:windows", "configurations:Debug" } linkoptions{ "/NODEFAULTLIB:MSVCRT.lib", "/NODEFAULTLIB:LIBCMT.lib", "/NODEFAULTLIB:LIBCMTD.lib" }

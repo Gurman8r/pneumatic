@@ -1,9 +1,7 @@
 -- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * --
 
 -- imgui
-cpp_project_common("Modules", "imgui", "SharedLib")
-
-targetdir("%{_BUILD_BIN}")
+cpp_project_common("Modules", "imgui", "SharedLib", "%{_BUILD_BIN}")
 
 manifest("imgui")
 

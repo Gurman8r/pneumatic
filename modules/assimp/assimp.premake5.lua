@@ -1,9 +1,7 @@
 -- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * --
 
 -- assimp
-cpp_project_common("Modules", "assimp", "Utility")
-
-targetdir("%{_BUILD_BIN}")
+cpp_project_common("Modules", "assimp", "Utility", "%{_BUILD_BIN}")
 
 manifest("assimp")
 

@@ -1,9 +1,7 @@
 -- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * --
 
 -- lua
-cpp_project_common("Modules", "lua", "SharedLib")
-
-targetdir("%{_BUILD_BIN}")
+cpp_project_common("Modules", "lua", "SharedLib", "%{_BUILD_BIN}")
 
 dependson{ "pneumatic", }
 

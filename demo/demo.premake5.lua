@@ -1,7 +1,5 @@
 -- demo
-cpp_project_common("Demo", "demo", "ConsoleApp")
-
-targetdir("%{_BUILD_BIN}")
+cpp_project_common("Demo", "demo", "ConsoleApp", "%{_BUILD}")
 
 links_graphics()
 
@@ -23,16 +21,14 @@ files{
 	"%{_PLATFORM}windows/pneumatic.ico",
 }
 
-postbuildcommands{
+prebuildcommands{
 	"{COPYFILE} %{_PLATFORM}windows/binaries.manifest %{_BUILD_BIN}",
 }
 
 -- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * --
 
 -- demo-CS
-csharp_project_common("Demo", "demo-CS", "SharedLib")
-
-targetdir("%{_BUILD_BIN}")
+csharp_project_common("Demo", "demo-CS", "SharedLib", "%{_BUILD_BIN}")
 
 files{ "%{_SLN}demo/**.cs" }
 
