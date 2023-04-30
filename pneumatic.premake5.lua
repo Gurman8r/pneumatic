@@ -1,9 +1,7 @@
 -- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * --
 
 -- pneumatic
-cpp_project_common("", "pneumatic", "SharedLib")
-
-targetdir("%{_BUILD_BIN}")
+cpp_project_common("Engine", "pneumatic", "SharedLib", "%{_BUILD_BIN}")
 
 manifest("pneumatic")
 

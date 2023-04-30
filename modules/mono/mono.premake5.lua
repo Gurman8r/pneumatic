@@ -1,9 +1,7 @@
 -- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * --
 
 -- mono
-cpp_project_common("Modules", "mono", "SharedLib")
-
-targetdir("%{_BUILD_BIN}")
+cpp_project_common("Modules", "mono", "SharedLib", "%{_BUILD_BIN}")
 
 manifest("mono-2.0-sgen")
 
