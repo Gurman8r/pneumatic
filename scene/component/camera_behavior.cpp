@@ -1,6 +1,6 @@
 #include <scene/component/camera_behavior.hpp>
 
-namespace pn
+namespace Pnu
 {
 	EMBED_CLASS(CameraBehavior, t) {}
 

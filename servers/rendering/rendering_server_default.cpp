@@ -5,7 +5,7 @@
 #define RENDERING_DEVICE_DEFAULT RenderingDeviceOpenGL
 #endif
 
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 

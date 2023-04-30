@@ -1,11 +1,11 @@
-#ifndef _PN_MAP_HPP_
-#define _PN_MAP_HPP_
+#ifndef _PNU_MAP_HPP_
+#define _PNU_MAP_HPP_
 
 #include <core/os/memory.hpp>
 
 #include <map>
 
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
@@ -80,4 +80,4 @@ namespace pn
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 }
 
-#endif // !_PN_MAP_HPP_
+#endif // !_PNU_MAP_HPP_

@@ -1,11 +1,11 @@
-#ifndef _PN_RENDERER_COMPONENT_HPP_
-#define _PN_RENDERER_COMPONENT_HPP_
+#ifndef _PNU_RENDERER_COMPONENT_HPP_
+#define _PNU_RENDERER_COMPONENT_HPP_
 
 #include <scene/component/component.hpp>
 
-namespace pn
+namespace Pnu
 {
-	class PN_API RendererComponent : public Component
+	class PNU_API RendererComponent : public Component
 	{
 		DEFINE_CLASS(RendererComponent, Component);
 
@@ -15,4 +15,4 @@ namespace pn
 	};
 }
 
-#endif // !_PN_RENDERER_COMPONENT_HPP_
+#endif // !_PNU_RENDERER_COMPONENT_HPP_

@@ -1,13 +1,13 @@
-#ifndef _PN_SHADER_LANGUAGE_HPP_
-#define _PN_SHADER_LANGUAGE_HPP_
+#ifndef _PNU_SHADER_LANGUAGE_HPP_
+#define _PNU_SHADER_LANGUAGE_HPP_
 
 #include <core/object/var.hpp>
 
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-	class PN_API ShaderLanguage
+	class PNU_API ShaderLanguage
 	{
 		mutable Vector<String> m_tokens;
 
@@ -54,7 +54,7 @@ namespace pn
 
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-	class PN_API ShaderLanguageGLSL : public ShaderLanguage
+	class PNU_API ShaderLanguageGLSL : public ShaderLanguage
 	{
 	public:
 		virtual ~ShaderLanguageGLSL() noexcept override = default;
@@ -65,4 +65,4 @@ namespace pn
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 }
 
-#endif // !_PN_SHADER_LANGUAGE_HPP_
+#endif // !_PNU_SHADER_LANGUAGE_HPP_

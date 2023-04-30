@@ -1,11 +1,11 @@
-#ifndef _PN_EXTENSION_MANAGER_HPP_
-#define _PN_EXTENSION_MANAGER_HPP_
+#ifndef _PNU_EXTENSION_MANAGER_HPP_
+#define _PNU_EXTENSION_MANAGER_HPP_
 
 #include <core/extension/extension.hpp>
 
-namespace pn
+namespace Pnu
 {
-	class PN_API ExtensionManager : public Object
+	class PNU_API ExtensionManager : public Object
 	{
 		DEFINE_CLASS(ExtensionManager, Object);
 
@@ -47,4 +47,4 @@ namespace pn
 	SINGLETON_WRAPPER(ExtensionManager, get_extension_manager)
 }
 
-#endif // !_PN_EXTENSION_MANAGER_HPP_
+#endif // !_PNU_EXTENSION_MANAGER_HPP_

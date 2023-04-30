@@ -1,6 +1,6 @@
 #include <scene/main/instance_placeholder.hpp>
 
-namespace pn
+namespace Pnu
 {
 	EMBED_CLASS(InstancePlaceholder, t) {}
 

@@ -1,6 +1,6 @@
 #include <scene/component/renderer_component.hpp>
 
-namespace pn
+namespace Pnu
 {
 	EMBED_CLASS(RendererComponent, t) {}
 

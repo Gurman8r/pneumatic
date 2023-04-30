@@ -1,6 +1,6 @@
 #include <core/os/main_loop.hpp>
 
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 

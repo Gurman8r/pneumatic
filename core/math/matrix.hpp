@@ -1,9 +1,9 @@
-#ifndef _PN_MATRIX_HPP_
-#define _PN_MATRIX_HPP_
+#ifndef _PNU_MATRIX_HPP_
+#define _PNU_MATRIX_HPP_
 
 #include <core/templates/array.hpp>
 
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
@@ -515,4 +515,4 @@ namespace pn
 #include "mat3x3.inl"
 #include "mat4x4.inl"
 
-#endif // !_PN_MATRIX_HPP_
+#endif // !_PNU_MATRIX_HPP_

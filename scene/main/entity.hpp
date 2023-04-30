@@ -1,13 +1,13 @@
-#ifndef _PN_ENTITY_HPP_
-#define _PN_ENTITY_HPP_
+#ifndef _PNU_ENTITY_HPP_
+#define _PNU_ENTITY_HPP_
 
 #include <scene/main/node.hpp>
 
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-	class PN_API Entity : public Node
+	class PNU_API Entity : public Node
 	{
 		DEFINE_CLASS(Entity, Node);
 
@@ -57,4 +57,4 @@ namespace pn
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 }
 
-#endif // !_PN_ENTITY_HPP_
+#endif // !_PNU_ENTITY_HPP_

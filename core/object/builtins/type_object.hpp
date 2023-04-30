@@ -1,15 +1,15 @@
-#ifndef _PN_TYPE_OBJECT_HPP_
-#define _PN_TYPE_OBJECT_HPP_
+#ifndef _PNU_TYPE_OBJECT_HPP_
+#define _PNU_TYPE_OBJECT_HPP_
 
 #include <core/object/internals.hpp>
 
 // type
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 	// type object
-	class PN_API TypeObject : public Object
+	class PNU_API TypeObject : public Object
 	{
 	public:
 		using base_type = typename Object;
@@ -162,7 +162,7 @@ namespace pn
 	template <> struct DefaultDelete<TypeObject> : DefaultDelete<Object> {};
 
 	// type check
-#define OBJECT_CHECK_TYPE(o) (pn::typeof(o).has_feature(pn::TypeFlags_Type_Subclass))
+#define OBJECT_CHECK_TYPE(o) (Pnu::typeof(o).has_feature(Pnu::TypeFlags_Type_Subclass))
 
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
@@ -200,7 +200,7 @@ namespace pn
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 }
 
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
@@ -261,4 +261,4 @@ namespace pn
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 }
 
-#endif // !_PN_TYPE_OBJECT_HPP_
+#endif // !_PNU_TYPE_OBJECT_HPP_

@@ -2,7 +2,7 @@
 #include <servers/rendering_server.hpp>
 #include <core/math/transform.hpp>
 
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 

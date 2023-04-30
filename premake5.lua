@@ -1,6 +1,6 @@
 -- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * --
 
-workspace "pneumatic_sdk_%{_ACTION}"
+workspace "pneumatic_%{_ACTION}"
 startproject "demo"
 
 configurations{ "Debug", "Release" }
@@ -19,9 +19,6 @@ solution_items{
 	"README.md",
 	"premake5.lua",
 	"premake5-system.lua",
-	"engine.ini",
-	"editor.ini",
-	"extensions.cfg",
 	"TODO.txt",
 }
 
@@ -50,51 +47,28 @@ debugdir "%{_BUILD}"
 
 debugenvs{ "%{_BUILD}" }
 
--- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * --
+libdirs{ "%{_BUILD_BIN}", }
 
--- C++ project settings
-filter{ "language:C++" }
+includedirs{
+	"%{_SLN}",
+	"%{_THIRDPARTY}",
+	"%{_THIRDPARTY}assimp/include/",
+	"%{_THIRDPARTY}entt/src/",
+	"%{_THIRDPARTY}freetype2/include/",
+	"%{_THIRDPARTY}freetype2/include/freetype/",
+	"%{_THIRDPARTY}gcem/include/",
+	"%{_THIRDPARTY}glfw/include/",
+	"%{_THIRDPARTY}imgui/",
+	"%{_THIRDPARTY}json/include/",
+	"%{_THIRDPARTY}mono/include/",
+	"%{_THIRDPARTY}lua/",
+	"%{_THIRDPARTY}zlib/",
+	"%{_THIRDPARTY}minizip/",
+}
 
-	libdirs{ "%{_BUILD_BIN}", }
-
-	includedirs{
-		"%{wks.location}",
-		"%{_THIRDPARTY}/",
-		"%{_THIRDPARTY}/assimp/include/",
-		"%{_THIRDPARTY}/entt/src/",
-		"%{_THIRDPARTY}/freetype2/include/",
-		"%{_THIRDPARTY}/freetype2/include/freetype/",
-		"%{_THIRDPARTY}/gcem/include/",
-		"%{_THIRDPARTY}/glfw/include/",
-		"%{_THIRDPARTY}/imgui/",
-		"%{_THIRDPARTY}/json/include/",
-		"%{_THIRDPARTY}/mono/include/",
-		"%{_THIRDPARTY}/lua/",
-		"%{_THIRDPARTY}/zlib/",
-		"%{_THIRDPARTY}/minizip/",
-	}
-
-	prebuildcommands{
-		"{MKDIR} %{_BUILD}",
-		"{MKDIR} %{_BUILD_BIN}",
-		"{MKDIR} %{_BUILD_DAT}",
-		"{MKDIR} %{_BUILD_CFG}",
-		"{MKDIR} %{_BUILD_RES}",
-		"{MKDIR} %{_BUILD_USR}",
-	}
-
-	if _TARGET_OS=="windows" then
-		links_win32()
-		generate_manifest("platform/windows/binaries.manifest")
-	end
-
-filter{}
-
--- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * --
-
--- C# project settings
-filter{ "language:C#" }
-	-- nothing to do here
-filter{}
+if _TARGET_OS=="windows" then
+	links_win32()
+	generate_manifest("platform/windows/binaries.manifest")
+end
 
 -- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * --

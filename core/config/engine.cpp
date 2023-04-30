@@ -1,6 +1,6 @@
 #include <core/config/engine.hpp>
 
-namespace pn
+namespace Pnu
 {
 	Engine * Engine::__singleton{};
 

@@ -1,13 +1,13 @@
-#ifndef _PN_MAIN_HPP_
-#define _PN_MAIN_HPP_
+#ifndef _PNU_MAIN_HPP_
+#define _PNU_MAIN_HPP_
 
 #include <core/os/os.hpp>
 
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-	class PN_API Main final
+	class PNU_API Main final
 	{
 		static i32 m_iterating;
 		static u64 m_frame;
@@ -27,4 +27,4 @@ namespace pn
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 }
 
-#endif // !_PN_MAIN_HPP_
+#endif // !_PNU_MAIN_HPP_

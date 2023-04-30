@@ -1,13 +1,13 @@
-#ifndef _PN_CPPFUNCTION_OBJECT_HPP_
-#define _PN_CPPFUNCTION_OBJECT_HPP_
+#ifndef _PNU_CPPFUNCTION_OBJECT_HPP_
+#define _PNU_CPPFUNCTION_OBJECT_HPP_
 
 #include <core/object/call.hpp>
 
 // cppfunction
-namespace pn
+namespace Pnu
 {
 	// cppfunction object
-	class PN_API CppFunctionObject : public FunctionObject
+	class PNU_API CppFunctionObject : public FunctionObject
 	{
 		DEFINE_CLASS(CppFunctionObject, FunctionObject);
 
@@ -162,7 +162,7 @@ namespace pn
 	};
 }
 
-namespace pn
+namespace Pnu
 {
 	inline OBJ FunctionObject::cpp_function() const noexcept
 	{
@@ -170,4 +170,4 @@ namespace pn
 	}
 }
 
-#endif // !_PN_CPPFUNCTION_OBJECT_HPP_
+#endif // !_PNU_CPPFUNCTION_OBJECT_HPP_

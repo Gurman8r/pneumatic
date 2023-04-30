@@ -1,10 +1,10 @@
-#ifndef _PN_FILE_ACCESS_PACK_HPP_
-#define _PN_FILE_ACCESS_PACK_HPP_
+#ifndef _PNU_FILE_ACCESS_PACK_HPP_
+#define _PNU_FILE_ACCESS_PACK_HPP_
 
 #include <core/io/dir_access.hpp>
 #include <core/io/file_access.hpp>
 
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
@@ -17,7 +17,7 @@ namespace pn
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 	// packed data
-	class PN_API PackedData
+	class PNU_API PackedData
 	{
 	public:
 		using PathID = size_t;
@@ -70,7 +70,7 @@ namespace pn
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 	// pack source
-	class PN_API PackSource {
+	class PNU_API PackSource {
 	public:
 		virtual ~PackSource() noexcept = default;
 		virtual bool try_open_pack(String const & path, bool replace_files, u64 offset) = 0;
@@ -78,7 +78,7 @@ namespace pn
 	};
 
 	// pack source PCK
-	class PN_API PackSourcePCK : public PackSource {
+	class PNU_API PackSourcePCK : public PackSource {
 	public:
 		virtual bool try_open_pack(String const & path, bool replace_files, u64 offset) override;
 		virtual Ref<FileAccess> get_file(String const & path, PackedData::PackedFile * file) override;
@@ -87,7 +87,7 @@ namespace pn
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 	// file access pack
-	class PN_API FileAccessPack : public Object
+	class PNU_API FileAccessPack : public Object
 	{
 		DEFINE_CLASS(FileAccessPack, Object);
 
@@ -97,7 +97,7 @@ namespace pn
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 	// dir access pack
-	class PN_API DirAccessPack : public Object
+	class PNU_API DirAccessPack : public Object
 	{
 		DEFINE_CLASS(DirAccessPack, Object);
 
@@ -107,4 +107,4 @@ namespace pn
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 }
 
-#endif // !_PN_FILE_ACCESS_PACK_HPP_
+#endif // !_PNU_FILE_ACCESS_PACK_HPP_

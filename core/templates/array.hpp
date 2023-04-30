@@ -1,9 +1,9 @@
-#ifndef _PN_ARRAY_HPP_
-#define _PN_ARRAY_HPP_
+#ifndef _PNU_ARRAY_HPP_
+#define _PNU_ARRAY_HPP_
 
 #include <core/templates/utility.hpp>
 
-namespace pn
+namespace Pnu
 {
 	// fixed size array
 	template <class _Ty, size_t _Size
@@ -188,4 +188,4 @@ namespace pn
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 }
 
-#endif // !_PN_ARRAY_HPP_
+#endif // !_PNU_ARRAY_HPP_

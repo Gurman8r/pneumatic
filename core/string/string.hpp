@@ -1,5 +1,5 @@
-#ifndef _PN_STRING_HPP_
-#define _PN_STRING_HPP_
+#ifndef _PNU_STRING_HPP_
+#define _PNU_STRING_HPP_
 
 #include <core/error/error_macros.hpp>
 #include <core/string/string_view.hpp>
@@ -7,7 +7,7 @@
 
 #include <string>
 
-namespace pn::util
+namespace Pnu::util
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
@@ -186,7 +186,7 @@ namespace pn::util
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 }
 
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
@@ -578,4 +578,4 @@ namespace pn
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 }
 
-#endif // !_PN_STRING_HPP_
+#endif // !_PNU_STRING_HPP_

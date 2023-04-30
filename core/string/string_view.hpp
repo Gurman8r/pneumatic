@@ -1,11 +1,11 @@
-#ifndef _PN_STRING_VIEW_HPP_
-#define _PN_STRING_VIEW_HPP_
+#ifndef _PNU_STRING_VIEW_HPP_
+#define _PNU_STRING_VIEW_HPP_
 
 #include <core/templates/utility.hpp>
 
 #include <string_view>
 
-namespace pn::util
+namespace Pnu::util
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
@@ -31,7 +31,7 @@ namespace pn::util
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 }
 
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
@@ -76,4 +76,4 @@ namespace pn
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 }
 
-#endif // !_PN_STRING_VIEW_HPP_
+#endif // !_PNU_STRING_VIEW_HPP_

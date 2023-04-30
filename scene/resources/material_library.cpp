@@ -1,6 +1,6 @@
 #include <scene/resources/material_library.hpp>
 
-namespace pn
+namespace Pnu
 {
 	Error_ MaterialLibrary::load_material(Material & material, String const & path)
 	{

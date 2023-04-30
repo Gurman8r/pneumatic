@@ -1,7 +1,7 @@
 #include <core/object/script.hpp>
 
 // script server
-namespace pn
+namespace Pnu
 {
 	EMBED_CLASS(ScriptServer, t) {}
 
@@ -46,7 +46,7 @@ namespace pn
 }
 
 // script
-namespace pn
+namespace Pnu
 {
 	EMBED_CLASS(Script, t, TypeFlags_IsAbstract) {}
 
@@ -64,7 +64,7 @@ namespace pn
 }
 
 // script instance
-namespace pn
+namespace Pnu
 {
 	EMBED_CLASS(ScriptInstance, t, TypeFlags_IsAbstract) {}
 
@@ -74,7 +74,7 @@ namespace pn
 }
 
 // script language
-namespace pn
+namespace Pnu
 {
 	EMBED_CLASS(ScriptLanguage, t, TypeFlags_IsAbstract) {}
 
@@ -88,7 +88,7 @@ namespace pn
 }
 
 // placeholder script instance
-namespace pn
+namespace Pnu
 {
 	EMBED_CLASS(PlaceholderScriptInstance, t) {}
 

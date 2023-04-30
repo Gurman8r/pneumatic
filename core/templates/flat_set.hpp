@@ -1,9 +1,9 @@
-#ifndef _PN_FLAT_SET_HPP_
-#define _PN_FLAT_SET_HPP_
+#ifndef _PNU_FLAT_SET_HPP_
+#define _PNU_FLAT_SET_HPP_
 
 #include <core/templates/vector.hpp>
 
-namespace pn
+namespace Pnu
 {
 	// BASIC FLAT SET
 	template <
@@ -493,7 +493,7 @@ namespace pn
 	};
 }
 
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
@@ -506,4 +506,4 @@ namespace pn
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 }
 
-#endif // !_PN_FLAT_SET_HPP_
+#endif // !_PNU_FLAT_SET_HPP_

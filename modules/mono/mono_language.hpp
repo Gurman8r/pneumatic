@@ -1,5 +1,5 @@
-#ifndef _PN_MONO_LANGUAGE_HPP_
-#define _PN_MONO_LANGUAGE_HPP_
+#ifndef _PNU_MONO_LANGUAGE_HPP_
+#define _PNU_MONO_LANGUAGE_HPP_
 
 #include <core/object/script.hpp>
 
@@ -12,10 +12,10 @@
 #include <mono/metadata/object.h>
 #include <mono/metadata/tokentype.h>
 
-namespace pn
+namespace Pnu
 {
 	// mono language
-	class PN_MOD_API MonoLanguage : public ScriptLanguage
+	class PNU_MOD_API MonoLanguage : public ScriptLanguage
 	{
 		DEFINE_CLASS(MonoLanguage, ScriptLanguage);
 
@@ -38,4 +38,4 @@ namespace pn
 	};
 }
 
-#endif // !_PN_MONO_LANGUAGE_HPP_
+#endif // !_PNU_MONO_LANGUAGE_HPP_

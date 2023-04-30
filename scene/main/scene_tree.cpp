@@ -2,7 +2,7 @@
 #include <scene/main/missing_node.hpp>
 #include <scene/main/window.hpp>
 
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 

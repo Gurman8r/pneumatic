@@ -1,13 +1,13 @@
-#ifndef _PN_FUNCTION_OBJECT_HPP_
-#define _PN_FUNCTION_OBJECT_HPP_
+#ifndef _PNU_FUNCTION_OBJECT_HPP_
+#define _PNU_FUNCTION_OBJECT_HPP_
 
 #include <core/object/builtins/type_object.hpp>
 
 // function
-namespace pn
+namespace Pnu
 {
 	// function object
-	class PN_API FunctionObject : public Object
+	class PNU_API FunctionObject : public Object
 	{
 		DEFINE_CLASS(FunctionObject, Object);
 
@@ -43,4 +43,4 @@ namespace pn
 	};
 }
 
-#endif // !_PN_FUNCTION_OBJECT_HPP_
+#endif // !_PNU_FUNCTION_OBJECT_HPP_

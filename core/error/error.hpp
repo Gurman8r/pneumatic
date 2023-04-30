@@ -1,11 +1,11 @@
-#ifndef _PN_ERROR_HPP_
-#define _PN_ERROR_HPP_
+#ifndef _PNU_ERROR_HPP_
+#define _PNU_ERROR_HPP_
 
 // WIP
 
 #include <core/templates/type_traits.hpp>
 
-namespace pn
+namespace Pnu
 {
 	enum Error_
 	{
@@ -18,4 +18,4 @@ namespace pn
 	};
 }
 
-#endif // !_PN_ERROR_HPP_
+#endif // !_PNU_ERROR_HPP_

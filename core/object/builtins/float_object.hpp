@@ -1,13 +1,13 @@
-#ifndef _PN_FLOAT_OBJECT_HPP_
-#define _PN_FLOAT_OBJECT_HPP_
+#ifndef _PNU_FLOAT_OBJECT_HPP_
+#define _PNU_FLOAT_OBJECT_HPP_
 
 #include <core/object/builtins/type_object.hpp>
 
 // float
-namespace pn
+namespace Pnu
 {
 	// float object
-	class PN_API FloatObject : public Object
+	class PNU_API FloatObject : public Object
 	{
 		DEFINE_CLASS(FloatObject, Object);
 
@@ -36,7 +36,7 @@ namespace pn
 	template <> struct DefaultDelete<FloatObject> : DefaultDelete<Object> {};
 
 	// float check
-#define OBJECT_CHECK_FLOAT(o) (pn::typeof(o).has_feature(pn::TypeFlags_Float_Subclass))
+#define OBJECT_CHECK_FLOAT(o) (Pnu::typeof(o).has_feature(Pnu::TypeFlags_Float_Subclass))
 
 	// float ref
 	class FLT : public Ref<FloatObject>
@@ -62,4 +62,4 @@ namespace pn
 	};
 }
 
-#endif // !_PN_FLOAT_OBJECT_HPP_
+#endif // !_PNU_FLOAT_OBJECT_HPP_

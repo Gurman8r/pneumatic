@@ -1,12 +1,12 @@
-#ifndef _PN_TYPE_INFO_HPP_
-#define _PN_TYPE_INFO_HPP_
+#ifndef _PNU_TYPE_INFO_HPP_
+#define _PNU_TYPE_INFO_HPP_
 
 #include <core/string/string_view.hpp>
 
 #include <typeinfo>
 #include <typeindex>
 
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
@@ -26,15 +26,15 @@ namespace pn
 
 #if CC_MSVC
 #define PRETTY_FUNCTION		__FUNCSIG__
-#define PRETTY_TYPE_PREFIX	"class pn::ctti::NameView __cdecl pn::ctti::nameof<"
+#define PRETTY_TYPE_PREFIX	"class Pnu::ctti::NameView __cdecl Pnu::ctti::nameof<"
 #define PRETTY_TYPE_SUFFIX	">(void)"
 #elif CC_CLANG
 #define PRETTY_FUNCTION		__PRETTY_FUNCTION__
-#define PRETTY_TYPE_PREFIX	"pn::ctti::NameView pn::ctti::nameof() [T = "
+#define PRETTY_TYPE_PREFIX	"Pnu::ctti::NameView Pnu::ctti::nameof() [T = "
 #define PRETTY_TYPE_SUFFIX	"]"
 #elif CC_GCC
 #define PRETTY_FUNCTION		__PRETTY_FUNCTION__
-#define PRETTY_TYPE_PREFIX	"constexpr pn::ctti::NameView pn::ctti::nameof() [with T = "
+#define PRETTY_TYPE_PREFIX	"constexpr Pnu::ctti::NameView Pnu::ctti::nameof() [with T = "
 #define PRETTY_TYPE_SUFFIX	"]"
 #else
 #error "ctti is unavailable"
@@ -86,4 +86,4 @@ namespace pn
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 }
 
-#endif // !_PN_TYPE_INFO_HPP_
+#endif // !_PNU_TYPE_INFO_HPP_

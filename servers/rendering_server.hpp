@@ -1,16 +1,16 @@
-#ifndef _PN_RENDERING_SERVER_HPP_
-#define _PN_RENDERING_SERVER_HPP_
+#ifndef _PNU_RENDERING_SERVER_HPP_
+#define _PNU_RENDERING_SERVER_HPP_
 
 #include <core/io/image.hpp>
 #include <servers/rendering/rendering_device.hpp>
 #include <servers/rendering/shader_language.hpp>
 
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 	// high-level graphics api
-	class PN_API RenderingServer : public Object
+	class PNU_API RenderingServer : public Object
 	{
 		DEFINE_CLASS(RenderingServer, Object);
 
@@ -123,4 +123,4 @@ namespace pn
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 }
 
-#endif // !_PN_RENDERING_SERVER_HPP_
+#endif // !_PNU_RENDERING_SERVER_HPP_

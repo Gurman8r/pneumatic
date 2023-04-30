@@ -1,9 +1,9 @@
-#ifndef _PN_PERFORMANCE_HPP_
-#define _PN_PERFORMANCE_HPP_
+#ifndef _PNU_PERFORMANCE_HPP_
+#define _PNU_PERFORMANCE_HPP_
 
 #include <core/object/class.hpp>
 
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
@@ -27,7 +27,7 @@ namespace pn
 
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-	class PN_API Performance : public Object
+	class PNU_API Performance : public Object
 	{
 		DEFINE_CLASS(Performance, Object);
 
@@ -42,4 +42,4 @@ namespace pn
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 }
 
-#endif // !_PN_PERFORMANCE_HPP_
+#endif // !_PNU_PERFORMANCE_HPP_

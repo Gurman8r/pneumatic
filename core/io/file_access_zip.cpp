@@ -1,6 +1,6 @@
 #include <core/io/file_access_zip.hpp>
 
-namespace pn
+namespace Pnu
 {
 	struct ZipData { Ref<FileAccess> f{}; };
 
@@ -62,7 +62,7 @@ namespace pn
 	}
 }
 
-namespace pn
+namespace Pnu
 {
 	ZipArchive * ZipArchive::__singleton{};
 
@@ -179,7 +179,7 @@ namespace pn
 	}
 }
 
-namespace pn
+namespace Pnu
 {
 	EMBED_CLASS(FileAccessZip, t) {}
 

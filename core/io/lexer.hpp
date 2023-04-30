@@ -1,15 +1,15 @@
-#ifndef _PN_LEXER_HPP_
-#define _PN_LEXER_HPP_
+#ifndef _PNU_LEXER_HPP_
+#define _PNU_LEXER_HPP_
 
 // PLACEHOLDER
 
 #include <core/object/class.hpp>
 
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-	class PN_API Lexer : public Object
+	class PNU_API Lexer : public Object
 	{
 		DEFINE_CLASS(Lexer, Object);
 
@@ -23,4 +23,4 @@ namespace pn
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 }
 
-#endif // !_PN_LEXER_HPP_
+#endif // !_PNU_LEXER_HPP_

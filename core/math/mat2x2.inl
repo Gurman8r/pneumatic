@@ -1,8 +1,8 @@
-#ifdef _PN_MATRIX_HPP_
+#ifdef _PNU_MATRIX_HPP_
 
 /* MAT2 */
 
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
@@ -79,4 +79,4 @@ namespace pn
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 }
 
-#endif // _PN_MATRIX_HPP_
+#endif // _PNU_MATRIX_HPP_

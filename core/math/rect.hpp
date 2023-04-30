@@ -1,9 +1,9 @@
-#ifndef _PN_RECT_HPP_
-#define _PN_RECT_HPP_
+#ifndef _PNU_RECT_HPP_
+#define _PNU_RECT_HPP_
 
 #include <core/math/matrix.hpp>
 
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
@@ -101,4 +101,4 @@ namespace pn
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 }
 
-#endif // !_PN_RECT_HPP_
+#endif // !_PNU_RECT_HPP_

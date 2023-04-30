@@ -1,6 +1,6 @@
 #include <scene/main/resource_preloader.hpp>
 
-namespace pn
+namespace Pnu
 {
 	EMBED_CLASS(ResourcePreloader, t) {}
 

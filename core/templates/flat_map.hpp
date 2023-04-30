@@ -1,10 +1,10 @@
-#ifndef _PN_FLAT_MAP_HPP_
-#define _PN_FLAT_MAP_HPP_
+#ifndef _PNU_FLAT_MAP_HPP_
+#define _PNU_FLAT_MAP_HPP_
 
 #include <core/templates/flat_set.hpp>
 #include <core/templates/optional.hpp>
 
-namespace pn
+namespace Pnu
 {
 	// BASIC FLAT MAP
 	template <
@@ -589,7 +589,7 @@ namespace pn
 	};
 }
 
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
@@ -599,4 +599,4 @@ namespace pn
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 }
 
-#endif // !_PN_FLAT_MAP_HPP_
+#endif // !_PNU_FLAT_MAP_HPP_

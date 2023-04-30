@@ -1,9 +1,9 @@
-#ifndef _PN_MPL_HPP_
-#define _PN_MPL_HPP_
+#ifndef _PNU_MPL_HPP_
+#define _PNU_MPL_HPP_
 
 #include <core/templates/tuple.hpp>
 
-namespace pn::mpl
+namespace Pnu::mpl
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
@@ -316,4 +316,4 @@ namespace pn::mpl
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 }
 
-#endif // !_PN_MPL_HPP_
+#endif // !_PNU_MPL_HPP_

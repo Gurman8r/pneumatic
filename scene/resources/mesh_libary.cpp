@@ -3,7 +3,7 @@
 #include <servers/rendering_server.hpp>
 #include <servers/rendering/renderer_storage.hpp>
 
-using namespace pn;
+using namespace Pnu;
 
 #include <assimp/Importer.hpp>
 #include <assimp/cimport.h>

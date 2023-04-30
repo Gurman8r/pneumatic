@@ -1,9 +1,9 @@
-#ifndef _PN_BASIS_HPP_
-#define _PN_BASIS_HPP_
+#ifndef _PNU_BASIS_HPP_
+#define _PNU_BASIS_HPP_
 
 #include <core/math/quat.hpp>
 
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
@@ -111,4 +111,4 @@ namespace pn
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 }
 
-#endif // !_PN_BASIS_HPP_
+#endif // !_PNU_BASIS_HPP_

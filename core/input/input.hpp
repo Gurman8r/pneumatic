@@ -1,14 +1,14 @@
-#ifndef _PN_INPUT_HPP_
-#define _PN_INPUT_HPP_
+#ifndef _PNU_INPUT_HPP_
+#define _PNU_INPUT_HPP_
 
 #include <core/input/input_map.hpp>
 
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 	// input
-	class PN_API Input : public Object
+	class PNU_API Input : public Object
 	{
 		DEFINE_CLASS(Input, Object);
 
@@ -435,4 +435,4 @@ namespace pn
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 }
 
-#endif // !_PN_INPUT_HPP_
+#endif // !_PNU_INPUT_HPP_

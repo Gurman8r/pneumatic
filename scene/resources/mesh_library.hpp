@@ -1,11 +1,11 @@
-#ifndef _PN_MESH_LIBRARY_HPP_
-#define _PN_MESH_LIBRARY_HPP_
+#ifndef _PNU_MESH_LIBRARY_HPP_
+#define _PNU_MESH_LIBRARY_HPP_
 
 #include <scene/resources/mesh.hpp>
 
-namespace pn
+namespace Pnu
 {
-	class PN_API MeshLibrary final
+	class PNU_API MeshLibrary final
 	{
 	public:
 		static Error_ load_mesh(Mesh & mesh, String const & path);
@@ -13,4 +13,4 @@ namespace pn
 	};
 }
 
-#endif // !_PN_MESH_LIBRARY_HPP_
+#endif // !_PNU_MESH_LIBRARY_HPP_

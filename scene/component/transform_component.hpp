@@ -1,11 +1,11 @@
-#ifndef _PN_TRANSFORM_COMPONENT_HPP_
-#define _PN_TRANSFORM_COMPONENT_HPP_
+#ifndef _PNU_TRANSFORM_COMPONENT_HPP_
+#define _PNU_TRANSFORM_COMPONENT_HPP_
 
 #include <scene/component/component.hpp>
 
-namespace pn
+namespace Pnu
 {
-	class PN_API TransformComponent : public Component
+	class PNU_API TransformComponent : public Component
 	{
 		DEFINE_CLASS(TransformComponent, Component);
 
@@ -15,4 +15,4 @@ namespace pn
 	};
 }
 
-#endif // !_PN_TRANSFORM_COMPONENT_HPP_
+#endif // !_PNU_TRANSFORM_COMPONENT_HPP_

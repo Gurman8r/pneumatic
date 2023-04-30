@@ -1,11 +1,11 @@
-#ifndef _PN_SHADER_LIBRARY_HPP_
-#define _PN_SHADER_LIBRARY_HPP_
+#ifndef _PNU_SHADER_LIBRARY_HPP_
+#define _PNU_SHADER_LIBRARY_HPP_
 
 #include <scene/resources/shader.hpp>
 
-namespace pn
+namespace Pnu
 {
-	class PN_API ShaderLibrary final
+	class PNU_API ShaderLibrary final
 	{
 	public:
 		static Error_ load_shader(Shader & shader, String const & path);
@@ -13,4 +13,4 @@ namespace pn
 	};
 }
 
-#endif // !_PN_SHADER_LIBRARY_HPP_
+#endif // !_PNU_SHADER_LIBRARY_HPP_

@@ -1,12 +1,12 @@
-#ifndef _PN_MONO_BEHAVIOR_HPP_
-#define _PN_MONO_BEHAVIOR_HPP_
+#ifndef _PNU_MONO_BEHAVIOR_HPP_
+#define _PNU_MONO_BEHAVIOR_HPP_
 
 #include <scene/component/behavior.hpp>
 
-namespace pn
+namespace Pnu
 {
 	// mono behavior
-	class PN_MOD_API MonoBehavior : public Behavior
+	class PNU_MOD_API MonoBehavior : public Behavior
 	{
 		DEFINE_CLASS(MonoBehavior, Behavior);
 
@@ -16,4 +16,4 @@ namespace pn
 	};
 }
 
-#endif // !_PN_MONO_BEHAVIOR_HPP_
+#endif // !_PNU_MONO_BEHAVIOR_HPP_

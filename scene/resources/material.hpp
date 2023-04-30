@@ -1,14 +1,14 @@
-#ifndef _PN_MATERIAL_HPP_
-#define _PN_MATERIAL_HPP_
+#ifndef _PNU_MATERIAL_HPP_
+#define _PNU_MATERIAL_HPP_
 
 #include <scene/resources/shader.hpp>
 #include <scene/resources/texture.hpp>
 
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-	class PN_API Material : public Resource
+	class PNU_API Material : public Resource
 	{
 		DEFINE_CLASS(Material, Resource);
 
@@ -29,7 +29,7 @@ namespace pn
 
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-	class PN_API ShaderMaterial : public Material
+	class PNU_API ShaderMaterial : public Material
 	{
 		DEFINE_CLASS(ShaderMaterial, Material);
 
@@ -52,7 +52,7 @@ namespace pn
 
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-	class PN_API StandardMaterial3D : public Material
+	class PNU_API StandardMaterial3D : public Material
 	{
 		DEFINE_CLASS(StandardMaterial3D, Material);
 
@@ -109,4 +109,4 @@ namespace pn
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 }
 
-#endif // !_PN_MATERIAL_HPP_
+#endif // !_PNU_MATERIAL_HPP_

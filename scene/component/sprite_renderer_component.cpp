@@ -1,6 +1,6 @@
 #include <scene/component/sprite_renderer_component.hpp>
 
-namespace pn
+namespace Pnu
 {
 	EMBED_CLASS(SpriteRendererComponent, t) {}
 

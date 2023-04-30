@@ -1,5 +1,5 @@
-#ifndef _PN_OS_WINDOWS_HPP_
-#define _PN_OS_WINDOWS_HPP_
+#ifndef _PNU_OS_WINDOWS_HPP_
+#define _PNU_OS_WINDOWS_HPP_
 
 #include <core/os/os.hpp>
 
@@ -7,12 +7,12 @@
 
 static_assert(SYSTEM_WINDOWS);
 
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 	// windows operating system
-	class PN_API OS_Windows : public OS
+	class PNU_API OS_Windows : public OS
 	{
 		Ref<MainLoop> m_main_loop{};
 		HINSTANCE m_hinstance{};
@@ -90,4 +90,4 @@ namespace pn
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 }
 
-#endif // !_PN_OS_WINDOWS_HPP_
+#endif // !_PNU_OS_WINDOWS_HPP_

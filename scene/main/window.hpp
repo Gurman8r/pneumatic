@@ -1,14 +1,14 @@
-#ifndef _PN_WINDOW_HPP_
-#define _PN_WINDOW_HPP_
+#ifndef _PNU_WINDOW_HPP_
+#define _PNU_WINDOW_HPP_
 
 #include <scene/main/viewport.hpp>
 
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 	// window
-	class PN_API Window : public Viewport
+	class PNU_API Window : public Viewport
 	{
 		DEFINE_CLASS(Window, Viewport);
 
@@ -58,4 +58,4 @@ namespace pn
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 }
 
-#endif // !_PN_WINDOW_HPP_
+#endif // !_PNU_WINDOW_HPP_

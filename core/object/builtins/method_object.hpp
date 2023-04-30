@@ -1,13 +1,13 @@
-#ifndef _PN_METHOD_OBJECT_HPP_
-#define _PN_METHOD_OBJECT_HPP_
+#ifndef _PNU_METHOD_OBJECT_HPP_
+#define _PNU_METHOD_OBJECT_HPP_
 
 #include <core/object/builtins/function_object.hpp>
 
 // method
-namespace pn
+namespace Pnu
 {
 	// method object
-	class PN_API MethodObject : public FunctionObject
+	class PNU_API MethodObject : public FunctionObject
 	{
 		DEFINE_CLASS(MethodObject, FunctionObject);
 
@@ -42,4 +42,4 @@ namespace pn
 	};
 }
 
-#endif // !_PN_METHOD_OBJECT_HPP_
+#endif // !_PNU_METHOD_OBJECT_HPP_

@@ -1,11 +1,11 @@
-#ifndef _PN_JSON_HPP_
-#define _PN_JSON_HPP_
+#ifndef _PNU_JSON_HPP_
+#define _PNU_JSON_HPP_
 
 #include <core/object/builtins/dict_object.hpp>
 
 #include <nlohmann/json.hpp>
 
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
@@ -22,7 +22,7 @@ namespace pn
 
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-	class PN_API JsonUtility final
+	class PNU_API JsonUtility final
 	{
 	public:
 		template <class T
@@ -41,4 +41,4 @@ namespace pn
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 }
 
-#endif // !_PN_JSON_HPP_
+#endif // !_PNU_JSON_HPP_

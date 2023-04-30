@@ -1,13 +1,13 @@
-#ifndef _PN_STRING_OBJECT_HPP_
-#define _PN_STRING_OBJECT_HPP_
+#ifndef _PNU_STRING_OBJECT_HPP_
+#define _PNU_STRING_OBJECT_HPP_
 
 #include <core/object/builtins/type_object.hpp>
 
 // string
-namespace pn
+namespace Pnu
 {
 	// string object
-	class PN_API StringObject : public Object
+	class PNU_API StringObject : public Object
 	{
 		DEFINE_CLASS(StringObject, Object);
 
@@ -87,7 +87,7 @@ namespace pn
 	template <> struct DefaultDelete<StringObject> : DefaultDelete<Object> {};
 
 	// string check
-#define OBJECT_CHECK_STR(o) (pn::typeof(o).has_feature(pn::TypeFlags_Str_Subclass))
+#define OBJECT_CHECK_STR(o) (Pnu::typeof(o).has_feature(Pnu::TypeFlags_Str_Subclass))
 
 	// string ref
 	class STR : public Ref<StringObject>
@@ -135,7 +135,7 @@ namespace pn
 	};
 }
 
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
@@ -165,4 +165,4 @@ namespace pn
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 }
 
-#endif // !_PN_STRING_OBJECT_HPP_
+#endif // !_PNU_STRING_OBJECT_HPP_

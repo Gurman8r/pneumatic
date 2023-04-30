@@ -1,6 +1,6 @@
 #include <scene/resources/mesh_library.hpp>
 
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 

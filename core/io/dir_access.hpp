@@ -1,12 +1,12 @@
-#ifndef _PN_DIR_ACCESS_HPP_
-#define _PN_DIR_ACCESS_HPP_
+#ifndef _PNU_DIR_ACCESS_HPP_
+#define _PNU_DIR_ACCESS_HPP_
 
 #include <core/object/class.hpp>
 
-namespace pn
+namespace Pnu
 {
 	// dir access
-	class PN_API DirAccess : public Object
+	class PNU_API DirAccess : public Object
 	{
 		DEFINE_CLASS(DirAccess, Object);
 
@@ -21,4 +21,4 @@ namespace pn
 	};
 }
 
-#endif // !_PN_DIR_ACCESS_HPP_
+#endif // !_PNU_DIR_ACCESS_HPP_

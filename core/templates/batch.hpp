@@ -1,10 +1,10 @@
-#ifndef _PN_BATCH_HPP_
-#define _PN_BATCH_HPP_
+#ifndef _PNU_BATCH_HPP_
+#define _PNU_BATCH_HPP_
 
 #include <core/templates/mpl.hpp>
 #include <core/templates/vector.hpp>
 
-namespace pn
+namespace Pnu
 {
 	// tuple<vector<T>...>
 	template <class ... _Types
@@ -17,7 +17,7 @@ namespace pn
 		using allocator_type	= typename PolymorphicAllocator<u8>;
 		using value_types		= typename mpl::type_list<_Types...>;
 		using value_tuple		= typename mpl::tuple<value_types>;
-		using vector_types		= typename mpl::remap<pn::Vector, value_types>;
+		using vector_types		= typename mpl::remap<Pnu::Vector, value_types>;
 		using vector_tuple		= typename mpl::tuple<vector_types>;
 		using init_type			= typename std::initializer_list<value_tuple>;
 
@@ -43,7 +43,7 @@ namespace pn
 		template <size_t I>	using element_i			= mpl::nth<I, value_types>;
 		template <class  T> using element_t			= T;
 		template <size_t I>	using vector_i			= mpl::nth<I, vector_types>;
-		template <class  T> using vector_t			= pn::Vector<T>;
+		template <class  T> using vector_t			= Pnu::Vector<T>;
 		template <size_t I>	using iterator_i		= typename vector_i<I>::iterator;
 		template <class  T>	using iterator_t		= typename vector_t<T>::iterator;
 		template <size_t I>	using const_iterator_i	= typename vector_i<I>::const_iterator;
@@ -1402,4 +1402,4 @@ namespace pn
 	};
 }
 
-#endif // !_PN_BATCH_HPP_
+#endif // !_PNU_BATCH_HPP_

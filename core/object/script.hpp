@@ -1,17 +1,17 @@
-#ifndef _PN_SCRIPT_HPP_
-#define _PN_SCRIPT_HPP_
+#ifndef _PNU_SCRIPT_HPP_
+#define _PNU_SCRIPT_HPP_
 
 #include <core/io/resource.hpp>
 
 // script server
-namespace pn
+namespace Pnu
 {
 	class Script;
 	class ScriptInstance;
 	class ScriptLanguage;
 	class PlaceholderScriptInstance;
 
-	class PN_API ScriptServer : public Object
+	class PNU_API ScriptServer : public Object
 	{
 		DEFINE_CLASS(ScriptServer, Object);
 
@@ -45,9 +45,9 @@ namespace pn
 }
 
 // script language
-namespace pn
+namespace Pnu
 {
-	class PN_API ScriptLanguage : public Object
+	class PNU_API ScriptLanguage : public Object
 	{
 		DEFINE_CLASS(ScriptLanguage, Object);
 
@@ -63,9 +63,9 @@ namespace pn
 }
 
 // script
-namespace pn
+namespace Pnu
 {
-	class PN_API Script : public Resource
+	class PNU_API Script : public Resource
 	{
 		DEFINE_CLASS(Script, Resource);
 
@@ -95,9 +95,9 @@ namespace pn
 }
 
 // script instance
-namespace pn
+namespace Pnu
 {
-	class PN_API ScriptInstance : public Object
+	class PNU_API ScriptInstance : public Object
 	{
 		DEFINE_CLASS(ScriptInstance, Object);
 
@@ -118,9 +118,9 @@ namespace pn
 }
 
 // placeholder script instance
-namespace pn
+namespace Pnu
 {
-	class PN_API PlaceholderScriptInstance : public ScriptInstance
+	class PNU_API PlaceholderScriptInstance : public ScriptInstance
 	{
 		DEFINE_CLASS(PlaceholderScriptInstance, ScriptInstance);
 
@@ -145,4 +145,4 @@ namespace pn
 	};
 }
 
-#endif // !_PN_SCRIPT_HPP_
+#endif // !_PNU_SCRIPT_HPP_

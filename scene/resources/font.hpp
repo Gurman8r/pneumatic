@@ -1,11 +1,11 @@
-#ifndef _PN_FONT_HPP_
-#define _PN_FONT_HPP_
+#ifndef _PNU_FONT_HPP_
+#define _PNU_FONT_HPP_
 
 #include <servers/text_server.hpp>
 
-namespace pn
+namespace Pnu
 {
-	class PN_API Font : public Resource
+	class PNU_API Font : public Resource
 	{
 		DEFINE_CLASS(Font, Resource);
 
@@ -26,4 +26,4 @@ namespace pn
 	};
 }
 
-#endif // !_PN_FONT_HPP_
+#endif // !_PNU_FONT_HPP_

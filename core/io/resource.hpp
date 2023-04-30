@@ -1,9 +1,9 @@
-#ifndef _PN_RESOURCE_HPP_
-#define _PN_RESOURCE_HPP_
+#ifndef _PNU_RESOURCE_HPP_
+#define _PNU_RESOURCE_HPP_
 
 #include <core/object/class.hpp>
 
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
@@ -12,7 +12,7 @@ namespace pn
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 	// resource
-	class PN_API Resource : public Object
+	class PNU_API Resource : public Object
 	{
 		DEFINE_CLASS(Resource, Object);
 
@@ -41,10 +41,10 @@ namespace pn
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 	using RES = Ref<Resource>;
-	PN_API_FUNC(RES) load_resource(String const & path);
-	PN_API_FUNC(Error_) save_resource(RES const & res, String const & path);
+	PNU_API_FUNC(RES) load_resource(String const & path);
+	PNU_API_FUNC(Error_) save_resource(RES const & res, String const & path);
 
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 }
 
-#endif // !_PN_RESOURCE_HPP_
+#endif // !_PNU_RESOURCE_HPP_

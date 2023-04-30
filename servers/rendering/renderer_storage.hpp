@@ -1,14 +1,14 @@
-#ifndef _PN_RENDERER_STORAGE_HPP_
-#define _PN_RENDERER_STORAGE_HPP_
+#ifndef _PNU_RENDERER_STORAGE_HPP_
+#define _PNU_RENDERER_STORAGE_HPP_
 
 #include <servers/rendering_server.hpp>
 
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 	// renderer storage
-	class PN_API RendererStorage : public Object
+	class PNU_API RendererStorage : public Object
 	{
 		DEFINE_CLASS(RendererStorage, Object);
 
@@ -160,4 +160,4 @@ namespace pn
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 }
 
-#endif // !_PN_RENDERER_STORAGE_HPP_
+#endif // !_PNU_RENDERER_STORAGE_HPP_

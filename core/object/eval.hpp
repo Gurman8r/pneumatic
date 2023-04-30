@@ -1,11 +1,11 @@
-#ifndef _PN_EVAL_HPP_
-#define _PN_EVAL_HPP_
+#ifndef _PNU_EVAL_HPP_
+#define _PNU_EVAL_HPP_
 
 #include <core/object/common.hpp>
 
-namespace pn
+namespace Pnu
 {
-	PN_API_FUNC(OBJ) evaluate(String text);
+	PNU_API_FUNC(OBJ) evaluate(String text);
 }
 
-#endif // !_PN_EVAL_HPP_
+#endif // !_PNU_EVAL_HPP_

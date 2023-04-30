@@ -1,5 +1,5 @@
-#ifndef _PN_LUA_SCRIPT_HPP_
-#define _PN_LUA_SCRIPT_HPP_
+#ifndef _PNU_LUA_SCRIPT_HPP_
+#define _PNU_LUA_SCRIPT_HPP_
 
 #include <core/object/script.hpp>
 
@@ -9,10 +9,10 @@ extern "C" {
 #include <lua/lauxlib.h>
 }
 
-namespace pnu
+namespace Pnu
 {
 	// lua language
-	class PN_MOD_API LuaLanguage : public ScriptLanguage
+	class PNU_MOD_API LuaLanguage : public ScriptLanguage
 	{
 		DEFINE_CLASS(LuaLanguage, ScriptLanguage);
 
@@ -27,10 +27,10 @@ namespace pnu
 	};
 }
 
-namespace pnu
+namespace Pnu
 {
 	// lua script
-	class PN_MOD_API LuaScript : public Script
+	class PNU_MOD_API LuaScript : public Script
 	{
 		DEFINE_CLASS(LuaScript, Script);
 
@@ -46,10 +46,10 @@ namespace pnu
 	};
 }
 
-namespace pnu
+namespace Pnu
 {
 	// lua instance
-	class PN_MOD_API LuaInstance : public ScriptInstance
+	class PNU_MOD_API LuaInstance : public ScriptInstance
 	{
 		DEFINE_CLASS(LuaInstance, ScriptInstance);
 
@@ -74,4 +74,4 @@ namespace pnu
 	};
 }
 
-#endif // !_PN_LUA_SCRIPT_HPP_
+#endif // !_PNU_LUA_SCRIPT_HPP_

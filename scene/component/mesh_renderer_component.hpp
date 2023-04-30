@@ -1,11 +1,11 @@
-#ifndef _PN_MESH_RENDERER_COMPONENT_HPP_
-#define _PN_MESH_RENDERER_COMPONENT_HPP_
+#ifndef _PNU_MESH_RENDERER_COMPONENT_HPP_
+#define _PNU_MESH_RENDERER_COMPONENT_HPP_
 
 #include <scene/component/renderer_component.hpp>
 
-namespace pn
+namespace Pnu
 {
-	class PN_API MeshRendererComponent : public RendererComponent
+	class PNU_API MeshRendererComponent : public RendererComponent
 	{
 		DEFINE_CLASS(MeshRendererComponent, RendererComponent);
 
@@ -15,4 +15,4 @@ namespace pn
 	};
 }
 
-#endif // !_PN_MESH_RENDERER_COMPONENT_HPP_
+#endif // !_PNU_MESH_RENDERER_COMPONENT_HPP_

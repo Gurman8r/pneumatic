@@ -5,7 +5,7 @@
 #include <core/io/config_file.hpp>
 #include <core/io/resource_loader.hpp>
 
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 

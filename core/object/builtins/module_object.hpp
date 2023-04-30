@@ -1,13 +1,13 @@
-#ifndef _PN_MODULE_OBJECT_HPP_
-#define _PN_MODULE_OBJECT_HPP_
+#ifndef _PNU_MODULE_OBJECT_HPP_
+#define _PNU_MODULE_OBJECT_HPP_
 
 #include <core/object/builtins/cppfunction_object.hpp>
 
 // module
-namespace pn
+namespace Pnu
 {
 	// module object
-	class PN_API ModuleObject : public Object
+	class PNU_API ModuleObject : public Object
 	{
 		DEFINE_CLASS(ModuleObject, Object);
 
@@ -86,7 +86,7 @@ namespace pn
 	};
 }
 
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
@@ -119,4 +119,4 @@ namespace pn
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 }
 
-#endif // !_PN_MODULE_OBJECT_HPP_
+#endif // !_PNU_MODULE_OBJECT_HPP_

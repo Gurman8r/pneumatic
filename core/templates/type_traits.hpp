@@ -1,5 +1,5 @@
-#ifndef _PN_TYPE_TRAITS_HPP_
-#define _PN_TYPE_TRAITS_HPP_
+#ifndef _PNU_TYPE_TRAITS_HPP_
+#define _PNU_TYPE_TRAITS_HPP_
 
 #include <core/typedefs.hpp>
 
@@ -7,7 +7,7 @@
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-namespace pn::mpl
+namespace Pnu::mpl
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
@@ -308,7 +308,7 @@ namespace pn::mpl
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 /* MAKER */
-namespace pn::priv
+namespace Pnu::priv
 {
 	// maker helper
 	template <class T> struct _MakerHelper final
@@ -329,7 +329,7 @@ namespace pn::priv
 
 	// maker
 #define MAKER(m_class, ...) \
-		(pn::priv::_MakerHelper<m_class>{ ##__VA_ARGS__ })
+		(Pnu::priv::_MakerHelper<m_class>{ ##__VA_ARGS__ })
 
 	// make
 #define MAKE(m_class, m_var, ...) \
@@ -339,7 +339,7 @@ namespace pn::priv
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 /* HASH */
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
@@ -440,4 +440,4 @@ namespace pn
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-#endif // !_PN_TYPE_TRAITS_HPP_
+#endif // !_PNU_TYPE_TRAITS_HPP_

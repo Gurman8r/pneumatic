@@ -1,7 +1,7 @@
 #include <editor/editor_viewport.hpp>
 #include <editor/editor_node.hpp>
 
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 

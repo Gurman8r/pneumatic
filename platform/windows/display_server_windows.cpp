@@ -9,7 +9,7 @@
 #	include <glfw/glfw3native.h>
 #endif
 
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 

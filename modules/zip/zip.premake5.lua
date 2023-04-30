@@ -1,26 +1,19 @@
 -- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * --
 
 -- zip
-group			"Modules"
-project			"zip"
-kind			"StaticLib"
-language		"C++"
-cppdialect 		"C++17"
-systemversion	"latest"
-staticruntime	"Off"
-targetname		"%{prj.name}"
-targetdir		"%{_BUILD_BIN}"
-objdir			"%{_TEMPS}"
-location		"%{_PROJECT}"
+cpp_project_common("Modules", "zip", "StaticLib")
 
---manifest("zlib")
+targetdir("%{_BUILD_BIN}")
 
---defines{ "ZLIB_DLL" }
+includedirs{
+	"%{_THIRDPARTY}minizip/",
+	"%{_THIRDPARTY}zlib/",
+}
 
-includedirs{ "%{_THIRDPARTY}/minizip/", "%{_THIRDPARTY}/zlib/", }
-
-files{ "%{wks.location}/modules/zip/zip.premake5.lua" }
-
-srcdirs("%{_THIRDPARTY}/minizip/", "%{_THIRDPARTY}/zlib/")
+files{
+	"%{_MODULES}zip/zip.premake5.lua",
+	"%{_THIRDPARTY}minizip/**.h", "%{_THIRDPARTY}minizip/**.c",
+	"%{_THIRDPARTY}zlib/**.h", "%{_THIRDPARTY}zlib/**.c",
+}
 
 -- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * --

@@ -2,7 +2,7 @@
 #include <core/io/resource_loader.hpp>
 #include <core/io/resource_saver.hpp>
 
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 

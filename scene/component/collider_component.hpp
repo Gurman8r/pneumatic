@@ -1,11 +1,11 @@
-#ifndef _PN_COLLIDER_COMPONENT_HPP_
-#define _PN_COLLIDER_COMPONENT_HPP_
+#ifndef _PNU_COLLIDER_COMPONENT_HPP_
+#define _PNU_COLLIDER_COMPONENT_HPP_
 
 #include <scene/component/component.hpp>
 
-namespace pn
+namespace Pnu
 {
-	class PN_API ColliderComponent : public Component
+	class PNU_API ColliderComponent : public Component
 	{
 		DEFINE_CLASS(ColliderComponent, Component);
 
@@ -15,4 +15,4 @@ namespace pn
 	};
 }
 
-#endif // !_PN_COLLIDER_COMPONENT_HPP_
+#endif // !_PNU_COLLIDER_COMPONENT_HPP_

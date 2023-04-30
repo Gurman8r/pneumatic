@@ -1,13 +1,13 @@
-#ifndef _PN_DICT_OBJECT_HPP_
-#define _PN_DICT_OBJECT_HPP_
+#ifndef _PNU_DICT_OBJECT_HPP_
+#define _PNU_DICT_OBJECT_HPP_
 
 #include <core/object/builtins/type_object.hpp>
 
 // dict
-namespace pn
+namespace Pnu
 {
 	// dict object
-	class PN_API DictObject : public Object
+	class PNU_API DictObject : public Object
 	{
 		DEFINE_CLASS(DictObject, Object);
 
@@ -88,7 +88,7 @@ namespace pn
 	template <> struct DefaultDelete<DictObject> : DefaultDelete<Object> {};
 
 	// dict check
-#define OBJECT_CHECK_DICT(o) (pn::typeof(o).has_feature(pn::TypeFlags_Dict_Subclass))
+#define OBJECT_CHECK_DICT(o) (Pnu::typeof(o).has_feature(Pnu::TypeFlags_Dict_Subclass))
 
 	// dict ref
 	class DICT : public Ref<DictObject>
@@ -146,4 +146,4 @@ namespace pn
 	};
 }
 
-#endif // !_PN_DICT_OBJECT_HPP_
+#endif // !_PNU_DICT_OBJECT_HPP_

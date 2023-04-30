@@ -1,15 +1,15 @@
-#ifndef _PN_FILE_ACCESS_WINDOWS_HPP_
-#define _PN_FILE_ACCESS_WINDOWS_HPP_
+#ifndef _PNU_FILE_ACCESS_WINDOWS_HPP_
+#define _PNU_FILE_ACCESS_WINDOWS_HPP_
 
 #include <core/io/file_access.hpp>
 
 #include <stdio.h>
 
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-	class PN_API FileAccessWindows : public FileAccess
+	class PNU_API FileAccessWindows : public FileAccess
 	{
 		DEFINE_CLASS(FileAccessWindows, FileAccess);
 
@@ -47,4 +47,4 @@ namespace pn
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 }
 
-#endif // !_PN_FILE_ACCESS_WINDOWS_HPP_
+#endif // !_PNU_FILE_ACCESS_WINDOWS_HPP_

@@ -2,7 +2,7 @@
 #include <core/object/eval.hpp>
 #include <inih/INIReader.h>
 
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 

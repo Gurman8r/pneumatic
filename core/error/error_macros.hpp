@@ -1,23 +1,23 @@
-#ifndef _PN_ERROR_MACROS_HPP_
-#define _PN_ERROR_MACROS_HPP_
+#ifndef _PNU_ERROR_MACROS_HPP_
+#define _PNU_ERROR_MACROS_HPP_
 
 #include <core/error/error.hpp>
 #include <cassert>
 #include <stdexcept>
 
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 	// crash implementation
 	namespace priv
 	{
-		PN_API_FUNC(void) _crash(cwstring message, cwstring file, u32 line);
+		PNU_API_FUNC(void) _crash(cwstring message, cwstring file, u32 line);
 	}
 
 	// crash
 #define CRASH(m_message) \
-		(pn::priv::_crash)(WIDE(m_message), WIDE(__FILE__), __LINE__)
+		(Pnu::priv::_crash)(WIDE(m_message), WIDE(__FILE__), __LINE__)
 
 	// debug crash
 #if DEBUG_ENABLED
@@ -53,7 +53,7 @@ namespace pn
 
 	// validate
 #define VALIDATE(m_expr) \
-		(pn::priv::_validate)((m_expr), WIDE(TOSTR(m_expr)), WIDE(__FILE__), __LINE__)
+		(Pnu::priv::_validate)((m_expr), WIDE(TOSTR(m_expr)), WIDE(__FILE__), __LINE__)
 
 	// debug validate
 #if DEBUG_ENABLED
@@ -69,7 +69,7 @@ namespace pn
 		do {																	\
 			if (m_expr) { /* contextually convertible to bool paranoia */ }		\
 			else {																\
-				pn::priv::_crash(WIDE(m_message), WIDE(__FILE__), __LINE__);	\
+				Pnu::priv::_crash(WIDE(m_message), WIDE(__FILE__), __LINE__);	\
 			}																	\
 		} while (0)
 
@@ -100,7 +100,7 @@ namespace pn
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 }
 
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
@@ -111,22 +111,22 @@ namespace pn
 		ErrorHandlerType_MAX
 	};
 
-	PN_API_FUNC(void) _err_print_error(cstring func, cstring file, u32 line, cstring desc, ErrorHandlerType_ log_type = ErrorHandlerType_Error);
-	PN_API_FUNC(void) _err_print_error(cstring func, cstring file, u32 line, cstring desc, cstring m_message, ErrorHandlerType_ log_type = ErrorHandlerType_Error);
+	PNU_API_FUNC(void) _err_print_error(cstring func, cstring file, u32 line, cstring desc, ErrorHandlerType_ log_type = ErrorHandlerType_Error);
+	PNU_API_FUNC(void) _err_print_error(cstring func, cstring file, u32 line, cstring desc, cstring m_message, ErrorHandlerType_ log_type = ErrorHandlerType_Error);
 
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 #define ERR_PRINT_ERROR(m_desc) \
-		(pn::_err_print_error(__PRETTY_FUNCTION__, __FILE__, __LINE__, (m_desc), pn::ErrorHandlerType_Error))
+		(Pnu::_err_print_error(__PRETTY_FUNCTION__, __FILE__, __LINE__, (m_desc), Pnu::ErrorHandlerType_Error))
 
 #define ERR_PRINT_ERROR_MSG(m_desc, m_message) \
-		(pn::_err_print_error(__PRETTY_FUNCTION__, __FILE__, __LINE__, (m_desc), (m_message), pn::ErrorHandlerType_Error))
+		(Pnu::_err_print_error(__PRETTY_FUNCTION__, __FILE__, __LINE__, (m_desc), (m_message), Pnu::ErrorHandlerType_Error))
 
 #define ERR_PRINT_WARNING(m_desc) \
-		(pn::_err_print_error(__PRETTY_FUNCTION__, __FILE__, __LINE__, (m_desc), pn::ErrorHandlerType_Warning))
+		(Pnu::_err_print_error(__PRETTY_FUNCTION__, __FILE__, __LINE__, (m_desc), Pnu::ErrorHandlerType_Warning))
 
 #define ERR_PRINT_WARNING_MSG(m_desc, m_message) \
-		(pn::_err_print_error(__PRETTY_FUNCTION__, __FILE__, __LINE__, (m_desc), (m_message), pn::ErrorHandlerType_Error))
+		(Pnu::_err_print_error(__PRETTY_FUNCTION__, __FILE__, __LINE__, (m_desc), (m_message), Pnu::ErrorHandlerType_Error))
 
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 }

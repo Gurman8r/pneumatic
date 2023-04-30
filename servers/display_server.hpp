@@ -1,16 +1,16 @@
-#ifndef _PN_DISPLAY_SERVER_HPP_
-#define _PN_DISPLAY_SERVER_HPP_
+#ifndef _PNU_DISPLAY_SERVER_HPP_
+#define _PNU_DISPLAY_SERVER_HPP_
 
 #include <core/os/os.hpp>
 #include <core/input/input.hpp>
 #include <core/io/image.hpp>
 
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 	// display server
-	class PN_API DisplayServer : public Object
+	class PNU_API DisplayServer : public Object
 	{
 		DEFINE_CLASS(DisplayServer, Object);
 
@@ -161,4 +161,4 @@ namespace pn
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 }
 
-#endif // !_PN_DISPLAY_SERVER_HPP_
+#endif // !_PNU_DISPLAY_SERVER_HPP_

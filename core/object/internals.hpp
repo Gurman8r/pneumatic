@@ -1,12 +1,12 @@
-#ifndef _PN_INTERNALS_HPP_
-#define _PN_INTERNALS_HPP_
+#ifndef _PNU_INTERNALS_HPP_
+#define _PNU_INTERNALS_HPP_
 
 #include <core/object/builtins/base_object.hpp>
 
-namespace pn
+namespace Pnu
 {
 	// object system internals
-	class PN_API Internals final
+	class PNU_API Internals final
 	{
 		static Internals * __singleton;
 
@@ -22,11 +22,11 @@ namespace pn
 	public:
 		template <class First, class ... Rest
 		> void register_class() noexcept { mpl::for_types<First, Rest...>([&](auto tag) noexcept { TAG_TYPE(tag)::initialize_class(); }); }
-#define REGISTER_CLASS(...) (pn::get_internals())->register_class<##__VA_ARGS__>()
+#define REGISTER_CLASS(...) (Pnu::get_internals())->register_class<##__VA_ARGS__>()
 
 		template <class First, class ... Rest
 		> void unregister_class() noexcept { mpl::for_types<First, Rest...>([&](auto tag) { del_class(TAG_TYPE(tag)::get_class_static()); }); }
-#define UNREGISTER_CLASS(...) (pn::get_internals())->unregister_class<##__VA_ARGS__>()
+#define UNREGISTER_CLASS(...) (Pnu::get_internals())->unregister_class<##__VA_ARGS__>()
 
 		void add_class(TypeObject * type);
 		bool del_class(String const & name);
@@ -40,4 +40,4 @@ namespace pn
 	SINGLETON_WRAPPER(Internals, get_internals);
 }
 
-#endif // !_PN_INTERNALS_HPP_
+#endif // !_PNU_INTERNALS_HPP_

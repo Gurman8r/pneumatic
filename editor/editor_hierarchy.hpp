@@ -1,12 +1,12 @@
-#ifndef _PN_EDITOR_HIERARCHY_HPP_
-#define _PN_EDITOR_HIERARCHY_HPP_
+#ifndef _PNU_EDITOR_HIERARCHY_HPP_
+#define _PNU_EDITOR_HIERARCHY_HPP_
 
 #include <editor/editor_panel.hpp>
 
-namespace pn
+namespace Pnu
 {
 	// hierarchy component of the main editor
-	class PN_API EditorHierarchy : public EditorPanel
+	class PNU_API EditorHierarchy : public EditorPanel
 	{
 		DEFINE_CLASS(EditorHierarchy, EditorPanel);
 
@@ -20,4 +20,4 @@ namespace pn
 	};
 }
 
-#endif // !_PN_EDITOR_HIERARCHY_HPP_
+#endif // !_PNU_EDITOR_HIERARCHY_HPP_

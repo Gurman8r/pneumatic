@@ -1,9 +1,9 @@
-#ifndef _PN_QUAT_HPP_
-#define _PN_QUAT_HPP_
+#ifndef _PNU_QUAT_HPP_
+#define _PNU_QUAT_HPP_
 
 #include <core/math/matrix.hpp>
 
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
@@ -177,4 +177,4 @@ namespace pn
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 }
 
-#endif // !_PN_QUAT_HPP_
+#endif // !_PNU_QUAT_HPP_

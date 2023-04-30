@@ -1,10 +1,10 @@
-#ifndef _PN_REF_HPP_
-#define _PN_REF_HPP_
+#ifndef _PNU_REF_HPP_
+#define _PNU_REF_HPP_
 
 #include <core/object/object_api.hpp>
 
 // ref
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
@@ -87,7 +87,7 @@ namespace pn
 		void unref()
 		{
 			if (m_ptr && m_ptr->dec_ref()) {
-				pn::call_default_delete(m_ptr);
+				Pnu::call_default_delete(m_ptr);
 			}
 			m_ptr = nullptr;
 		}
@@ -156,9 +156,9 @@ namespace pn
 	// ref class
 #define REF_CLASS(m_class, m_check)																		\
 public:																									\
-	using base_type = pn::Ref<value_type>;																\
+	using base_type = Pnu::Ref<value_type>;																\
 																										\
-	static bool check_(pn::Ref<Object> const & o) { return o && (bool)(m_check(o)); }					\
+	static bool check_(Pnu::Ref<Object> const & o) { return o && (bool)(m_check(o)); }					\
 																										\
 	~m_class() noexcept = default;																		\
 																										\
@@ -170,7 +170,7 @@ public:																									\
 																										\
 	m_class(base_type const & value) { ref(value); }													\
 																										\
-	template <class U> m_class(pn::Ref<U> const & value) { reset(value); }								\
+	template <class U> m_class(Pnu::Ref<U> const & value) { reset(value); }								\
 																										\
 	m_class(value_type && value) noexcept { instance(std::move(value)); }								\
 																										\
@@ -178,7 +178,7 @@ public:																									\
 																										\
 	m_class & operator=(base_type const & value) { return reset(value), (*this); }						\
 																										\
-	template <class U> m_class & operator=(pn::Ref<U> const & value) { return reset(value), (*this); }	\
+	template <class U> m_class & operator=(Pnu::Ref<U> const & value) { return reset(value), (*this); }	\
 																										\
 	m_class & operator=(value_type && value) noexcept { return instance(std::move(value)), (*this); }	\
 																										\
@@ -186,4 +186,4 @@ public:																									\
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 }
 
-#endif // !_PN_REF_HPP_
+#endif // !_PNU_REF_HPP_

@@ -1,16 +1,16 @@
-#ifndef _PN_NODE_HPP_
-#define _PN_NODE_HPP_
+#ifndef _PNU_NODE_HPP_
+#define _PNU_NODE_HPP_
 
 #include <scene/main/scene_tree.hpp>
 
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 	class SceneTree;
 
 	// node
-	class PN_API Node : public Object
+	class PNU_API Node : public Object
 	{
 		DEFINE_CLASS(Node, Object);
 
@@ -120,4 +120,4 @@ namespace pn
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 }
 
-#endif // !_PN_NODE_HPP_
+#endif // !_PNU_NODE_HPP_

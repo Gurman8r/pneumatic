@@ -1,5 +1,5 @@
-#ifndef _PN_EDITOR_NODE_HPP_
-#define _PN_EDITOR_NODE_HPP_
+#ifndef _PNU_EDITOR_NODE_HPP_
+#define _PNU_EDITOR_NODE_HPP_
 
 #include <scene/main/window.hpp>
 #include <scene/main/scene_tree.hpp>
@@ -9,7 +9,7 @@
 #include <scene/resources/mesh.hpp>
 #include <scene/resources/text_file.hpp>
 
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
@@ -21,7 +21,7 @@ namespace pn
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 	// main editor
-	class PN_API EditorNode : public Node
+	class PNU_API EditorNode : public Node
 	{
 		DEFINE_CLASS(EditorNode, Node);
 
@@ -51,7 +51,7 @@ namespace pn
 		EditorNode();
 		virtual ~EditorNode() override;
 		FORCE_INLINE static EditorNode * get_singleton() noexcept { return __singleton; }
-#define EDITOR (pn::EditorNode::get_singleton())
+#define EDITOR (Pnu::EditorNode::get_singleton())
 
 	protected:
 		void _notification(Notification_ id);
@@ -69,4 +69,4 @@ namespace pn
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 }
 
-#endif // !_PN_EDITOR_NODE_HPP_
+#endif // !_PNU_EDITOR_NODE_HPP_

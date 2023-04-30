@@ -1,14 +1,14 @@
-#ifndef _PN_IMAGE_LIBRARY_HPP_
-#define _PN_IMAGE_LIBRARY_HPP_
+#ifndef _PNU_IMAGE_LIBRARY_HPP_
+#define _PNU_IMAGE_LIBRARY_HPP_
 
 #include <core/io/image.hpp>
 #include <core/io/resource_loader.hpp>
 
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-	class PN_API ImageLibrary final
+	class PNU_API ImageLibrary final
 	{
 	public:
 		static Error_ load_image(Image & image, String const & path);
@@ -29,4 +29,4 @@ namespace pn
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 }
 
-#endif // !_PN_IMAGE_LIBRARY_HPP_
+#endif // !_PNU_IMAGE_LIBRARY_HPP_

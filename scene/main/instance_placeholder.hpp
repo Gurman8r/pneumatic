@@ -1,11 +1,11 @@
-#ifndef _PN_INSTANCE_PLACEHOLDER_HPP_
-#define _PN_INSTANCE_PLACEHOLDER_HPP_
+#ifndef _PNU_INSTANCE_PLACEHOLDER_HPP_
+#define _PNU_INSTANCE_PLACEHOLDER_HPP_
 
 #include <scene/main/node.hpp>
 
-namespace pn
+namespace Pnu
 {
-	class PN_API InstancePlaceholder : public Node
+	class PNU_API InstancePlaceholder : public Node
 	{
 		DEFINE_CLASS(InstancePlaceholder, Node);
 
@@ -15,4 +15,4 @@ namespace pn
 	};
 }
 
-#endif // !_PN_INSTANCE_PLACEHOLDER_HPP_
+#endif // !_PNU_INSTANCE_PLACEHOLDER_HPP_

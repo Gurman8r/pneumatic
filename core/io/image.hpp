@@ -1,9 +1,9 @@
-#ifndef _PN_IMAGE_HPP_
-#define _PN_IMAGE_HPP_
+#ifndef _PNU_IMAGE_HPP_
+#define _PNU_IMAGE_HPP_
 
 #include <core/io/resource.hpp>
 
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
@@ -62,7 +62,7 @@ namespace pn
 
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-	class PN_API Image : public Resource
+	class PNU_API Image : public Resource
 	{
 		DEFINE_CLASS(Image, Resource);
 
@@ -105,4 +105,4 @@ namespace pn
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 }
 
-#endif // !_PN_IMAGE_HPP_
+#endif // !_PNU_IMAGE_HPP_

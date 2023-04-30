@@ -1,5 +1,5 @@
-#ifndef _PN_MATH_HPP_
-#define _PN_MATH_HPP_
+#ifndef _PNU_MATH_HPP_
+#define _PNU_MATH_HPP_
 
 #include <core/templates/type_traits.hpp>
 
@@ -13,7 +13,7 @@
 #include <glm/glm/gtc/matrix_transform.hpp>
 #include <glm/glm/gtx/quaternion.hpp>
 
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
@@ -111,4 +111,4 @@ namespace pn
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 }
 
-#endif // !_PN_MATH_HPP_
+#endif // !_PNU_MATH_HPP_

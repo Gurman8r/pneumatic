@@ -1,10 +1,10 @@
-#ifndef _PN_STRING_UTILITY_HPP_
-#define _PN_STRING_UTILITY_HPP_
+#ifndef _PNU_STRING_UTILITY_HPP_
+#define _PNU_STRING_UTILITY_HPP_
 
 #include <core/templates/optional.hpp>
 #include <core/string/string_stream.hpp>
 
-namespace pn::util
+namespace Pnu::util
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
@@ -153,4 +153,4 @@ namespace pn::util
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 }
 
-#endif // !_PN_STRING_UTILITY_HPP_
+#endif // !_PNU_STRING_UTILITY_HPP_

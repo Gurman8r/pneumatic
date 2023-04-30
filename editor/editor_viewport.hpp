@@ -1,12 +1,12 @@
-#ifndef _PN_EDITOR_VIEWPORT_HPP_
-#define _PN_EDITOR_VIEWPORT_HPP_
+#ifndef _PNU_EDITOR_VIEWPORT_HPP_
+#define _PNU_EDITOR_VIEWPORT_HPP_
 
 #include <editor/editor_panel.hpp>
 
-namespace pn
+namespace Pnu
 {
 	// viewport component of the main editor
-	class PN_API EditorViewport : public EditorPanel
+	class PNU_API EditorViewport : public EditorPanel
 	{
 		DEFINE_CLASS(EditorViewport, EditorPanel);
 
@@ -33,4 +33,4 @@ namespace pn
 	};
 }
 
-#endif // !_PN_EDITOR_VIEWPORT_HPP_
+#endif // !_PNU_EDITOR_VIEWPORT_HPP_

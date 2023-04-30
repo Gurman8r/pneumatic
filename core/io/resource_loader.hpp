@@ -1,11 +1,11 @@
-#ifndef _PN_RESOURCE_LOADER_HPP_
-#define _PN_RESOURCE_LOADER_HPP_
+#ifndef _PNU_RESOURCE_LOADER_HPP_
+#define _PNU_RESOURCE_LOADER_HPP_
 
 #include <core/io/resource.hpp>
 
-namespace pn
+namespace Pnu
 {
-	class PN_API ResourceFormatLoader : public Object
+	class PNU_API ResourceFormatLoader : public Object
 	{
 		DEFINE_CLASS(ResourceFormatLoader, Object);
 		friend class ResourceLoader;
@@ -18,9 +18,9 @@ namespace pn
 	};
 }
 
-namespace pn
+namespace Pnu
 {
-	class PN_API ResourceLoader
+	class PNU_API ResourceLoader
 	{
 		static ResourceLoader * __singleton;
 
@@ -43,4 +43,4 @@ namespace pn
 	SINGLETON_WRAPPER(ResourceLoader, get_resource_loader);
 }
 
-#endif // !_PN_RESOURCE_LOADER_HPP_
+#endif // !_PNU_RESOURCE_LOADER_HPP_

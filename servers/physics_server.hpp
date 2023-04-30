@@ -1,11 +1,11 @@
-#ifndef _PN_PHYSICS_SERVER_HPP_
-#define _PN_PHYSICS_SERVER_HPP_
+#ifndef _PNU_PHYSICS_SERVER_HPP_
+#define _PNU_PHYSICS_SERVER_HPP_
 
 // PLACEHOLDER
 
 #include <core/object/class.hpp>
 
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
@@ -31,4 +31,4 @@ namespace pn
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 }
 
-#endif // !_PN_PHYSICS_SERVER_HPP_
+#endif // !_PNU_PHYSICS_SERVER_HPP_

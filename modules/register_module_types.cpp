@@ -1,6 +1,6 @@
 #include <modules/register_module_types.hpp>
 
-namespace pn
+namespace Pnu
 {
 	void initialize_modules(ExtensionInitializationLevel_ level)
 	{

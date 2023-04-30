@@ -1,11 +1,11 @@
-#ifndef _PN_OPTIONAL_HPP_
-#define _PN_OPTIONAL_HPP_
+#ifndef _PNU_OPTIONAL_HPP_
+#define _PNU_OPTIONAL_HPP_
 
 #include <core/templates/utility.hpp>
 
 #include <optional>
 
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
@@ -39,4 +39,4 @@ namespace pn
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 }
 
-#endif // !_PN_OPTIONAL_HPP_
+#endif // !_PNU_OPTIONAL_HPP_

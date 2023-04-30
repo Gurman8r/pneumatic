@@ -1,13 +1,13 @@
-#ifndef _PN_TEXT_SERVER_HPP_
-#define _PN_TEXT_SERVER_HPP_
+#ifndef _PNU_TEXT_SERVER_HPP_
+#define _PNU_TEXT_SERVER_HPP_
 
 #include <scene/resources/texture.hpp>
 
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-	class PN_API Glyph : public Texture2D
+	class PNU_API Glyph : public Texture2D
 	{
 		DEFINE_CLASS(Glyph, Texture2D);
 
@@ -53,11 +53,11 @@ namespace pn
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 }
 
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-	class PN_API TextServer : public Object
+	class PNU_API TextServer : public Object
 	{
 		DEFINE_CLASS(TextServer, Object);
 
@@ -112,4 +112,4 @@ namespace pn
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 }
 
-#endif // !_PN_TEXT_SERVER_HPP_
+#endif // !_PNU_TEXT_SERVER_HPP_

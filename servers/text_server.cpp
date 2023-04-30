@@ -8,7 +8,7 @@
 #include FT_BITMAP_H
 #include FT_STROKER_H
 
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 

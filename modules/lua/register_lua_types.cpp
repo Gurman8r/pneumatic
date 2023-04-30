@@ -4,11 +4,11 @@
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-using namespace pnu;
+using namespace Pnu;
 
 static LuaLanguage * lua_language{};
 
-bool open_lua_library(IsmExtensionInterfacePtr iface, IsmExtensionPtr library, IsmExtensionInitializationPtr initialization)
+bool open_lua_library(PnuExtensionInterfacePtr iface, PnuExtensionPtr library, PnuExtensionInitializationPtr initialization)
 {
 	if (!iface || !library || !initialization) { return false; }
 	PRINT_LINE("open lua module");
@@ -20,7 +20,7 @@ bool open_lua_library(IsmExtensionInterfacePtr iface, IsmExtensionPtr library, I
 	return true;
 }
 
-void initialize_lua_module(void * user, IsmExtensionInitializationLevel level)
+void initialize_lua_module(void * user, PnuExtensionInitializationLevel level)
 {
 	if (level != ExtensionInitializationLevel_Scene) { return; }
 	PRINT_LINE("initialize lua module");
@@ -29,7 +29,7 @@ void initialize_lua_module(void * user, IsmExtensionInitializationLevel level)
 	get_script_server()->register_language(lua_language);
 }
 
-void finalize_lua_module(void * user, IsmExtensionInitializationLevel level)
+void finalize_lua_module(void * user, PnuExtensionInitializationLevel level)
 {
 	if (level != ExtensionInitializationLevel_Scene) { return; }
 	PRINT_LINE("finalize lua module");

@@ -1,5 +1,5 @@
-#ifndef _PN_UTILITY_HPP_
-#define _PN_UTILITY_HPP_
+#ifndef _PNU_UTILITY_HPP_
+#define _PNU_UTILITY_HPP_
 
 #include <core/os/copymem.hpp>
 #include <core/math/math.hpp>
@@ -33,7 +33,7 @@
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
@@ -291,4 +291,4 @@ namespace pn
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 }
 
-#endif // !_PN_UTILITY_HPP_
+#endif // !_PNU_UTILITY_HPP_

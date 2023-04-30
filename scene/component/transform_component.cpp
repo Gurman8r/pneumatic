@@ -1,6 +1,6 @@
 #include <scene/component/transform_component.hpp>
 
-namespace pn
+namespace Pnu
 {
 	EMBED_CLASS(TransformComponent, t) {}
 

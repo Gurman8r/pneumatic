@@ -1,9 +1,9 @@
-#ifndef _PN_COLOR_HPP_
-#define _PN_COLOR_HPP_
+#ifndef _PNU_COLOR_HPP_
+#define _PNU_COLOR_HPP_
 
 #include <core/math/matrix.hpp>
 
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
@@ -128,4 +128,4 @@ namespace pn
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 }
 
-#endif // !_PN_COLOR_HPP_
+#endif // !_PNU_COLOR_HPP_

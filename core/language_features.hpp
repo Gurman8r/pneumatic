@@ -1,5 +1,5 @@
-#ifndef _PN_LANGUAGE_FEATURES_HPP_
-#define _PN_LANGUAGE_FEATURES_HPP_
+#ifndef _PNU_LANGUAGE_FEATURES_HPP_
+#define _PNU_LANGUAGE_FEATURES_HPP_
 
 #include <core/version.hpp>
 #include <core/preprocessor.hpp>
@@ -260,33 +260,33 @@
 #endif
 
 #if STATIC_BUILD_ENABLED
-#	define PN_API_EXPORT
-#	define PN_API_IMPORT
+#	define PNU_API_EXPORT
+#	define PNU_API_IMPORT
 
 #elif SYSTEM_WINDOWS
-#	define PN_API_EXPORT __declspec(dllexport)
-#	define PN_API_IMPORT __declspec(dllimport)
+#	define PNU_API_EXPORT __declspec(dllexport)
+#	define PNU_API_IMPORT __declspec(dllimport)
 
 #elif CC_CLANG || (__GNUC__ && (__GNUC__ >= 4))
-#	define PN_API_EXPORT __attribute__((visibility("default")))
-#	define PN_API_IMPORT __attribute__((visibility("hidden")))
+#	define PNU_API_EXPORT __attribute__((visibility("default")))
+#	define PNU_API_IMPORT __attribute__((visibility("hidden")))
 
 #else
-#	define PN_API_EXPORT
-#	define PN_API_IMPORT
+#	define PNU_API_EXPORT
+#	define PNU_API_IMPORT
 #endif
 
-#ifndef PN_API
+#ifndef PNU_API
 #	if DYNAMIC_BUILD_ENABLED
-#		define PN_API PN_API_EXPORT
+#		define PNU_API PNU_API_EXPORT
 #	else
-#		define PN_API PN_API_IMPORT
+#		define PNU_API PNU_API_IMPORT
 #	endif
 #endif
 
-#define PN_API_FUNC(rtype) PN_API rtype
+#define PNU_API_FUNC(rtype) PNU_API rtype
 
-#define PN_API_DATA(rtype) PN_API extern rtype
+#define PNU_API_DATA(rtype) PNU_API extern rtype
 
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
@@ -323,4 +323,4 @@
 #	pragma warning(disable: 33101)	//	unchecked tolower bound for enum type used as index
 #endif
 
-#endif //	!_PN_LANGUAGE_FEATURES_HPP_
+#endif //	!_PNU_LANGUAGE_FEATURES_HPP_

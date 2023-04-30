@@ -28,7 +28,7 @@
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-namespace pn
+namespace Pnu
 {
 	ImGuiContext * ImGui_Initialize()
 	{

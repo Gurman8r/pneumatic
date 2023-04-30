@@ -1,18 +1,18 @@
-#ifndef _PN_INT_OBJECT_HPP_
-#define _PN_INT_OBJECT_HPP_
+#ifndef _PNU_INT_OBJECT_HPP_
+#define _PNU_INT_OBJECT_HPP_
 
 #include <core/object/builtins/type_object.hpp>
 
 // bool
-#define TRUE_OBJ		(pn::INT(&pn::IntObject::g_True))
-#define FALSE_OBJ		(pn::INT(&pn::IntObject::g_False))
+#define TRUE_OBJ		(Pnu::INT(&Pnu::IntObject::g_True))
+#define FALSE_OBJ		(Pnu::INT(&Pnu::IntObject::g_False))
 #define BOOL_OBJ(b)		((b) ? TRUE_OBJ : FALSE_OBJ)
 
 // int
-namespace pn
+namespace Pnu
 {
 	// int object
-	class PN_API IntObject : public Object
+	class PNU_API IntObject : public Object
 	{
 		DEFINE_CLASS(IntObject, Object);
 
@@ -46,7 +46,7 @@ namespace pn
 	template <> struct DefaultDelete<IntObject> : DefaultDelete<Object> {};
 
 	// int check
-#define OBJECT_CHECK_INT(o) (pn::typeof(o).has_feature(pn::TypeFlags_Int_Subclass))
+#define OBJECT_CHECK_INT(o) (Pnu::typeof(o).has_feature(Pnu::TypeFlags_Int_Subclass))
 
 	// int ref
 	class INT : public Ref<IntObject>
@@ -72,4 +72,4 @@ namespace pn
 	};
 }
 
-#endif // !_PN_INT_OBJECT_HPP_
+#endif // !_PNU_INT_OBJECT_HPP_

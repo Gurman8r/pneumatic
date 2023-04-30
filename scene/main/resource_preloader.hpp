@@ -1,11 +1,11 @@
-#ifndef _PN_RESOURCE_PRELOADER_HPP_
-#define _PN_RESOURCE_PRELOADER_HPP_
+#ifndef _PNU_RESOURCE_PRELOADER_HPP_
+#define _PNU_RESOURCE_PRELOADER_HPP_
 
 #include <scene/main/node.hpp>
 
-namespace pn
+namespace Pnu
 {
-	class PN_API ResourcePreloader : public Node
+	class PNU_API ResourcePreloader : public Node
 	{
 		DEFINE_CLASS(ResourcePreloader, Node);
 
@@ -15,4 +15,4 @@ namespace pn
 	};
 }
 
-#endif // !_PN_RESOURCE_PRELOADER_HPP_
+#endif // !_PNU_RESOURCE_PRELOADER_HPP_

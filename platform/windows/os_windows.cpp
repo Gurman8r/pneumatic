@@ -5,7 +5,7 @@
 #include <main/main.hpp>
 #include <filesystem>
 
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 

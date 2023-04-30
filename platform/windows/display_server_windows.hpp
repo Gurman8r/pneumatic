@@ -1,17 +1,17 @@
-#ifndef _PN_DISPLAY_SERVER_WINDOWS_HPP_
-#define _PN_DISPLAY_SERVER_WINDOWS_HPP_
+#ifndef _PNU_DISPLAY_SERVER_WINDOWS_HPP_
+#define _PNU_DISPLAY_SERVER_WINDOWS_HPP_
 
 #include <servers/display_server.hpp>
 
 struct GLFWcursor;
 struct GLFWwindow;
 
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 	// windows display server
-	class PN_API DisplayServerWindows : public DisplayServer
+	class PNU_API DisplayServerWindows : public DisplayServer
 	{
 		DEFINE_CLASS(DisplayServerWindows, DisplayServer);
 
@@ -116,4 +116,4 @@ namespace pn
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 }
 
-#endif // !_PN_DISPLAY_SERVER_WINDOWS_HPP_
+#endif // !_PNU_DISPLAY_SERVER_WINDOWS_HPP_

@@ -4,13 +4,13 @@
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-using namespace pn;
+using namespace Pnu;
 
 static MonoLanguage * mono_language{};
 
 static Ref<MonoScriptFormatLoader> cs_loader{};
 
-bool open_mono_library(IsmExtensionInterfacePtr iface, IsmExtensionPtr library, IsmExtensionInitializationPtr initialization)
+bool open_mono_library(PnuExtensionInterfacePtr iface, PnuExtensionPtr library, PnuExtensionInitializationPtr initialization)
 {
 	if (!iface || !library || !initialization) { return false; }
 	PRINT_LINE("open mono module");
@@ -22,7 +22,7 @@ bool open_mono_library(IsmExtensionInterfacePtr iface, IsmExtensionPtr library, 
 	return true;
 }
 
-void initialize_mono_module(void * user, IsmExtensionInitializationLevel level)
+void initialize_mono_module(void * user, PnuExtensionInitializationLevel level)
 {
 	if (level != ExtensionInitializationLevel_Scene) { return; }
 	PRINT_LINE("initialize mono module");
@@ -31,7 +31,7 @@ void initialize_mono_module(void * user, IsmExtensionInitializationLevel level)
 	mono_language = memnew(MonoLanguage); get_script_server()->register_language(mono_language);
 }
 
-void finalize_mono_module(void * user, IsmExtensionInitializationLevel level)
+void finalize_mono_module(void * user, PnuExtensionInitializationLevel level)
 {
 	if (level != ExtensionInitializationLevel_Scene) { return; }
 	PRINT_LINE("finalize mono module");

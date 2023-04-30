@@ -1,11 +1,11 @@
-#ifndef _PN_SHADER_HPP_
-#define _PN_SHADER_HPP_
+#ifndef _PNU_SHADER_HPP_
+#define _PNU_SHADER_HPP_
 
 #include <servers/rendering_server.hpp>
 
-namespace pn
+namespace Pnu
 {
-	class PN_API Shader : public Resource
+	class PNU_API Shader : public Resource
 	{
 		DEFINE_CLASS(Shader, Resource);
 
@@ -37,4 +37,4 @@ namespace pn
 	};
 }
 
-#endif // !_PN_SHADER_HPP_
+#endif // !_PNU_SHADER_HPP_

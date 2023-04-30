@@ -1,14 +1,14 @@
-#ifndef _PN_MONO_SCRIPT_HPP_
-#define _PN_MONO_SCRIPT_HPP_
+#ifndef _PNU_MONO_SCRIPT_HPP_
+#define _PNU_MONO_SCRIPT_HPP_
 
 #include <modules/mono/mono_language.hpp>
 #include <core/io/resource_loader.hpp>
 #include <core/io/resource_saver.hpp>
 
-namespace pn
+namespace Pnu
 {
 	// mono script
-	class PN_MOD_API MonoScript : public Script
+	class PNU_MOD_API MonoScript : public Script
 	{
 		DEFINE_CLASS(MonoScript, Script);
 
@@ -24,10 +24,10 @@ namespace pn
 	};
 }
 
-namespace pn
+namespace Pnu
 {
 	// mono script loader
-	class PN_MOD_API MonoScriptFormatLoader : public ResourceFormatLoader {
+	class PNU_MOD_API MonoScriptFormatLoader : public ResourceFormatLoader {
 		DEFINE_CLASS(MonoScriptFormatLoader, ResourceFormatLoader);
 	public:
 		virtual RES load(String const & path, Error_ * error = nullptr) override;
@@ -36,10 +36,10 @@ namespace pn
 	};
 }
 
-namespace pn
+namespace Pnu
 {
 	// mono instance
-	class PN_MOD_API MonoInstance : public ScriptInstance
+	class PNU_MOD_API MonoInstance : public ScriptInstance
 	{
 		DEFINE_CLASS(MonoInstance, ScriptInstance);
 
@@ -64,4 +64,4 @@ namespace pn
 	};
 }
 
-#endif // !_PN_MONO_SCRIPT_HPP_
+#endif // !_PNU_MONO_SCRIPT_HPP_

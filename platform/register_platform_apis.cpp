@@ -1,6 +1,6 @@
 #include <platform/register_platform_apis.hpp>
 
-namespace pn
+namespace Pnu
 {
 	void register_platform_apis()
 	{

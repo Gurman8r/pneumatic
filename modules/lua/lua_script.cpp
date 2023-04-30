@@ -1,6 +1,6 @@
 #include <modules/lua/lua_script.hpp>
 
-namespace pnu
+namespace Pnu
 {
 	EMBED_CLASS(LuaLanguage, t) {}
 
@@ -21,7 +21,7 @@ namespace pnu
 	}
 }
 
-namespace pnu
+namespace Pnu
 {
 	EMBED_CLASS(LuaScript, t) {}
 
@@ -57,7 +57,7 @@ namespace pnu
 	}
 }
 
-namespace pnu
+namespace Pnu
 {
 	EMBED_CLASS(LuaInstance, t) {}
 

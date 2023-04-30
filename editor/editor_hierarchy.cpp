@@ -1,6 +1,6 @@
 #include <editor/editor_hierarchy.hpp>
 
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 

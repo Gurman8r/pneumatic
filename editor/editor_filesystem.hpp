@@ -1,12 +1,12 @@
-#ifndef _PN_EDITOR_FILESYSTEM_HPP_
-#define _PN_EDITOR_FILESYSTEM_HPP_
+#ifndef _PNU_EDITOR_FILESYSTEM_HPP_
+#define _PNU_EDITOR_FILESYSTEM_HPP_
 
 #include <editor/editor_panel.hpp>
 
-namespace pn
+namespace Pnu
 {
 	// filesystem component of the main editor
-	class PN_API EditorFileSystem : public EditorPanel
+	class PNU_API EditorFileSystem : public EditorPanel
 	{
 		DEFINE_CLASS(EditorFileSystem, EditorPanel);
 
@@ -19,4 +19,4 @@ namespace pn
 	};
 }
 
-#endif // !_PN_EDITOR_FILESYSTEM_HPP_
+#endif // !_PNU_EDITOR_FILESYSTEM_HPP_

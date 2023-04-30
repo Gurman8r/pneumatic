@@ -1,10 +1,10 @@
-#ifndef _PN_ACCESSORS_HPP_
-#define _PN_ACCESSORS_HPP_
+#ifndef _PNU_ACCESSORS_HPP_
+#define _PNU_ACCESSORS_HPP_
 
 #include <core/object/object_api.hpp>
 
 // accessors
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
@@ -82,4 +82,4 @@ namespace pn
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 }
 
-#endif // !_PN_ACCESSORS_HPP_
+#endif // !_PNU_ACCESSORS_HPP_

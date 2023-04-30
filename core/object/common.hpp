@@ -1,5 +1,5 @@
-#ifndef _PN_COMMON_HPP_
-#define _PN_COMMON_HPP_
+#ifndef _PNU_COMMON_HPP_
+#define _PNU_COMMON_HPP_
 
 #include <core/extension/extension_interface.hpp>
 #include <core/os/safe_ref_count.hpp>
@@ -23,12 +23,12 @@
 #endif
 
 #define FWD_OBJ(expr) \
-	(pn::object_or_cast(FWD(expr)))
+	(Pnu::object_or_cast(FWD(expr)))
 
 #define STR_IDENTIFIER(m_name) \
-	static pn::StringObject CAT(ID_, m_name) { TOSTR(m_name) }
+	static Pnu::StringObject CAT(ID_, m_name) { TOSTR(m_name) }
 
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
@@ -308,4 +308,4 @@ namespace pn
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 }
 
-#endif // !_PN_COMMON_HPP_
+#endif // !_PNU_COMMON_HPP_

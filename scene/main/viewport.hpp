@@ -1,10 +1,10 @@
-#ifndef _PN_VIEWPORT_HPP_
-#define _PN_VIEWPORT_HPP_
+#ifndef _PNU_VIEWPORT_HPP_
+#define _PNU_VIEWPORT_HPP_
 
 #include <scene/main/node.hpp>
 #include <scene/resources/texture.hpp>
 
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
@@ -27,7 +27,7 @@ namespace pn
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 	// viewport
-	class PN_API Viewport : public Node
+	class PNU_API Viewport : public Node
 	{
 		DEFINE_CLASS(Viewport, Node);
 
@@ -52,4 +52,4 @@ namespace pn
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 }
 
-#endif // !_PN_VIEWPORT_HPP_
+#endif // !_PNU_VIEWPORT_HPP_

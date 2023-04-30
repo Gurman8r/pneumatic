@@ -1,11 +1,11 @@
-#ifndef _PN_MATERIAL_LIBRARY_HPP_
-#define _PN_MATERIAL_LIBRARY_HPP_
+#ifndef _PNU_MATERIAL_LIBRARY_HPP_
+#define _PNU_MATERIAL_LIBRARY_HPP_
 
 #include <scene/resources/material.hpp>
 
-namespace pn
+namespace Pnu
 {
-	class PN_API MaterialLibrary final
+	class PNU_API MaterialLibrary final
 	{
 	public:
 		static Error_ load_material(Material & material, String const & path);
@@ -13,4 +13,4 @@ namespace pn
 	};
 }
 
-#endif // !_PN_MATERIAL_LIBRARY_HPP_
+#endif // !_PNU_MATERIAL_LIBRARY_HPP_

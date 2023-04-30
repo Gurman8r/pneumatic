@@ -1,16 +1,16 @@
-#ifndef _PN_INPUT_EVENT_HPP_
-#define _PN_INPUT_EVENT_HPP_
+#ifndef _PNU_INPUT_EVENT_HPP_
+#define _PNU_INPUT_EVENT_HPP_
 
 // PLACEHOLDER
 
 #include <core/io/resource.hpp>
 
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 	// input event
-	class PN_API InputEvent : public Resource
+	class PNU_API InputEvent : public Resource
 	{
 		DEFINE_CLASS(InputEvent, Resource);
 
@@ -25,4 +25,4 @@ namespace pn
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 }
 
-#endif // !_PN_INPUT_EVENT_HPP_
+#endif // !_PNU_INPUT_EVENT_HPP_

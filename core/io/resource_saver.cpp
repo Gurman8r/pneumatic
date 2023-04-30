@@ -1,6 +1,6 @@
 #include <core/io/resource_saver.hpp>
 
-namespace pn
+namespace Pnu
 {
 	ResourceSaver * ResourceSaver::__singleton{};
 

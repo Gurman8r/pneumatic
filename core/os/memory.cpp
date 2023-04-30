@@ -11,7 +11,7 @@
 #define CLEAR_FINAL_ALLOCATIONS 0
 #endif
 
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
@@ -115,22 +115,22 @@ namespace pn
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-void * operator new(pn::size_t size, pn::cstring desc)
+void * operator new(Pnu::size_t size, Pnu::cstring desc)
 {
-	return pn::Memory::alloc_static(size, desc);
+	return Pnu::Memory::alloc_static(size, desc);
 }
 
-void * operator new(pn::size_t size, void * (*alloc_fn)(pn::size_t))
+void * operator new(Pnu::size_t size, void * (*alloc_fn)(Pnu::size_t))
 {
 	return alloc_fn(size);
 }
 
-void operator delete(void * ptr, pn::cstring desc)
+void operator delete(void * ptr, Pnu::cstring desc)
 {
 	CRASH("this should never be called");
 }
 
-void operator delete(void * ptr, void * (*alloc_fn)(pn::size_t))
+void operator delete(void * ptr, void * (*alloc_fn)(Pnu::size_t))
 {
 	CRASH("this should never be called");
 }

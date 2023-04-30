@@ -1,15 +1,15 @@
-#ifndef _PN_RENDERING_SERVER_DEFAULT_HPP_
-#define _PN_RENDERING_SERVER_DEFAULT_HPP_
+#ifndef _PNU_RENDERING_SERVER_DEFAULT_HPP_
+#define _PNU_RENDERING_SERVER_DEFAULT_HPP_
 
 #include <servers/rendering/renderer_storage.hpp>
 #include <servers/rendering/renderer_2d.hpp>
 #include <servers/rendering/renderer_3d.hpp>
 
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-	class PN_API RenderingServerDefault : public RenderingServer
+	class PNU_API RenderingServerDefault : public RenderingServer
 	{
 		DEFINE_CLASS(RenderingServerDefault, RenderingServer);
 
@@ -90,4 +90,4 @@ namespace pn
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 }
 
-#endif // !_PN_RENDERING_SERVER_DEFAULT_HPP_
+#endif // !_PNU_RENDERING_SERVER_DEFAULT_HPP_

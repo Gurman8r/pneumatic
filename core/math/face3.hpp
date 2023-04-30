@@ -1,9 +1,9 @@
-#ifndef _PN_FACE3_HPP_
-#define _PN_FACE3_HPP_
+#ifndef _PNU_FACE3_HPP_
+#define _PNU_FACE3_HPP_
 
 #include <core/math/matrix.hpp>
 
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
@@ -21,4 +21,4 @@ namespace pn
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 }
 
-#endif // !_PN_FACE3_HPP_
+#endif // !_PNU_FACE3_HPP_

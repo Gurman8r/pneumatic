@@ -1,13 +1,13 @@
-#ifndef _PN_PROJECT_SETTINGS_HPP_
-#define _PN_PROJECT_SETTINGS_HPP_
+#ifndef _PNU_PROJECT_SETTINGS_HPP_
+#define _PNU_PROJECT_SETTINGS_HPP_
 
 #include <core/object/class.hpp>
 
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-	class PN_API ProjectSettings : public Object
+	class PNU_API ProjectSettings : public Object
 	{
 		DEFINE_CLASS(ProjectSettings, Object);
 
@@ -50,4 +50,4 @@ namespace pn
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 }
 
-#endif // !_PN_PROJECT_SETTINGS_HPP_
+#endif // !_PNU_PROJECT_SETTINGS_HPP_

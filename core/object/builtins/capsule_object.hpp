@@ -1,13 +1,13 @@
-#ifndef _PN_CAPSULE_OBJECT_HPP_
-#define _PN_CAPSULE_OBJECT_HPP_
+#ifndef _PNU_CAPSULE_OBJECT_HPP_
+#define _PNU_CAPSULE_OBJECT_HPP_
 
 #include <core/object/builtins/type_object.hpp>
 
 // capsule
-namespace pn
+namespace Pnu
 {
 	// capsule object
-	class PN_API CapsuleObject : public Object
+	class PNU_API CapsuleObject : public Object
 	{
 		DEFINE_CLASS(CapsuleObject, Object);
 
@@ -84,4 +84,4 @@ namespace pn
 	};
 }
 
-#endif // !_PN_CAPSULE_OBJECT_HPP_
+#endif // !_PNU_CAPSULE_OBJECT_HPP_

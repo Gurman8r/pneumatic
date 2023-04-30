@@ -1,6 +1,6 @@
 #include <scene/component/collider_component.hpp>
 
-namespace pn
+namespace Pnu
 {
 	EMBED_CLASS(ColliderComponent, t) {}
 

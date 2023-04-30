@@ -1,11 +1,11 @@
-#ifndef _PN_FONT_LIBRARY_HPP_
-#define _PN_FONT_LIBRARY_HPP_
+#ifndef _PNU_FONT_LIBRARY_HPP_
+#define _PNU_FONT_LIBRARY_HPP_
 
 #include <scene/resources/font.hpp>
 
-namespace pn
+namespace Pnu
 {
-	class PN_API FontLibrary final
+	class PNU_API FontLibrary final
 	{
 	public:
 		static Error_ load_font(Font & font, String const & path);
@@ -13,4 +13,4 @@ namespace pn
 	};
 }
 
-#endif // !_PN_FONT_LIBRARY_HPP_
+#endif // !_PNU_FONT_LIBRARY_HPP_

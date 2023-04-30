@@ -1,16 +1,16 @@
-#ifndef _PN_FILE_ACCESS_ZIP_HPP_
-#define _PN_FILE_ACCESS_ZIP_HPP_
+#ifndef _PNU_FILE_ACCESS_ZIP_HPP_
+#define _PNU_FILE_ACCESS_ZIP_HPP_
 
 #include <core/io/file_access_pack.hpp>
 
 #include <minizip/unzip.h>
 
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 	// zip archive
-	class PN_API ZipArchive : public PackSource
+	class PNU_API ZipArchive : public PackSource
 	{
 	public:
 		struct File {
@@ -45,7 +45,7 @@ namespace pn
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 	// file access zip
-	class PN_API FileAccessZip : public FileAccess
+	class PNU_API FileAccessZip : public FileAccess
 	{
 		DEFINE_CLASS(FileAccessZip, FileAccess);
 
@@ -77,4 +77,4 @@ namespace pn
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 }
 
-#endif // !_PN_FILE_ACCESS_ZIP_HPP_
+#endif // !_PNU_FILE_ACCESS_ZIP_HPP_

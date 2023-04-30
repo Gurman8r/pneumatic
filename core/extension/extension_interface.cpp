@@ -1,5 +1,5 @@
 #include <core/extension/extension_interface.hpp>
 
-namespace pn
+namespace Pnu
 {
 }

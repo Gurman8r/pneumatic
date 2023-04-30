@@ -2,7 +2,7 @@
 #include <core/io/file_access_pack.hpp>
 #include <cstdio>
 
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 

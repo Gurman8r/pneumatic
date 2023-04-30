@@ -1,6 +1,6 @@
 #include <servers/rendering/renderer_2d.hpp>
 
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 

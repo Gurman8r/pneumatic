@@ -1,11 +1,11 @@
-#ifndef _PN_RIGIDBODY2D_COMPONENT_HPP_
-#define _PN_RIGIDBODY2D_COMPONENT_HPP_
+#ifndef _PNU_RIGIDBODY2D_COMPONENT_HPP_
+#define _PNU_RIGIDBODY2D_COMPONENT_HPP_
 
 #include <scene/component/component.hpp>
 
-namespace pn
+namespace Pnu
 {
-	class PN_API Rigidbody2DComponent : public Component
+	class PNU_API Rigidbody2DComponent : public Component
 	{
 		DEFINE_CLASS(Rigidbody2DComponent, Component);
 
@@ -15,4 +15,4 @@ namespace pn
 	};
 }
 
-#endif // !_PN_RIGIDBODY2D_COMPONENT_HPP_
+#endif // !_PNU_RIGIDBODY2D_COMPONENT_HPP_

@@ -1,9 +1,9 @@
-#ifndef _PN_EVENT_SYSTEM_HPP_
-#define _PN_EVENT_SYSTEM_HPP_
+#ifndef _PNU_EVENT_SYSTEM_HPP_
+#define _PNU_EVENT_SYSTEM_HPP_
 
 #include <core/object/class.hpp>
 
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
@@ -24,7 +24,7 @@ namespace pn
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 	// event
-	class PN_API Event : public Object
+	class PNU_API Event : public Object
 	{
 		DEFINE_CLASS(Event, Object);
 
@@ -50,21 +50,21 @@ namespace pn
 	// event class
 #define EVENT_CLASS(m_class, m_inherits)										\
 private:																		\
-	static_assert(std::is_base_of_v<pn::Event, m_inherits>);					\
+	static_assert(std::is_base_of_v<Pnu::Event, m_inherits>);					\
 																				\
 	DEFINE_CLASS(m_class, m_inherits);											\
 																				\
 public:																			\
-	enum : pn::EventID { ID = m_class::get_class_static().hash_code() };		\
+	enum : Pnu::EventID { ID = m_class::get_class_static().hash_code() };		\
 																				\
-	virtual pn::EventID get_event_id() const override { return m_class::ID; }	\
+	virtual Pnu::EventID get_event_id() const override { return m_class::ID; }	\
 																				\
 private:
 
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 	// listener
-	class PN_API EventListener : public Object
+	class PNU_API EventListener : public Object
 	{
 		DEFINE_CLASS(EventListener, Object);
 
@@ -96,7 +96,7 @@ private:
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 	// dummy listener
-	class PN_API DummyListener final : public EventListener
+	class PNU_API DummyListener final : public EventListener
 	{
 		DEFINE_CLASS(DummyListener, EventListener);
 
@@ -122,7 +122,7 @@ private:
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 	// delegate base
-	template <> class PN_API EventDelegate<Event> : public EventListener
+	template <> class PNU_API EventDelegate<Event> : public EventListener
 	{
 		DEFINE_CLASS(EventDelegate<Event>, EventListener);
 
@@ -197,7 +197,7 @@ private:
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 	// bus
-	class PN_API EventBus : public Object
+	class PNU_API EventBus : public Object
 	{
 		DEFINE_CLASS(EventBus, Object);
 
@@ -363,4 +363,4 @@ private:
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 }
 
-#endif // !_PN_EVENT_SYSTEM_HPP_
+#endif // !_PNU_EVENT_SYSTEM_HPP_

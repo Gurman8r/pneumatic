@@ -1,12 +1,12 @@
-#ifndef _PN_DIR_ACCESS_WINDOWS_HPP_
-#define _PN_DIR_ACCESS_WINDOWS_HPP_
+#ifndef _PNU_DIR_ACCESS_WINDOWS_HPP_
+#define _PNU_DIR_ACCESS_WINDOWS_HPP_
 
 #include <core/io/dir_access.hpp>
 
-namespace pn
+namespace Pnu
 {
 	// directory
-	class PN_API DirAccessWindows : public DirAccess
+	class PNU_API DirAccessWindows : public DirAccess
 	{
 		DEFINE_CLASS(DirAccessWindows, DirAccess);
 
@@ -19,4 +19,4 @@ namespace pn
 	};
 }
 
-#endif // !_PN_DIR_ACCESS_WINDOWS_HPP_
+#endif // !_PNU_DIR_ACCESS_WINDOWS_HPP_

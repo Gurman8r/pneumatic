@@ -1,13 +1,13 @@
-#ifndef _PN_EXTENSION_HPP_
-#define _PN_EXTENSION_HPP_
+#ifndef _PNU_EXTENSION_HPP_
+#define _PNU_EXTENSION_HPP_
 
 #include <core/extension/extension_interface.hpp>
 
 #include <core/io/resource_loader.hpp>
 
-namespace pn
+namespace Pnu
 {
-	class PN_API Extension : public Resource
+	class PNU_API Extension : public Resource
 	{
 		DEFINE_CLASS(Extension, Resource);
 
@@ -36,4 +36,4 @@ namespace pn
 	};
 }
 
-#endif // !_PN_EXTENSION_HPP_
+#endif // !_PNU_EXTENSION_HPP_

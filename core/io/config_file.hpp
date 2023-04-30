@@ -1,11 +1,11 @@
-#ifndef _PN_CONFIG_FILE_HPP_
-#define _PN_CONFIG_FILE_HPP_
+#ifndef _PNU_CONFIG_FILE_HPP_
+#define _PNU_CONFIG_FILE_HPP_
 
 #include <core/io/resource.hpp>
 
-namespace pn
+namespace Pnu
 {
-	class PN_API ConfigFile : public Resource
+	class PNU_API ConfigFile : public Resource
 	{
 		DEFINE_CLASS(ConfigFile, Resource);
 
@@ -28,4 +28,4 @@ namespace pn
 	};
 }
 
-#endif // !_PN_CONFIG_FILE_HPP_
+#endif // !_PNU_CONFIG_FILE_HPP_

@@ -1,14 +1,14 @@
-#ifndef _PN_COMPONENT_HPP_
-#define _PN_COMPONENT_HPP_
+#ifndef _PNU_COMPONENT_HPP_
+#define _PNU_COMPONENT_HPP_
 
 #include <core/object/class.hpp>
 
-namespace pn
+namespace Pnu
 {
 	class Entity;
 	class TransformComponent;
 
-	class PN_API Component : public Object
+	class PNU_API Component : public Object
 	{
 		DEFINE_CLASS(Component, Object);
 
@@ -32,4 +32,4 @@ namespace pn
 	};
 }
 
-#endif // !_PN_COMPONENT_HPP_
+#endif // !_PNU_COMPONENT_HPP_

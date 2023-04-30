@@ -1,6 +1,6 @@
 #include <core/extension/extension_api_dump.hpp>
 
-namespace pn
+namespace Pnu
 {
 	DICT ExtensionAPIDump::generate_extension_api()
 	{

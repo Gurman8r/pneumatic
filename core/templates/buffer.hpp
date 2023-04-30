@@ -1,12 +1,12 @@
-#ifndef _PN_BUFFER_HPP_
-#define _PN_BUFFER_HPP_
+#ifndef _PNU_BUFFER_HPP_
+#define _PNU_BUFFER_HPP_
 
 #include <core/templates/array.hpp>
 #include <core/templates/vector.hpp>
 #include <core/string/string.hpp>
 #include <core/templates/mpl.hpp>
 
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
@@ -276,7 +276,7 @@ namespace pn
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 }
 
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
@@ -526,7 +526,7 @@ namespace pn
 }
 
 // constant buffer
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 	
@@ -817,4 +817,4 @@ namespace pn
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 }
 
-#endif // !_PN_BUFFER_HPP_
+#endif // !_PNU_BUFFER_HPP_

@@ -1,11 +1,11 @@
-#ifndef _PN_HASH_SET_HPP_
-#define _PN_HASH_SET_HPP_
+#ifndef _PNU_HASH_SET_HPP_
+#define _PNU_HASH_SET_HPP_
 
 #include <core/os/memory.hpp>
 
 #include <unordered_set>
 
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
@@ -46,4 +46,4 @@ namespace pn
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 }
 
-#endif // !_PN_HASH_SET_HPP_
+#endif // !_PNU_HASH_SET_HPP_

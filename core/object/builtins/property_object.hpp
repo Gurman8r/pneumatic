@@ -1,13 +1,13 @@
-#ifndef _PN_PROPERTY_OBJECT_HPP_
-#define _PN_PROPERTY_OBJECT_HPP_
+#ifndef _PNU_PROPERTY_OBJECT_HPP_
+#define _PNU_PROPERTY_OBJECT_HPP_
 
 #include <core/object/builtins/type_object.hpp>
 
 // property
-namespace pn
+namespace Pnu
 {
 	// property object
-	class PN_API PropertyObject : public Object
+	class PNU_API PropertyObject : public Object
 	{
 		DEFINE_CLASS(PropertyObject, Object);
 
@@ -53,4 +53,4 @@ namespace pn
 	};
 }
 
-#endif // !_PN_PROPERTY_OBJECT_HPP_
+#endif // !_PNU_PROPERTY_OBJECT_HPP_

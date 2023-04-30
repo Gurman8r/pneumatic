@@ -3,7 +3,7 @@
 #include <core/config/project_settings.hpp>
 #include <filesystem>
 
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 

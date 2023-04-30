@@ -24,17 +24,28 @@ newoption{
 
 -- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * --
 
-_BUILD="%{wks.location}/build_%{_TARGET_OS}_%{cfg.platform}_%{cfg.buildcfg}/"
-_BUILD_BIN="%{wks.location}/build_%{_TARGET_OS}_%{cfg.platform}_%{cfg.buildcfg}/binaries/"
-_BUILD_CFG="%{wks.location}/build_%{_TARGET_OS}_%{cfg.platform}_%{cfg.buildcfg}/config/"
-_BUILD_DAT="%{wks.location}/build_%{_TARGET_OS}_%{cfg.platform}_%{cfg.buildcfg}/data/"
-_BUILD_RES="%{wks.location}/build_%{_TARGET_OS}_%{cfg.platform}_%{cfg.buildcfg}/resources/"
-_BUILD_USR="%{wks.location}/build_%{_TARGET_OS}_%{cfg.platform}_%{cfg.buildcfg}/user/"
-_MODULES="%{wks.location}/modules/"
-_PROJECT="%{wks.location}/workspace/%{_ACTION}/%{prj.name}/"
-_TEMPS="%{wks.location}/temporary/%{_ACTION}/%{_TARGET_OS}/"
-_THIRDPARTY="%{wks.location}/thirdparty/"
-_VENDOR="%{wks.location}/misc/%{_TARGET_OS}/vendor/%{cfg.platform}/%{cfg.buildcfg}/"
+-- paths
+_SLN="%{wks.location}/"
+_CORE="%{_SLN}core/"
+_DRIVERS="%{_SLN}drivers/"
+_EDITOR="%{_SLN}editor/"
+_MAIN="%{_SLN}main/"
+_MODULES="%{_SLN}modules/"
+_PLATFORM="%{_SLN}platform/"
+_SCENE="%{_SLN}scene/"
+_SERVERS="%{_SLN}servers/"
+
+_THIRDPARTY="%{_SLN}thirdparty/"
+_PROJECT="%{_SLN}workspace/%{_ACTION}/%{prj.name}/"
+_TEMPS="%{_SLN}temporary/%{_ACTION}/%{_TARGET_OS}/"
+_VENDOR="%{_SLN}misc/%{_TARGET_OS}/vendor/%{cfg.platform}/%{cfg.buildcfg}/"
+
+_BUILD="%{_SLN}build_%{_TARGET_OS}_%{cfg.platform}_%{cfg.buildcfg}/"
+_BUILD_BIN="%{_SLN}build_%{_TARGET_OS}_%{cfg.platform}_%{cfg.buildcfg}/binaries/"
+_BUILD_CFG="%{_SLN}build_%{_TARGET_OS}_%{cfg.platform}_%{cfg.buildcfg}/config/"
+_BUILD_DAT="%{_SLN}build_%{_TARGET_OS}_%{cfg.platform}_%{cfg.buildcfg}/data/"
+_BUILD_RES="%{_SLN}build_%{_TARGET_OS}_%{cfg.platform}_%{cfg.buildcfg}/resources/"
+_BUILD_USR="%{_SLN}build_%{_TARGET_OS}_%{cfg.platform}_%{cfg.buildcfg}/user/"
 
 -- platform specific extensions
 LIB=".a" DLL=".so" EXE=""
@@ -44,19 +55,37 @@ end
 
 -- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * --
 
-function srcdirs(...)
-	local arg = { ... }
-	for i, v in ipairs(arg) do
-		files{
-			""..v.."/**.hpp",
-			""..v.."/**.cpp",
-			""..v.."/**.h",
-			""..v.."/**.c",
-			""..v.."/**.inl",
-			""..v.."/**.ini",
-			""..v.."/**.cfg",
-		}
-	end
+-- C++ project common
+function cpp_project_common(grp, prj, knd)
+	group			(grp)
+	project			(prj)
+	kind			(knd)
+	language		("C++")
+	cppdialect		("C++17")
+	systemversion	("latest")
+	staticruntime	("Off")
+	rtti			("On")
+	objdir			("%{_TEMPS}")
+	location		("%{_PROJECT}")
+	prebuildcommands{
+		"{MKDIR} %{_BUILD}",
+		"{MKDIR} %{_BUILD_BIN}",
+		"{MKDIR} %{_BUILD_DAT}",
+		"{MKDIR} %{_BUILD_CFG}",
+		"{MKDIR} %{_BUILD_RES}",
+		"{MKDIR} %{_BUILD_USR}",
+	}
+end
+
+-- C# project common
+function csharp_project_common(grp, prj, knd)
+	group		(grp)
+	project		(prj)
+	kind		(knd)
+	language	("C#")
+	framework	("4.0")
+	objdir		("%{_TEMPS}")
+	location	("%{_PROJECT}")
 end
 
 -- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * --

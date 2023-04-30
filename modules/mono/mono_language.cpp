@@ -1,7 +1,7 @@
 #include <modules/mono/mono_language.hpp>
 #include <core/config/project_settings.hpp>
 
-namespace pn
+namespace Pnu
 {
 	EMBED_CLASS(MonoLanguage, t) {}
 
@@ -27,7 +27,7 @@ namespace pn
 		m_assembly = VALIDATE(mono_domain_assembly_open(m_domain, ".\\binaries\\demo-CS.dll"));
 		m_image = VALIDATE(mono_assembly_get_image(m_assembly));
 		print_all_types(m_image);
-		MonoClass * klass{ mono_class_from_name(m_image, "PN", "Test") };
+		MonoClass * klass{ mono_class_from_name(m_image, "Pnu", "Test") };
 		MonoMethodDesc * desc{ mono_method_desc_new(".Test:SayHello()", false) };
 		MonoMethod * method{ mono_method_desc_search_in_class(desc, klass) };
 		mono_method_desc_free(desc);

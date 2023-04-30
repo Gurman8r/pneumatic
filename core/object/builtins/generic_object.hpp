@@ -1,11 +1,11 @@
-#ifndef _PN_GENERIC_OBJECT_HPP_
-#define _PN_GENERIC_OBJECT_HPP_
+#ifndef _PNU_GENERIC_OBJECT_HPP_
+#define _PNU_GENERIC_OBJECT_HPP_
 
 // NYI / PLACEHOLDER
 
 #include <core/object/builtins/type_object.hpp>
 
-namespace pn
+namespace Pnu
 {
 	// generic object
 	class GenericObject : public Object
@@ -32,4 +32,4 @@ namespace pn
 	};
 }
 
-#endif // !_PN_GENERIC_OBJECT_HPP_
+#endif // !_PNU_GENERIC_OBJECT_HPP_

@@ -1,16 +1,16 @@
-#ifndef _PN_INPUT_MAP_HPP_
-#define _PN_INPUT_MAP_HPP_
+#ifndef _PNU_INPUT_MAP_HPP_
+#define _PNU_INPUT_MAP_HPP_
 
 // PLACEHOLDER
 
 #include <core/input/input_event.hpp>
 
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 	// input map
-	class PN_API InputMap : public Object
+	class PNU_API InputMap : public Object
 	{
 		DEFINE_CLASS(InputMap, Object);
 
@@ -25,4 +25,4 @@ namespace pn
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 }
 
-#endif // !_PN_INPUT_MAP_HPP_
+#endif // !_PNU_INPUT_MAP_HPP_

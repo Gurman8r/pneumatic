@@ -2,7 +2,7 @@
 #include <servers/rendering_server.hpp>
 #include <fstream>
 
-using namespace pn;
+using namespace Pnu;
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 

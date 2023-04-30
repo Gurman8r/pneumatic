@@ -1,5 +1,5 @@
-#ifndef _PN_VERSION_HPP_
-#define _PN_VERSION_HPP_
+#ifndef _PNU_VERSION_HPP_
+#define _PNU_VERSION_HPP_
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
@@ -43,4 +43,4 @@
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-#endif // !_PN_VERSION_HPP_
+#endif // !_PNU_VERSION_HPP_

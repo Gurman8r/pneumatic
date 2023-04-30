@@ -1,5 +1,5 @@
-#ifndef _PN_BITSET_HPP_
-#define _PN_BITSET_HPP_
+#ifndef _PNU_BITSET_HPP_
+#define _PNU_BITSET_HPP_
 
 #include <core/templates/array.hpp>
 
@@ -41,7 +41,7 @@
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-namespace pn
+namespace Pnu
 {
 	// mask base
 	template <size_t _Bits
@@ -88,4 +88,4 @@ namespace pn
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-#endif // !_PN_BITSET_HPP_
+#endif // !_PNU_BITSET_HPP_

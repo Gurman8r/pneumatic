@@ -1,11 +1,11 @@
-#ifndef _PN_RESOURCE_SAVER_HPP_
-#define _PN_RESOURCE_SAVER_HPP_
+#ifndef _PNU_RESOURCE_SAVER_HPP_
+#define _PNU_RESOURCE_SAVER_HPP_
 
 #include <core/io/resource.hpp>
 
-namespace pn
+namespace Pnu
 {
-	class PN_API ResourceSaver
+	class PNU_API ResourceSaver
 	{
 		static ResourceSaver * __singleton;
 
@@ -21,4 +21,4 @@ namespace pn
 	SINGLETON_WRAPPER(ResourceSaver, get_resource_saver);
 }
 
-#endif // !_PN_RESOURCE_LOADER_HPP_
+#endif // !_PNU_RESOURCE_LOADER_HPP_

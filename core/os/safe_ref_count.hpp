@@ -1,5 +1,5 @@
-#ifndef _PN_SAFE_REFCOUNT_HPP_
-#define _PN_SAFE_REFCOUNT_HPP_
+#ifndef _PNU_SAFE_REFCOUNT_HPP_
+#define _PNU_SAFE_REFCOUNT_HPP_
 
 #include <core/templates/utility.hpp>
 
@@ -10,7 +10,7 @@
 static_assert(!MULTICORE_ENABLED, "thread support not implemented");
 
 #if !MULTICORE_ENABLED
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
@@ -60,7 +60,7 @@ namespace pn
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 }
 #else
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
@@ -130,11 +130,11 @@ namespace pn
 }
 #endif
 
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-	class PN_API SafeRefCount final
+	class PNU_API SafeRefCount final
 	{
 		u32 m_count{};
 
@@ -155,4 +155,4 @@ namespace pn
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 }
 
-#endif // !_PN_SAFE_REFCOUNT_HPP_
+#endif // !_PNU_SAFE_REFCOUNT_HPP_

@@ -6,7 +6,7 @@
 #include <editor/editor_log.hpp>
 #include <editor/editor_viewport.hpp>
 
-namespace pn
+namespace Pnu
 {
 	void register_editor_types()
 	{

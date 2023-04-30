@@ -1,10 +1,10 @@
-#ifndef _PN_CLASS_HPP_
-#define _PN_CLASS_HPP_
+#ifndef _PNU_CLASS_HPP_
+#define _PNU_CLASS_HPP_
 
 #include <core/object/builtins/module_object.hpp>
 
 // class
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
@@ -152,7 +152,7 @@ namespace pn
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 }
 
-namespace pn::priv
+namespace Pnu::priv
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
@@ -169,9 +169,9 @@ namespace pn::priv
 	};
 
 #define BIND_CLASS(m_class, m_var) \
-	(pn::priv::BindClassHelper<m_class>{}) + [](pn::CLASS_<m_class> m_var) -> pn::CLASS_<m_class>
+	(Pnu::priv::BindClassHelper<m_class>{}) + [](Pnu::CLASS_<m_class> m_var) -> Pnu::CLASS_<m_class>
 
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 }
 
-#endif // !_PN_CLASS_HPP_
+#endif // !_PNU_CLASS_HPP_

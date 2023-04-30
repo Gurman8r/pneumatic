@@ -1,5 +1,5 @@
-#ifndef _PN_MEMORY_HPP_
-#define _PN_MEMORY_HPP_
+#ifndef _PNU_MEMORY_HPP_
+#define _PNU_MEMORY_HPP_
 
 #include <core/templates/utility.hpp>
 
@@ -9,9 +9,9 @@
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 // memory
-namespace pn
+namespace Pnu
 {
-	class PN_API Memory final
+	class PNU_API Memory final
 	{
 	public:
 		static void * alloc_static(size_t size_in_bytes, cstring desc = "");
@@ -26,43 +26,43 @@ namespace pn
 
 // memalloc
 #define memalloc \
-		(pn::Memory::alloc_static)
+		(Pnu::Memory::alloc_static)
 
 // memrealloc
 #define memrealloc(ptr, size_in_bytes) \
-		(pn::Memory::realloc_static((size_in_bytes), (size), (size)))
+		(Pnu::Memory::realloc_static((size_in_bytes), (size), (size)))
 
 // memrealloc (sized)
 #define memrealloc_sized(ptr, old_size, new_size) \
-		(pn::Memory::realloc_static((ptr), (old_size), (new_size)))
+		(Pnu::Memory::realloc_static((ptr), (old_size), (new_size)))
 
 // memfree
 #define memfree \
-		(pn::Memory::free_static)
+		(Pnu::Memory::free_static)
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 // operator new
 
-PN_API_FUNC(void *) operator new(pn::size_t size, pn::cstring desc);
+PNU_API_FUNC(void *) operator new(Pnu::size_t size, Pnu::cstring desc);
 
-PN_API_FUNC(void *) operator new(pn::size_t size, void * (*alloc_fn)(pn::size_t));
+PNU_API_FUNC(void *) operator new(Pnu::size_t size, void * (*alloc_fn)(Pnu::size_t));
 
-FORCE_INLINE void * operator new(pn::size_t size, void * ptr, pn::size_t check, pn::cstring desc) { return ptr; }
+FORCE_INLINE void * operator new(Pnu::size_t size, void * ptr, Pnu::size_t check, Pnu::cstring desc) { return ptr; }
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 // operator delete
 
-PN_API_FUNC(void) operator delete(void * ptr, pn::cstring desc);
+PNU_API_FUNC(void) operator delete(void * ptr, Pnu::cstring desc);
 
-PN_API_FUNC(void) operator delete(void * ptr, void * (*alloc_fn)(pn::size_t));
+PNU_API_FUNC(void) operator delete(void * ptr, void * (*alloc_fn)(Pnu::size_t));
 
-FORCE_INLINE void operator delete(void * placement, void * ptr, pn::size_t check, pn::cstring desc) {}
+FORCE_INLINE void operator delete(void * placement, void * ptr, Pnu::size_t check, Pnu::cstring desc) {}
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
@@ -78,7 +78,7 @@ namespace pn
 
 	// memnew
 #define memnew(T) \
-		(pn::_post_initialize(new (TOSTR(T)) T))
+		(Pnu::_post_initialize(new (TOSTR(T)) T))
 
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
@@ -100,7 +100,7 @@ namespace pn
 		do {							\
 			if (ptr)					\
 			{							\
-				pn::memdelete(ptr);	\
+				Pnu::memdelete(ptr);	\
 			}							\
 		} while (0)
 
@@ -160,7 +160,7 @@ namespace pn
 }
 
 // test memory resource
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
@@ -237,4 +237,4 @@ namespace pn
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 }
 
-#endif // !_PN_MEMORY_HPP_
+#endif // !_PNU_MEMORY_HPP_

@@ -1,13 +1,13 @@
-#ifndef _PN_LIST_OBJECT_HPP_
-#define _PN_LIST_OBJECT_HPP_
+#ifndef _PNU_LIST_OBJECT_HPP_
+#define _PNU_LIST_OBJECT_HPP_
 
 #include <core/object/builtins/type_object.hpp>
 
 // list
-namespace pn
+namespace Pnu
 {
 	// list object
-	class PN_API ListObject : public Object
+	class PNU_API ListObject : public Object
 	{
 		DEFINE_CLASS(ListObject, Object);
 
@@ -128,7 +128,7 @@ namespace pn
 	template <> struct DefaultDelete<ListObject> : DefaultDelete<Object> {};
 
 	// list check
-#define OBJECT_CHECK_LIST(o) (pn::typeof(o).has_feature(pn::TypeFlags_List_Subclass))
+#define OBJECT_CHECK_LIST(o) (Pnu::typeof(o).has_feature(Pnu::TypeFlags_List_Subclass))
 
 	// list ref
 	class LIST : public Ref<ListObject>
@@ -194,4 +194,4 @@ namespace pn
 	};
 }
 
-#endif // !_PN_LIST_OBJECT_HPP_
+#endif // !_PNU_LIST_OBJECT_HPP_

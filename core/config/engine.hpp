@@ -1,9 +1,9 @@
-#ifndef _PN_ENGINE_HPP_
-#define _PN_ENGINE_HPP_
+#ifndef _PNU_ENGINE_HPP_
+#define _PNU_ENGINE_HPP_
 
 #include <core/os/main_loop.hpp>
 
-namespace pn
+namespace Pnu
 {
 	class Engine final
 	{
@@ -21,4 +21,4 @@ namespace pn
 	SINGLETON_WRAPPER(Engine, get_engine);
 }
 
-#endif // !_PN_ENGINE_HPP_
+#endif // !_PNU_ENGINE_HPP_

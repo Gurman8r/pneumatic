@@ -1,11 +1,11 @@
-#ifndef _PN_SPRITE_RENDERER_COMPONENT_HPP_
-#define _PN_SPRITE_RENDERER_COMPONENT_HPP_
+#ifndef _PNU_SPRITE_RENDERER_COMPONENT_HPP_
+#define _PNU_SPRITE_RENDERER_COMPONENT_HPP_
 
 #include <scene/component/renderer_component.hpp>
 
-namespace pn
+namespace Pnu
 {
-	class PN_API SpriteRendererComponent : public RendererComponent
+	class PNU_API SpriteRendererComponent : public RendererComponent
 	{
 		DEFINE_CLASS(SpriteRendererComponent, RendererComponent);
 
@@ -15,4 +15,4 @@ namespace pn
 	};
 }
 
-#endif // !_PN_SPRITE_RENDERER_COMPONENT_HPP_
+#endif // !_PNU_SPRITE_RENDERER_COMPONENT_HPP_

@@ -29,7 +29,7 @@
 
 #include <scene/gui/imgui.hpp>
 
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
@@ -82,7 +82,7 @@ namespace pn
 
 		get_os()->set_cmdline(exepath, args);
 
-		display = DS::create("pn", DS::WindowMode_Maximized, { 0, 0 }, { 1280, 720 }, 0, error);
+		display = DS::create("Pneumatic", DS::WindowMode_Maximized, { 0, 0 }, { 1280, 720 }, 0, error);
 		graphics = RS::create();
 		text = memnew(TextServer);
 		physics = memnew(PhysicsServer);

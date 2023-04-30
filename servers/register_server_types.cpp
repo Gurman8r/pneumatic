@@ -5,7 +5,7 @@
 #include <servers/rendering/rendering_server_default.hpp>
 #include <servers/text_server.hpp>
 
-namespace pn
+namespace Pnu
 {
 	void register_server_types()
 	{

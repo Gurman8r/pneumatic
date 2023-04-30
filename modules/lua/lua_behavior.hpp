@@ -1,12 +1,12 @@
-#ifndef _PN_LUA_BEHAVIOR_HPP_
-#define _PN_LUA_BEHAVIOR_HPP_
+#ifndef _PNU_LUA_BEHAVIOR_HPP_
+#define _PNU_LUA_BEHAVIOR_HPP_
 
 #include <scene/component/behavior.hpp>
 
-namespace pn
+namespace Pnu
 {
 	// lua behavior
-	class PN_MOD_API LuaBehavior : public Behavior
+	class PNU_MOD_API LuaBehavior : public Behavior
 	{
 		DEFINE_CLASS(LuaBehavior, Behavior);
 
@@ -16,4 +16,4 @@ namespace pn
 	};
 }
 
-#endif // !_PN_LUA_BEHAVIOR_HPP_
+#endif // !_PNU_LUA_BEHAVIOR_HPP_

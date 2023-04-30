@@ -1,5 +1,5 @@
-#ifndef _PN_SCENE_TREE_HPP_
-#define _PN_SCENE_TREE_HPP_
+#ifndef _PNU_SCENE_TREE_HPP_
+#define _PNU_SCENE_TREE_HPP_
 
 #include <core/os/main_loop.hpp>
 
@@ -7,7 +7,7 @@
 
 #include <entt/entt.hpp>
 
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
@@ -23,7 +23,7 @@ namespace pn
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 	// scene tree
-	class PN_API SceneTree : public MainLoop
+	class PNU_API SceneTree : public MainLoop
 	{
 		DEFINE_CLASS(SceneTree, MainLoop);
 
@@ -70,4 +70,4 @@ namespace pn
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 }
 
-#endif // !_PN_SCENE_TREE_HPP_
+#endif // !_PNU_SCENE_TREE_HPP_

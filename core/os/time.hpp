@@ -1,11 +1,11 @@
-#ifndef _PN_TIME_HPP_
-#define _PN_TIME_HPP_
+#ifndef _PNU_TIME_HPP_
+#define _PNU_TIME_HPP_
 
 #include <core/templates/ratio.hpp>
 
 #include <chrono>
 
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
@@ -183,4 +183,4 @@ namespace pn
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 }
 
-#endif // !_PN_TIME_HPP_
+#endif // !_PNU_TIME_HPP_

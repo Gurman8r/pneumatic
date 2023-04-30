@@ -8,7 +8,7 @@
 #include <core/math/face3.hpp>
 #include <core/math/transform.hpp>
 
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
@@ -238,9 +238,7 @@ namespace pn
 		{
 		case Notification_Process: {
 
-			char window_title[32];
-			std::sprintf(window_title, "pn @ %.3f fps", get_tree()->get_fps().value);
-			get_tree()->get_root()->set_title(window_title);
+			get_tree()->get_root()->set_title(String::format<48>("Pneumatic @ %.3f fps", get_tree()->get_fps().value));
 
 			Duration const delta_time{ get_tree()->get_delta_time() };
 

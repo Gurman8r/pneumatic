@@ -1,14 +1,14 @@
-#ifndef _PN_RENDERER_SCENE_RENDERER_HPP_
-#define _PN_RENDERER_SCENE_RENDERER_HPP_
+#ifndef _PNU_RENDERER_SCENE_RENDERER_HPP_
+#define _PNU_RENDERER_SCENE_RENDERER_HPP_
 
 #include <servers/rendering/renderer_storage.hpp>
 
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 	// scene renderer
-	class PN_API Renderer3D : public Object
+	class PNU_API Renderer3D : public Object
 	{
 		DEFINE_CLASS(Renderer3D, Object);
 
@@ -52,4 +52,4 @@ namespace pn
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 }
 
-#endif // !_PN_RENDERER_SCENE_RENDERER_HPP_
+#endif // !_PNU_RENDERER_SCENE_RENDERER_HPP_

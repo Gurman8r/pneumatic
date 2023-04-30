@@ -1,6 +1,6 @@
 #include <servers/rendering/rendering_device.hpp>
 
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 

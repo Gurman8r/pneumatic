@@ -1,14 +1,14 @@
-#ifndef _PN_LOGGER_HPP_
-#define _PN_LOGGER_HPP_
+#ifndef _PNU_LOGGER_HPP_
+#define _PNU_LOGGER_HPP_
 
 #include <core/string/string.hpp>
 #include <core/templates/vector.hpp>
 
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-	class PN_API Logger
+	class PNU_API Logger
 	{
 	public:
 		virtual ~Logger() noexcept = default;
@@ -22,7 +22,7 @@ namespace pn
 
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-	class PN_API StdLogger : public Logger
+	class PNU_API StdLogger : public Logger
 	{
 	public:
 		virtual ~StdLogger() noexcept override = default;
@@ -32,7 +32,7 @@ namespace pn
 
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-	class PN_API CompositeLogger : public Logger
+	class PNU_API CompositeLogger : public Logger
 	{
 		Vector<Logger *> m_loggers;
 
@@ -49,4 +49,4 @@ namespace pn
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 }
 
-#endif // !_PN_LOGGER_HPP_
+#endif // !_PNU_LOGGER_HPP_

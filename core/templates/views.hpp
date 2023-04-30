@@ -1,9 +1,9 @@
-#ifndef _PN_VIEWS_HPP_
-#define _PN_VIEWS_HPP_
+#ifndef _PNU_VIEWS_HPP_
+#define _PNU_VIEWS_HPP_
 
 #include <core/templates/utility.hpp>
 
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
@@ -149,4 +149,4 @@ namespace pn
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 }
 
-#endif // !_PN_VIEWS_HPP_
+#endif // !_PNU_VIEWS_HPP_

@@ -1,6 +1,6 @@
 #include <modules/lua/lua_behavior.hpp>
 
-namespace pnu
+namespace Pnu
 {
 	EMBED_CLASS(LuaBehavior, t) {}
 

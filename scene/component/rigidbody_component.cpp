@@ -1,6 +1,6 @@
 #include <scene/component/rigidbody_component.hpp>
 
-namespace pn
+namespace Pnu
 {
 	EMBED_CLASS(RigidbodyComponent, t) {}
 

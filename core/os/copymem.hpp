@@ -1,5 +1,5 @@
-#ifndef _PN_COPYMEM_HPP_
-#define _PN_COPYMEM_HPP_
+#ifndef _PNU_COPYMEM_HPP_
+#define _PNU_COPYMEM_HPP_
 
 #include <core/typedefs.hpp>
 
@@ -11,4 +11,4 @@
 
 #define zeromem(dst, size) (std::memset(dst, 0, size))
 
-#endif // !_PN_COPYMEM_HPP_
+#endif // !_PNU_COPYMEM_HPP_

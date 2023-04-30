@@ -1,9 +1,9 @@
-#ifndef _PN_FILE_ACCESS_HPP_
-#define _PN_FILE_ACCESS_HPP_
+#ifndef _PNU_FILE_ACCESS_HPP_
+#define _PNU_FILE_ACCESS_HPP_
 
 #include <core/object/class.hpp>
 
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
@@ -33,7 +33,7 @@ namespace pn
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 	// file access
-	class PN_API FileAccess : public Object
+	class PNU_API FileAccess : public Object
 	{
 		DEFINE_CLASS(FileAccess, Object);
 
@@ -98,4 +98,4 @@ namespace pn
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 }
 
-#endif // !_PN_FILE_ACCESS_HPP_
+#endif // !_PNU_FILE_ACCESS_HPP_

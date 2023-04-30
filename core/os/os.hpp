@@ -1,11 +1,11 @@
-#ifndef _PN_OS_HPP_
-#define _PN_OS_HPP_
+#ifndef _PNU_OS_HPP_
+#define _PNU_OS_HPP_
 
 #include <core/io/logger.hpp>
 #include <core/os/main_loop.hpp>
 #include <iostream>
 
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
@@ -16,7 +16,7 @@ namespace pn
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 	// operating system
-	class PN_API OS
+	class PNU_API OS
 	{
 		static OS * __singleton;
 
@@ -232,4 +232,4 @@ namespace pn
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 }
 
-#endif // !_PN_OS_HPP_
+#endif // !_PNU_OS_HPP_

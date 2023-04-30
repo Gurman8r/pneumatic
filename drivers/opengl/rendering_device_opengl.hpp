@@ -1,14 +1,14 @@
 #if OPENGL_ENABLED
-#ifndef _PN_RENDERING_DEVICE_OPENGL_HPP_
-#define _PN_RENDERING_DEVICE_OPENGL_HPP_
+#ifndef _PNU_RENDERING_DEVICE_OPENGL_HPP_
+#define _PNU_RENDERING_DEVICE_OPENGL_HPP_
 
 #include <servers/rendering_server.hpp>
 
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-	class PN_API RenderingDeviceOpenGL : public RenderingDevice
+	class PNU_API RenderingDeviceOpenGL : public RenderingDevice
 	{
 		DEFINE_CLASS(RenderingDeviceOpenGL, RenderingDevice);
 
@@ -228,5 +228,5 @@ namespace pn
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 }
 
-#endif // !_PN_RENDERING_DEVICE_OPENGL_HPP_
+#endif // !_PNU_RENDERING_DEVICE_OPENGL_HPP_
 #endif // OPENGL_ENABLED

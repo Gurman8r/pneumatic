@@ -1,15 +1,15 @@
-#ifndef _PN_RENDERING_DEVICE_HPP_
-#define _PN_RENDERING_DEVICE_HPP_
+#ifndef _PNU_RENDERING_DEVICE_HPP_
+#define _PNU_RENDERING_DEVICE_HPP_
 
 #include <servers/display_server.hpp>
 
 // rendering device
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 	// low-level graphics api
-	class PN_API RenderingDevice : public Object
+	class PNU_API RenderingDevice : public Object
 	{
 		DEFINE_CLASS(RenderingDevice, Object);
 
@@ -20,7 +20,7 @@ namespace pn
 		RenderingDevice() noexcept { __singleton = this; }
 		virtual ~RenderingDevice() noexcept override = default;
 		FORCE_INLINE static RenderingDevice * get_singleton() noexcept { return __singleton; }
-#define RENDERING_DEVICE (pn::RenderingDevice::get_singleton())
+#define RENDERING_DEVICE (Pnu::RenderingDevice::get_singleton())
 
 	public:
 		virtual void initialize() = 0;
@@ -309,7 +309,7 @@ namespace pn
 					, type		{ type }
 					, count		{ (u32)count }
 					, normalized{ normalized }
-					, size		{ (u32)(pn::get_data_type_size(type) * count) }
+					, size		{ (u32)(Pnu::get_data_type_size(type) * count) }
 					, offset	{}
 				{
 				}
@@ -784,4 +784,4 @@ namespace pn
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 }
 
-#endif // !_PN_RENDERING_DEVICE_HPP_
+#endif // !_PNU_RENDERING_DEVICE_HPP_

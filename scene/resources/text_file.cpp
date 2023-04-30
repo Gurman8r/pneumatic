@@ -2,7 +2,7 @@
 #include <servers/text_server.hpp>
 #include <fstream>
 
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 

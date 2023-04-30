@@ -1,13 +1,13 @@
-#ifndef _PN_EXTENSION_API_DUMP_HPP_
-#define _PN_EXTENSION_API_DUMP_HPP_
+#ifndef _PNU_EXTENSION_API_DUMP_HPP_
+#define _PNU_EXTENSION_API_DUMP_HPP_
 
 // PLACEHOLDER
 
 #include <core/extension/extension.hpp>
 
-namespace pn
+namespace Pnu
 {
-	class PN_API ExtensionAPIDump final
+	class PNU_API ExtensionAPIDump final
 	{
 	public:
 		static DICT generate_extension_api();
@@ -15,4 +15,4 @@ namespace pn
 	};
 }
 
-#endif // !_PN_EXTENSION_API_DUMP_HPP_
+#endif // !_PNU_EXTENSION_API_DUMP_HPP_

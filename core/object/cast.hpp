@@ -1,5 +1,5 @@
-#ifndef _PN_CAST_HPP_
-#define _PN_CAST_HPP_
+#ifndef _PNU_CAST_HPP_
+#define _PNU_CAST_HPP_
 
 #include <core/object/builtins/base_object.hpp>
 #include <core/object/builtins/type_object.hpp>
@@ -16,7 +16,7 @@
 #include <core/object/builtins/property_object.hpp>
 #include <core/object/builtins/generic_object.hpp>
 
-namespace pn::priv
+namespace Pnu::priv
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
@@ -51,7 +51,7 @@ namespace pn::priv
 }
 
 // base casters
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
@@ -90,7 +90,7 @@ namespace pn
 }
 
 // type casters
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
@@ -299,7 +299,7 @@ public:																							\
 
 		template <class U> operator U && () { return (U &&)std::move(***value); }
 
-		template <class U> using cast_op_type = pn::cast_op_type<U>;
+		template <class U> using cast_op_type = Pnu::cast_op_type<U>;
 
 		static constexpr auto name{ "string" };
 
@@ -386,7 +386,7 @@ public:																							\
 			}
 		}
 
-		template <class U> using cast_op_type = pn::cast_op_type<U>;
+		template <class U> using cast_op_type = Pnu::cast_op_type<U>;
 
 		static constexpr auto name{ "object" };
 
@@ -457,7 +457,7 @@ public:																							\
 }
 
 // cast
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
@@ -644,7 +644,7 @@ namespace pn
 	template <class T, std::enable_if_t<!is_object_api_v<T>, int>
 	> OBJ object_or_cast(T && o)
 	{
-		return pn::cast(FWD(o));
+		return Pnu::cast(FWD(o));
 	}
 
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
@@ -652,26 +652,26 @@ namespace pn
 	// ref cast
 	template <class O> template <class T> inline T Ref<O>::cast() const &
 	{
-		if constexpr (!std::is_void_v<T>) { return pn::cast<T>(*this); }
+		if constexpr (!std::is_void_v<T>) { return Pnu::cast<T>(*this); }
 	}
 
 	template <class O> template <class T> inline T Ref<O>::cast() &&
 	{
-		if constexpr (!std::is_void_v<T>) { return pn::cast<T>(std::move(*this)); }
+		if constexpr (!std::is_void_v<T>) { return Pnu::cast<T>(std::move(*this)); }
 	}
 
 	// object cast
 	template <class T> inline T Object::cast() const &
 	{
-		if constexpr (!std::is_void_v<T>) { return pn::cast<T>(ptr()); }
+		if constexpr (!std::is_void_v<T>) { return Pnu::cast<T>(ptr()); }
 	}
 
 	template <class T> inline T Object::cast() &&
 	{
-		if constexpr (!std::is_void_v<T>) { return pn::cast<T>(std::move(*this).ptr()); }
+		if constexpr (!std::is_void_v<T>) { return Pnu::cast<T>(std::move(*this).ptr()); }
 	}
 
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 }
 
-#endif // !_PN_CAST_HPP_
+#endif // !_PNU_CAST_HPP_

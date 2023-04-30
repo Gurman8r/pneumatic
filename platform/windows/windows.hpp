@@ -1,5 +1,5 @@
-#ifndef _PN_WINDOWS_HPP_
-#define _PN_WINDOWS_HPP_
+#ifndef _PNU_WINDOWS_HPP_
+#define _PNU_WINDOWS_HPP_
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
@@ -48,4 +48,4 @@
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-#endif // !_PN_WINDOWS_HPP_
+#endif // !_PNU_WINDOWS_HPP_

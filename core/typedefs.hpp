@@ -1,9 +1,9 @@
-#ifndef _PN_TYPEDEFS_HPP_
-#define _PN_TYPEDEFS_HPP_
+#ifndef _PNU_TYPEDEFS_HPP_
+#define _PNU_TYPEDEFS_HPP_
 
 #include <core/language_features.hpp>
 
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
@@ -95,4 +95,4 @@ namespace pn
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-#endif // !_PN_TYPEDEFS_HPP_
+#endif // !_PNU_TYPEDEFS_HPP_

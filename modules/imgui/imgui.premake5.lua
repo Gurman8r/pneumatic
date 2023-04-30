@@ -1,17 +1,9 @@
 -- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * --
 
 -- imgui
-group			"Modules"
-project			"imgui"
-kind			"SharedLib"
-language		"C++"
-cppdialect 		"C++17"
-systemversion	"latest"
-staticruntime	"Off"
-targetname		"%{prj.name}"
-targetdir		"%{_BUILD_BIN}"
-objdir			"%{_TEMPS}"
-location		"%{_PROJECT}"
+cpp_project_common("Modules", "imgui", "SharedLib")
+
+targetdir("%{_BUILD_BIN}")
 
 manifest("imgui")
 
@@ -27,32 +19,32 @@ defines{
 }
 
 includedirs{
-	"%{wks.location}/thirdparty",
-	"%{wks.location}/thirdparty/glfw/glfw/include",
-	"%{wks.location}/thirdparty/imgui/imgui",
-	"%{wks.location}/thirdparty/imgui/imgui-node-editor",
+	"%{_SLN}thirdparty",
+	"%{_THIRDPARTY}glfw/glfw/include",
+	"%{_THIRDPARTY}imgui/imgui",
+	"%{_THIRDPARTY}imgui/imgui-node-editor",
 }
 
 files{
-	"%{wks.location}/modules/%{prj.name}/%{prj.name}.premake5.lua",
+	"%{_MODULES}%{prj.name}/%{prj.name}.premake5.lua",
 	
-	"%{wks.location}/thirdparty/imgui/*.h",
-	"%{wks.location}/thirdparty/imgui/*.cpp",
+	"%{_THIRDPARTY}imgui/*.h",
+	"%{_THIRDPARTY}imgui/*.cpp",
 
-	"%{wks.location}/thirdparty/imgui/backends/imgui_impl_glfw.h",
-	"%{wks.location}/thirdparty/imgui/backends/imgui_impl_glfw.cpp",
-	"%{wks.location}/thirdparty/imgui/backends/imgui_impl_opengl3.h",
-	"%{wks.location}/thirdparty/imgui/backends/imgui_impl_opengl3.cpp",
+	"%{_THIRDPARTY}imgui/backends/imgui_impl_glfw.h",
+	"%{_THIRDPARTY}imgui/backends/imgui_impl_glfw.cpp",
+	"%{_THIRDPARTY}imgui/backends/imgui_impl_opengl3.h",
+	"%{_THIRDPARTY}imgui/backends/imgui_impl_opengl3.cpp",
 	
-	"%{wks.location}/thirdparty/imgui_club/imgui_memory_editor/imgui_memory_editor.h",
-	"%{wks.location}/thirdparty/ImGuizmo/ImGuizmo.h",
-	"%{wks.location}/thirdparty/ImGuizmo/ImGuizmo.cpp",
-	--"%{wks.location}/thirdparty/ImGuiColorTextEdit/*.h",
-	--"%{wks.location}/thirdparty/ImGuiColorTextEdit/*.cpp",
-	--"%{wks.location}/thirdparty/imgui-node-editor/*.h",
-	--"%{wks.location}/thirdparty/imgui-node-editor/*.cpp",
-	--"%{wks.location}/thirdparty/implot/**.h",
-	--"%{wks.location}/thirdparty/implot/**.cpp",
+	"%{_THIRDPARTY}imgui_club/imgui_memory_editor/imgui_memory_editor.h",
+	"%{_THIRDPARTY}ImGuizmo/ImGuizmo.h",
+	"%{_THIRDPARTY}ImGuizmo/ImGuizmo.cpp",
+	--"%{_THIRDPARTY}ImGuiColorTextEdit/*.h",
+	--"%{_THIRDPARTY}ImGuiColorTextEdit/*.cpp",
+	--"%{_THIRDPARTY}imgui-node-editor/*.h",
+	--"%{_THIRDPARTY}imgui-node-editor/*.cpp",
+	--"%{_THIRDPARTY}implot/**.h",
+	--"%{_THIRDPARTY}implot/**.cpp",
 }
 
 -- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * --

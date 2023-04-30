@@ -1,17 +1,17 @@
-#ifndef _PN_EDITOR_PANEL_HPP_
-#define _PN_EDITOR_PANEL_HPP_
+#ifndef _PNU_EDITOR_PANEL_HPP_
+#define _PNU_EDITOR_PANEL_HPP_
 
 #include <scene/gui/imgui.hpp>
 #include <scene/main/scene_tree.hpp>
 
 #define EDITOR_PANEL_SCOPE(open)							\
-	(open) = pn::EditorPanel::begin_window();				\
-	ON_SCOPE_EXIT(&) { pn::EditorPanel::end_window(); };	\
+	(open) = Pnu::EditorPanel::begin_window();				\
+	ON_SCOPE_EXIT(&) { Pnu::EditorPanel::end_window(); };	\
 
-namespace pn
+namespace Pnu
 {
 	// base class for editor windows
-	class PN_API EditorPanel : public Object
+	class PNU_API EditorPanel : public Object
 	{
 		DEFINE_CLASS(EditorPanel, Object);
 
@@ -48,4 +48,4 @@ namespace pn
 	};
 }
 
-#endif // !_PN_EDITOR_PANEL_HPP_
+#endif // !_PNU_EDITOR_PANEL_HPP_

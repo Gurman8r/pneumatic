@@ -1,11 +1,11 @@
-#ifndef _PN_VAR_HPP_
-#define _PN_VAR_HPP_
+#ifndef _PNU_VAR_HPP_
+#define _PNU_VAR_HPP_
 
 #include <core/io/resource.hpp>
 
 #include <variant>
 
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
@@ -323,4 +323,4 @@ namespace pn
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 }
 
-#endif // !_PN_VAR_HPP_
+#endif // !_PNU_VAR_HPP_

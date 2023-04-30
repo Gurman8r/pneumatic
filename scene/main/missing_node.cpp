@@ -1,6 +1,6 @@
 #include <scene/main/missing_node.hpp>
 
-namespace pn
+namespace Pnu
 {
 	EMBED_CLASS(MissingNode, t) {}
 

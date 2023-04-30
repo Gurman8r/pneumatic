@@ -1,11 +1,11 @@
-#ifndef _PN_MESH_HPP_
-#define _PN_MESH_HPP_
+#ifndef _PNU_MESH_HPP_
+#define _PNU_MESH_HPP_
 
 #include <servers/rendering_server.hpp>
 
-namespace pn
+namespace Pnu
 {
-	class PN_API Mesh : public Resource
+	class PNU_API Mesh : public Resource
 	{
 		DEFINE_CLASS(Mesh, Resource);
 
@@ -35,4 +35,4 @@ namespace pn
 	};
 }
 
-#endif // !_PN_MESH_HPP_
+#endif // !_PNU_MESH_HPP_

@@ -1,14 +1,14 @@
-#ifndef _PN_TEXTURE_HPP_
-#define _PN_TEXTURE_HPP_
+#ifndef _PNU_TEXTURE_HPP_
+#define _PNU_TEXTURE_HPP_
 
 #include <servers/rendering_server.hpp>
 
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 	// texture
-	class PN_API Texture : public Resource
+	class PNU_API Texture : public Resource
 	{
 		DEFINE_CLASS(Texture, Resource);
 
@@ -24,7 +24,7 @@ namespace pn
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 	// texture 2D
-	class PN_API Texture2D : public Texture
+	class PNU_API Texture2D : public Texture
 	{
 		DEFINE_CLASS(Texture2D, Texture);
 
@@ -47,7 +47,7 @@ namespace pn
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 	// image texture
-	class PN_API ImageTexture : public Texture2D
+	class PNU_API ImageTexture : public Texture2D
 	{
 		DEFINE_CLASS(ImageTexture, Texture2D);
 
@@ -72,7 +72,7 @@ namespace pn
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 	// texture 3D (NYI)
-	class PN_API Texture3D : public Texture
+	class PNU_API Texture3D : public Texture
 	{
 		DEFINE_CLASS(Texture3D, Texture);
 
@@ -87,7 +87,7 @@ namespace pn
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 	// texture cube (NYI)
-	class PN_API TextureCube : public Texture
+	class PNU_API TextureCube : public Texture
 	{
 		DEFINE_CLASS(TextureCube, Texture);
 
@@ -102,4 +102,4 @@ namespace pn
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 }
 
-#endif // !_PN_TEXTURE_HPP_
+#endif // !_PNU_TEXTURE_HPP_

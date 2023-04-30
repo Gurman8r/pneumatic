@@ -1,11 +1,11 @@
-#ifndef _PN_MISSING_NODE_HPP_
-#define _PN_MISSING_NODE_HPP_
+#ifndef _PNU_MISSING_NODE_HPP_
+#define _PNU_MISSING_NODE_HPP_
 
 #include <scene/main/node.hpp>
 
-namespace pn
+namespace Pnu
 {
-	class PN_API MissingNode : public Node
+	class PNU_API MissingNode : public Node
 	{
 		DEFINE_CLASS(MissingNode, Node);
 
@@ -15,4 +15,4 @@ namespace pn
 	};
 }
 
-#endif // !_PN_MISSING_NODE_HPP_
+#endif // !_PNU_MISSING_NODE_HPP_

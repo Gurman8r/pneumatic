@@ -1,11 +1,11 @@
-#ifndef _PN_STRING_STREAM_HPP_
-#define _PN_STRING_STREAM_HPP_
+#ifndef _PNU_STRING_STREAM_HPP_
+#define _PNU_STRING_STREAM_HPP_
 
 #include <core/string/string.hpp>
 
 #include <sstream>
 
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
@@ -44,4 +44,4 @@ namespace pn
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 }
 
-#endif // !_PN_STRING_STREAM_HPP_
+#endif // !_PNU_STRING_STREAM_HPP_

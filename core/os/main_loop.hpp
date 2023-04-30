@@ -1,13 +1,13 @@
-#ifndef _PN_MAIN_LOOP_HPP_
-#define _PN_MAIN_LOOP_HPP_
+#ifndef _PNU_MAIN_LOOP_HPP_
+#define _PNU_MAIN_LOOP_HPP_
 
 #include <core/object/class.hpp>
 
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-	class PN_API MainLoop : public Object
+	class PNU_API MainLoop : public Object
 	{
 		DEFINE_CLASS(MainLoop, Object);
 
@@ -37,4 +37,4 @@ namespace pn
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 }
 
-#endif // !_PN_MAIN_LOOP_HPP_
+#endif // !_PNU_MAIN_LOOP_HPP_

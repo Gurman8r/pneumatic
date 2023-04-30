@@ -4,7 +4,7 @@
 
 #include <drivers/opengl/rendering_device_opengl.hpp>
 
-using namespace pn;
+using namespace Pnu;
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 

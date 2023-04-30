@@ -1,7 +1,7 @@
 #include <core/object/eval.hpp>
 #include <core/object/class.hpp>
 
-namespace pn
+namespace Pnu
 {
 	OBJ evaluate(String text)
 	{

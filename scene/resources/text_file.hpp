@@ -1,11 +1,11 @@
-#ifndef _PN_TEXT_FILE_HPP_
-#define _PN_TEXT_FILE_HPP_
+#ifndef _PNU_TEXT_FILE_HPP_
+#define _PNU_TEXT_FILE_HPP_
 
 #include <core/io/resource.hpp>
 
-namespace pn
+namespace Pnu
 {
-	class PN_API TextFile : public Resource
+	class PNU_API TextFile : public Resource
 	{
 		DEFINE_CLASS(TextFile, Resource);
 
@@ -20,4 +20,4 @@ namespace pn
 	};
 }
 
-#endif // !_PN_TEXT_FILE_HPP_
+#endif // !_PNU_TEXT_FILE_HPP_

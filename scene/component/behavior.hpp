@@ -1,11 +1,11 @@
-#ifndef _PN_BEHAVIOR_HPP_
-#define _PN_BEHAVIOR_HPP_
+#ifndef _PNU_BEHAVIOR_HPP_
+#define _PNU_BEHAVIOR_HPP_
 
 #include <scene/component/component.hpp>
 
-namespace pn
+namespace Pnu
 {
-	class PN_API Behavior : public Component
+	class PNU_API Behavior : public Component
 	{
 		DEFINE_CLASS(Behavior, Component);
 
@@ -22,4 +22,4 @@ namespace pn
 	};
 }
 
-#endif // !_PN_BEHAVIOR_HPP_
+#endif // !_PNU_BEHAVIOR_HPP_

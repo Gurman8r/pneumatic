@@ -1,6 +1,6 @@
 #include <modules/mono/mono_behavior.hpp>
 
-namespace pnu
+namespace Pnu
 {
 	EMBED_CLASS(MonoBehavior, t) {}
 

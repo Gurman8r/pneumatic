@@ -15,7 +15,7 @@
 #include <core/io/file_access_zip.hpp>
 #include <core/io/lexer.hpp>
 
-namespace pn
+namespace Pnu
 {
 	static Internals *			internals{};
 	static ResourceLoader *		loader{};

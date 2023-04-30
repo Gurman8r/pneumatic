@@ -1,7 +1,7 @@
 #include <scene/resources/font_library.hpp>
 #include <servers/text_server.hpp>
 
-namespace pn
+namespace Pnu
 {
 	Error_ FontLibrary::load_font(Font & font, String const & path)
 	{

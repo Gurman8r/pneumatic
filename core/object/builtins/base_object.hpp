@@ -1,5 +1,5 @@
-#ifndef _PN_BASE_OBJECT_HPP_
-#define _PN_BASE_OBJECT_HPP_
+#ifndef _PNU_BASE_OBJECT_HPP_
+#define _PNU_BASE_OBJECT_HPP_
 
 #include <core/object/accessors.hpp>
 #include <core/object/ref.hpp>
@@ -14,13 +14,13 @@ public:																				\
 	using typename base_type::Notification_;										\
 																					\
 private:																			\
-	friend class pn::Internals;													\
-	friend class pn::_EmbedClassHelper<m_class>;									\
-	friend struct pn::DefaultDelete<m_class>;										\
+	friend class Pnu::Internals;													\
+	friend class Pnu::_EmbedClassHelper<m_class>;									\
+	friend struct Pnu::DefaultDelete<m_class>;										\
 																					\
-	static constexpr pn::StringView __name_static{ TOSTR(m_class) };				\
+	static constexpr Pnu::StringView __name_static{ TOSTR(m_class) };				\
 																					\
-	static pn::TypeObject __type_static;											\
+	static Pnu::TypeObject __type_static;											\
 																					\
 protected:																			\
 	static void initialize_class()													\
@@ -40,12 +40,12 @@ protected:																			\
 		m_class::initialize_class();												\
 	}																				\
 																					\
-	FORCE_INLINE virtual pn::StringView _get_classv() const noexcept override		\
+	FORCE_INLINE virtual Pnu::StringView _get_classv() const noexcept override		\
 	{																				\
 		return m_class::get_class_static();											\
 	}																				\
 																					\
-	FORCE_INLINE virtual pn::TYPE _get_typev() const noexcept override				\
+	FORCE_INLINE virtual Pnu::TYPE _get_typev() const noexcept override				\
 	{																				\
 		return m_class::get_type_static();											\
 	}																				\
@@ -69,12 +69,12 @@ protected:																			\
 	}																				\
 																					\
 public:																				\
-	FORCE_INLINE static constexpr pn::StringView get_class_static() noexcept		\
+	FORCE_INLINE static constexpr Pnu::StringView get_class_static() noexcept		\
 	{																				\
 		return m_class::__name_static;												\
 	}																				\
 																					\
-	FORCE_INLINE static pn::TYPE get_type_static() noexcept						\
+	FORCE_INLINE static Pnu::TYPE get_type_static() noexcept						\
 	{																				\
 		return &m_class::__type_static;												\
 	}																				\
@@ -87,12 +87,12 @@ private:
 #define EMBED_CLASS(m_class, m_var, ...)									\
 																			\
 	/* implement embedding helper */										\
-	template <> class pn::_EmbedClassHelper<m_class> final					\
+	template <> class Pnu::_EmbedClassHelper<m_class> final					\
 	{																		\
 	public:																	\
-		static void do_embed(pn::TypeObject & t);							\
+		static void do_embed(Pnu::TypeObject & t);							\
 																			\
-		static void embed(pn::TypeObject & t)								\
+		static void embed(Pnu::TypeObject & t)								\
 		{																	\
 			/* TODO: can add extra stuff here */							\
 																			\
@@ -101,27 +101,27 @@ private:
 	};																		\
 																			\
 	/* construct the type object using a maker to call the embedder */		\
-	pn::TypeObject m_class::__type_static = MAKER(							\
-		pn::TypeObject,													\
-		pn::mpl::type_tag<m_class>(),										\
+	Pnu::TypeObject m_class::__type_static = MAKER(							\
+		Pnu::TypeObject,													\
+		Pnu::mpl::type_tag<m_class>(),										\
 		TOSTR(m_class),														\
 		##__VA_ARGS__)														\
 																			\
-	+ pn::_EmbedClassHelper<m_class>::embed;								\
+	+ Pnu::_EmbedClassHelper<m_class>::embed;								\
 																			\
 	/* implement binder function body */									\
-	void pn::_EmbedClassHelper<m_class>::do_embed(pn::TypeObject & m_var)	\
+	void Pnu::_EmbedClassHelper<m_class>::do_embed(Pnu::TypeObject & m_var)	\
 																			\
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 // object
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 	// base object
-	class PN_API Object : public ObjectAPI<Object>
+	class PNU_API Object : public ObjectAPI<Object>
 	{
 	public:
 		using base_type = typename void;
@@ -139,8 +139,8 @@ namespace pn
 		friend class Internals;
 		friend class _EmbedClassHelper<Object>;
 		friend struct DefaultDelete<Object>;
-		friend PN_API bool predelete_handler(Object *);
-		friend PN_API void postinitialize_handler(Object *);
+		friend PNU_API bool predelete_handler(Object *);
+		friend PNU_API void postinitialize_handler(Object *);
 
 		static constexpr StringView __name_static{ "Object" };
 
@@ -203,9 +203,9 @@ namespace pn
 
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-	PN_API_FUNC(bool) predelete_handler(Object * value);
+	PNU_API_FUNC(bool) predelete_handler(Object * value);
 
-	PN_API_FUNC(void) postinitialize_handler(Object * value);
+	PNU_API_FUNC(void) postinitialize_handler(Object * value);
 
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
@@ -251,7 +251,7 @@ namespace pn
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 }
 
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
@@ -442,4 +442,4 @@ namespace pn
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 }
 
-#endif // !_PN_BASE_OBJECT_HPP_
+#endif // !_PNU_BASE_OBJECT_HPP_

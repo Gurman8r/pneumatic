@@ -1,11 +1,11 @@
-#ifndef _PN_CAMERA_BEHAVIOR_HPP_
-#define _PN_CAMERA_BEHAVIOR_HPP_
+#ifndef _PNU_CAMERA_BEHAVIOR_HPP_
+#define _PNU_CAMERA_BEHAVIOR_HPP_
 
 #include <scene/component/behavior.hpp>
 
-namespace pn
+namespace Pnu
 {
-	class PN_API CameraBehavior : public Behavior
+	class PNU_API CameraBehavior : public Behavior
 	{
 		DEFINE_CLASS(CameraBehavior, Behavior);
 
@@ -15,4 +15,4 @@ namespace pn
 	};
 }
 
-#endif // !_PN_CAMERA_BEHAVIOR_HPP_
+#endif // !_PNU_CAMERA_BEHAVIOR_HPP_

@@ -1,10 +1,10 @@
-#ifndef _PN_OBJECT_API_HPP_
-#define _PN_OBJECT_API_HPP_
+#ifndef _PNU_OBJECT_API_HPP_
+#define _PNU_OBJECT_API_HPP_
 
 #include <core/object/common.hpp>
 
 // object_api
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
@@ -137,4 +137,4 @@ namespace pn
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 }
 
-#endif // !_PN_OBJECT_API_HPP_
+#endif // !_PNU_OBJECT_API_HPP_

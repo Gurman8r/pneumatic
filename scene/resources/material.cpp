@@ -1,7 +1,7 @@
 #include <scene/resources/material_library.hpp>
 #include <scene/resources/shader.hpp>
 
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 

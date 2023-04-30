@@ -1,14 +1,14 @@
-#ifndef _PN_EXTENSION_INTERFACE_HPP_
-#define _PN_EXTENSION_INTERFACE_HPP_
+#ifndef _PNU_EXTENSION_INTERFACE_HPP_
+#define _PNU_EXTENSION_INTERFACE_HPP_
 
 #include <core/typedefs.hpp>
 
-using PnExtensionInterfacePtr = void *;
-using PnExtensionPtr = void *;
-using PnExtensionInitializationPtr = void *;
-using PnExtensionInitializationLevel = int;
+using PnuExtensionInterfacePtr = void *;
+using PnuExtensionPtr = void *;
+using PnuExtensionInitializationPtr = void *;
+using PnuExtensionInitializationLevel = int;
 
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
@@ -39,15 +39,15 @@ namespace pn
 	{
 		ExtensionInitializationLevel_ minimum_level{};
 		void * user{};
-		void(*initialize)(void * user, PnExtensionInitializationLevel level) {};
-		void(*finalize)(void * user, PnExtensionInitializationLevel level) {};
+		void(*initialize)(void * user, PnuExtensionInitializationLevel level) {};
+		void(*finalize)(void * user, PnuExtensionInitializationLevel level) {};
 	};
 
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-	using ExtensionInitializationFunc = bool(*)(PnExtensionInterfacePtr iface, PnExtensionPtr library, PnExtensionInitializationPtr init);
+	using ExtensionInitializationFunc = bool(*)(PnuExtensionInterfacePtr iface, PnuExtensionPtr library, PnuExtensionInitializationPtr init);
 
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 }
 
-#endif // !_PN_EXTENSION_INTERFACE_HPP_
+#endif // !_PNU_EXTENSION_INTERFACE_HPP_

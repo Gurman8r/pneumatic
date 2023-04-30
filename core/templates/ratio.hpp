@@ -1,11 +1,11 @@
-#ifndef _PN_RATIO_HPP_
-#define _PN_RATIO_HPP_
+#ifndef _PNU_RATIO_HPP_
+#define _PNU_RATIO_HPP_
 
 #include <core/templates/utility.hpp>
 
 #include <ratio>
 
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
@@ -168,4 +168,4 @@ namespace pn
 }
 
 
-#endif // !_PN_RATIO_HPP_
+#endif // !_PNU_RATIO_HPP_

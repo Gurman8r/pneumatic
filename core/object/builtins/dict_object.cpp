@@ -1,7 +1,7 @@
 #include <core/object/builtins/dict_object.hpp>
 #include <core/object/class.hpp>
 
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 

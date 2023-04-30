@@ -13,7 +13,7 @@
 #include <scene/resources/text_file.hpp>
 #include <scene/resources/texture.hpp>
 
-namespace pn
+namespace Pnu
 {
 	void register_scene_types()
 	{

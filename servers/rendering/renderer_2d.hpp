@@ -1,14 +1,14 @@
-#ifndef _PN_RENDERER_CANVAS_RENDERER_HPP_
-#define _PN_RENDERER_CANVAS_RENDERER_HPP_
+#ifndef _PNU_RENDERER_CANVAS_RENDERER_HPP_
+#define _PNU_RENDERER_CANVAS_RENDERER_HPP_
 
 #include <servers/rendering/renderer_storage.hpp>
 
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 	// canvas renderer
-	class PN_API Renderer2D : public Object
+	class PNU_API Renderer2D : public Object
 	{
 		DEFINE_CLASS(Renderer2D, Object);
 		
@@ -26,4 +26,4 @@ namespace pn
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 }
 
-#endif // !_PN_RENDERER_CANVAS_RENDERER_HPP_
+#endif // !_PNU_RENDERER_CANVAS_RENDERER_HPP_

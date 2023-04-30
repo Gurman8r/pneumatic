@@ -1,7 +1,7 @@
 #include <scene/main/window.hpp>
 #include <scene/main/scene_tree.hpp>
 
-namespace pn
+namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 

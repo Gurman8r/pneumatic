@@ -1,5 +1,5 @@
-#ifndef _PN_PREPROCESSOR_HPP_
-#define _PN_PREPROCESSOR_HPP_
+#ifndef _PNU_PREPROCESSOR_HPP_
+#define _PNU_PREPROCESSOR_HPP_
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
@@ -85,7 +85,7 @@
 
 /* ON SCOPE ENTER */
 
-namespace pn::priv
+namespace Pnu::priv
 {
 	template <class F> struct OnScopeEnter final
 	{
@@ -99,13 +99,13 @@ namespace pn::priv
 }
 
 #define ON_SCOPE_ENTER(...) \
-		auto ANON(temp) = (pn::priv::OnScopeEnter_Tag{}) + [##__VA_ARGS__]() noexcept -> void
+		auto ANON(temp) = (Pnu::priv::OnScopeEnter_Tag{}) + [##__VA_ARGS__]() noexcept -> void
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 /* ON SCOPE EXIT */
 
-namespace pn::priv
+namespace Pnu::priv
 {
 	template <class F> struct OnScopeExit final
 	{
@@ -123,7 +123,7 @@ namespace pn::priv
 }
 
 #define ON_SCOPE_EXIT(...) \
-		auto ANON(temp) = (pn::priv::OnScopeExit_Tag{}) + [##__VA_ARGS__]() noexcept -> void
+		auto ANON(temp) = (Pnu::priv::OnScopeExit_Tag{}) + [##__VA_ARGS__]() noexcept -> void
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
@@ -151,4 +151,4 @@ namespace pn::priv
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-#endif // !_PN_PREPROCESSOR_HPP_
+#endif // !_PNU_PREPROCESSOR_HPP_

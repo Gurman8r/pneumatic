@@ -1,6 +1,6 @@
 #include <scene/component/behavior.hpp>
 
-namespace pn
+namespace Pnu
 {
 	EMBED_CLASS(Behavior, t) {}
 
