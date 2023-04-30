@@ -1,0 +1,19 @@
+{
+    "type": "Scene",
+    "name": "Demo Scene",
+    "data":
+    [
+        {
+            "type": "Entity",
+            "name": "Main Camera",
+            "data": [
+                {
+                    "type": "Transform"
+                },
+                {
+                    "type": "Camera"
+                }
+            ]
+        }
+    ]
+}

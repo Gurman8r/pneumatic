@@ -1,0 +1,10 @@
+{
+    "type": "Material",
+    "name": "3D/Default",
+    "shader": "3D/Default",
+    "params": {
+        "albedo": [ 1, 1, 1, 1 ],
+        "specular": 1,
+        "metallic": 1
+    }
+}

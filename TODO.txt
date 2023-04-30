@@ -1,0 +1,6 @@
+expand internal type database
+iterator / tuple / generic objects
+must get viewports and render targets working
+add static draw functions to drawable resources like texture and mesh
+
+should the editor be in charge of imgui?
