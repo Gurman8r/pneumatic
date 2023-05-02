@@ -2,7 +2,6 @@
 #include <core/os/os.hpp>
 #include <core/config/project_settings.hpp>
 #include <core/io/file_access.hpp>
-#include <core/io/config_file.hpp>
 #include <core/io/resource_loader.hpp>
 
 namespace Pnu
@@ -32,13 +31,8 @@ namespace Pnu
 		auto const it{ m_extensions.find(path) };
 		if (it != m_extensions.end()) { return LoadStatus_AlreadyLoaded; }
 
-		String const stem{ path.stem() };
-		String const ini_path{ String::format("%s%s.ini", get_project_settings()->get_config_path().c_str(), stem.c_str()) };
-		ConfigFile const ini{ ini_path };
-		String const library_name{ ini.get_string("configuration", "library_name", stem) };
-		String const entry_symbol{ ini.get_string("configuration", "entry_symbol", String::format("open_%s_library", library_name.c_str())) };
-		String const dll_path{ String::format("%s%s", get_project_settings()->get_bin_path().c_str(), library_name.c_str()) };
-		Ref<Extension> extension{ Extension::open(dll_path, entry_symbol) };
+		
+		Ref<Extension> extension{ get_resource_loader()->load(path) };
 		if (!extension) { return LoadStatus_Failure; }
 
 		if (m_level >= 0) {

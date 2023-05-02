@@ -397,7 +397,7 @@ void RenderingDeviceOpenGL::buffer_destroy(RID buffer)
 	_BufferBase & b{ *VALIDATE((_BufferBase *)buffer) };
 	if (b.handle) { glCheck(glDeleteBuffers(1, &b.handle)); }
 	switch (b.buffer_type) {
-	default: { CRASH("INVALID BUFFER TYPE"); } break;
+	default: { CRASH("INVALID BUFFER TypeRef"); } break;
 	case GL_ARRAY_BUFFER: { memdelete((_VertexBuffer *)buffer); } break;
 	case GL_ELEMENT_ARRAY_BUFFER: { memdelete((_IndexBuffer *)buffer); } break;
 	case GL_UNIFORM_BUFFER: { memdelete((_UniformBuffer *)buffer); } break;
@@ -558,7 +558,7 @@ void RenderingDeviceOpenGL::_texture_update(_Texture & t, void const * data)
 
 	switch (t.texture_type) {
 	default: {
-		CRASH("INVALID TEXTURE TYPE");
+		CRASH("INVALID TEXTURE TypeRef");
 	} break;
 	case GL_TEXTURE_2D: {
 		glCheck(glTexImage2D(GL_TEXTURE_2D, 0, _internal_format, t.width, t.height, 0, _format, _type, data));

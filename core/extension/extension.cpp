@@ -2,6 +2,7 @@
 #include <core/extension/extension_manager.hpp>
 #include <core/os/os.hpp>
 #include <core/config/project_settings.hpp>
+#include <core/io/config_file.hpp>
 
 namespace Pnu
 {
@@ -19,8 +20,6 @@ namespace Pnu
 	{
 		close_library();
 	}
-
-	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 	Error_ Extension::open_library(String const & path, String const & entry_symbol)
 	{
@@ -79,20 +78,6 @@ namespace Pnu
 		m_initialization.finalize(m_initialization.user, level);
 	}
 
-	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-
-	Ref<Extension> Extension::open(String const & path, String const & entry_symbol)
-	{
-		ASSERT(!path.empty());
-		ASSERT(!entry_symbol.empty());
-		Ref<Extension> extension;
-		extension.instance();
-		if (extension->open_library(path, entry_symbol)) {
-			extension = nullptr;
-		}
-		return extension;
-	}
-
 	void Extension::initialize_interface()
 	{
 	}
@@ -100,6 +85,36 @@ namespace Pnu
 	String Extension::get_extension_list_config_file()
 	{
 		return get_project_settings()->get_config_path() + "extensions.cfg";
+	}
+
+	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+	EMBED_CLASS(ExtensionFormatLoader, t) {}
+
+	RES ExtensionFormatLoader::load(String const & path, Error_ * error)
+	{
+		String const stem{ path.stem() };
+		String const ini_path{ get_project_settings()->get_config_path() + stem };
+		ConfigFile const ini{ ini_path };
+		String const library_name{ ini.get_string("configuration", "library_name", stem) };
+		String const entry_symbol{ ini.get_string("configuration", "entry_symbol", String::format("open_%s_library", library_name.c_str())) };
+		String const dll_path{ get_project_settings()->get_bin_path() + library_name };
+
+		Ref<Extension> extension;
+		extension.instance();
+		if (extension->open_library(dll_path, entry_symbol)) {
+			extension = nullptr;
+		}
+		
+		if (error) { *error = Error_OK; }
+		return extension;
+	}
+
+	void ExtensionFormatLoader::get_recognized_extensions(Vector<String> * out) const
+	{
+		if (!out) { return; }
+		out->push_back("");
+		out->push_back(".dll");
 	}
 
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */

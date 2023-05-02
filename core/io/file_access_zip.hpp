@@ -59,7 +59,7 @@ namespace Pnu
 		virtual Error_ open_internal(String const & path, FileMode_ mode) override;
 		virtual FileAccessZip & close() override;
 		virtual FileAccessZip & flush() override;
-		virtual bool exists(String const & path) override;
+		virtual bool file_exists(String const & path) override;
 		virtual bool is_open() const override;
 		virtual FileAccessZip & seek(u64 position) override;
 		virtual FileAccessZip & seek_end(i64 position) override;

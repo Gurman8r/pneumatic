@@ -1,7 +1,7 @@
 #ifndef _PNU_PRINT_STRING_HPP_
 #define _PNU_PRINT_STRING_HPP_
 
-#include <core/string/string_utility.hpp>
+#include <core/string/string.hpp>
 
 #define PRINT_LINE (Pnu::print_line)
 

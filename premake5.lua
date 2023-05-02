@@ -1,6 +1,6 @@
 -- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * --
 
-workspace "pneumatic_%{_ACTION}"
+workspace "pneumatic_sdk_%{_ACTION}"
 startproject "demo"
 
 configurations{ "Debug", "Release" }

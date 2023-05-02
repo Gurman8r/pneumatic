@@ -62,7 +62,7 @@ namespace Pnu
 		template <class ... Args
 		> static auto new_(Args && ... args) { return Ref<value_type>{ value_type{ FWD(args)... } }; }
 
-		static constexpr auto get_class_static() noexcept { return value_type::get_class_static(); }
+		static constexpr auto get_class_name_static() noexcept { return value_type::get_class_name_static(); }
 
 		static auto get_type_static() noexcept { return value_type::get_type_static(); }
 

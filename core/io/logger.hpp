@@ -1,8 +1,8 @@
 #ifndef _PNU_LOGGER_HPP_
 #define _PNU_LOGGER_HPP_
 
+#include <core/error/error_macros.hpp>
 #include <core/string/string.hpp>
-#include <core/templates/vector.hpp>
 
 namespace Pnu
 {

@@ -11,13 +11,13 @@ namespace Pnu
 	{
 		SINGLETON_CTOR();
 
-		m_modules = DICT::new_();
+		m_modules = DictRef::new_();
 	}
 
 	Internals::~Internals()
 	{
 		SINGLETON_DTOR();
-		Vector<OBJ>{}.swap(m_loader_stack);
+		Vector<ObjectRef>{}.swap(m_loader_stack);
 		m_modules = nullptr;
 		while (!m_classes.empty()) {
 			if (auto const type{ m_classes.back<TypeObject *>() }) { type->cleanup(); }

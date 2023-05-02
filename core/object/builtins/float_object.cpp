@@ -7,17 +7,17 @@ namespace Pnu
 
 	EMBED_CLASS(FloatObject, t)
 	{
-		t.tp_hash = (HashFunc)[](OBJ self) -> size_t { return Hasher<f64>()(***(FLT &)self); };
+		t.tp_hash = (HashFunc)[](ObjectRef self) -> size_t { return Hasher<f64>()(***(FloatRef &)self); };
 
-		t.tp_repr = (ReprFunc)[](OBJ self) -> STR { return STR(util::to_string(***(FLT &)self)); };
+		t.tp_repr = (ReprFunc)[](ObjectRef self) -> StringRef { return StringRef(util::to_string(***(FloatRef &)self)); };
 
-		t.tp_str = (ReprFunc)[](OBJ self) -> STR { return STR(util::to_string(***(FLT &)self)); };
+		t.tp_str = (ReprFunc)[](ObjectRef self) -> StringRef { return StringRef(util::to_string(***(FloatRef &)self)); };
 
-		t.tp_cmp = (CmpFunc)[](OBJ self, OBJ other) -> i32
+		t.tp_cmp = (CmpFunc)[](ObjectRef self, ObjectRef other) -> i32
 		{
 			if (self.is(other)) { return 0; }
 
-			else if (FLT::check_(self) && FLT::check_(other)) { return compare(***(FLT &)self, ***(FLT &)other); }
+			else if (FloatRef::check_(self) && FloatRef::check_(other)) { return compare(***(FloatRef &)self, ***(FloatRef &)other); }
 
 			else { return compare((intptr_t)*self, (intptr_t)*other); }
 		};

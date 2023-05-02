@@ -2,7 +2,6 @@
 #define _PNU_BUFFER_HPP_
 
 #include <core/templates/array.hpp>
-#include <core/templates/vector.hpp>
 #include <core/string/string.hpp>
 #include <core/templates/mpl.hpp>
 

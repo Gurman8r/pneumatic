@@ -54,11 +54,11 @@ namespace Pnu
 		return (*this);
 	}
 
-	bool FileAccessWindows::exists(String const & path)
+	bool FileAccessWindows::file_exists(String const & path)
 	{
 		FILE * const fp{ fopen(path.c_str(), "rb") };
 		ON_SCOPE_EXIT(&fp) { fclose(fp); };
-		return (bool)fp;
+		return fp != nullptr;
 	}
 
 	bool FileAccessWindows::is_open() const

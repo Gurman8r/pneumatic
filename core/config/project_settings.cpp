@@ -83,7 +83,7 @@ namespace Pnu
 
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-	OBJ ProjectSettings::get(String const & section, String const & name) const
+	ObjectRef ProjectSettings::get(String const & section, String const & name) const
 	{
 		if (auto const s{ util::getptr(m_data, section) })
 		{
@@ -95,7 +95,7 @@ namespace Pnu
 		return nullptr;
 	}
 
-	Error_ ProjectSettings::set(String const & section, String const & name, OBJ const & value)
+	Error_ ProjectSettings::set(String const & section, String const & name, ObjectRef const & value)
 	{
 		// add
 		if (value) {

@@ -3,7 +3,6 @@
 #include <drivers/windows/dir_access_windows.hpp>
 #include <drivers/windows/file_access_windows.hpp>
 #include <main/main.hpp>
-#include <filesystem>
 
 namespace Pnu
 {
@@ -63,7 +62,7 @@ namespace Pnu
 	{
 		if (blocking) {
 			String temp;
-			std::getline(std::cin, temp);
+			std::getline(std::cin, temp.native());
 			return temp;
 		}
 		return {};
@@ -71,11 +70,20 @@ namespace Pnu
 
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-	Error_ OS_Windows::open_dynamic_library(String const & path, void *& instance)
+	Error_ OS_Windows::open_dynamic_library(String path, void *& instance, bool set_library_path, String * resolved_path)
 	{
-		if (path.empty()) { return Error_Unknown; }
-		instance = LoadLibraryA(path.c_str());
-		if (!instance) { return Error_Unknown; }
+		if (!FileAccess::exists(path)) {
+			path += ".dll";
+		}
+
+		instance = VALIDATE(LoadLibraryA(path.c_str()));
+
+		//DLL_DIRECTORY_COOKIE cookie{};
+		//if (set_library_path) { cookie = AddDllDirectory((LPCWSTR)(path.root_directory().widen().c_str())); }
+		//instance = VALIDATE(LoadLibraryExW((LPCWSTR)(path.widen().c_str()), nullptr, set_library_path ? LOAD_LIBRARY_SEARCH_DEFAULT_DIRS : 0));
+		//if (cookie) { RemoveDllDirectory(cookie); }
+
+		if (resolved_path) { *resolved_path = path; }
 		return Error_OK;
 	}
 
@@ -123,12 +131,12 @@ namespace Pnu
 
 	String OS_Windows::get_cwd() const
 	{
-		return (String)std::filesystem::current_path().string();
+		return ".";
 	}
 
 	Error_ OS_Windows::set_cwd(String const & path)
 	{
-		return std::filesystem::current_path((std::wstring)path.widen()), Error_OK;
+		return Error_OK;
 	}
 
 	Error_ OS_Windows::shell_open(String const & path)
@@ -145,10 +153,11 @@ namespace Pnu
 
 	bool OS_Windows::has_env(String const & key) const
 	{
-		WCHAR * env; size_t len;
-		_wdupenv_s(&env, &len, (LPCWSTR)(key.widen().c_str()));
-		ON_SCOPE_EXIT(env) { free(env); };
-		return (bool)env;
+		//WCHAR * env; size_t len;
+		//_wdupenv_s(&env, &len, (LPCWSTR)(key.widen().c_str()));
+		//ON_SCOPE_EXIT(env) { free(env); };
+		//return (bool)env;
+		return false;
 	}
 
 	void OS_Windows::set_env(String const & key, String const & value) const
@@ -265,9 +274,10 @@ namespace Pnu
 
 	String OS_Windows::get_exe_path() const
 	{
-		WCHAR bufname[4096];
-		GetModuleFileNameW(nullptr, bufname, 4096);
-		return Unicode(bufname).narrow();
+		WCHAR buf[4096];
+		GetModuleFileNameW(nullptr, buf, 4096);
+		//return Unicode(buf).narrow().replace_all("\\", "/");
+		return {};
 	}
 
 	String OS_Windows::get_system_path(SystemDir_ value) const

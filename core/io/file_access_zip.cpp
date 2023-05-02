@@ -216,7 +216,7 @@ namespace Pnu
 		return (*this);
 	}
 
-	bool FileAccessZip::exists(String const & path)
+	bool FileAccessZip::file_exists(String const & path)
 	{
 		return false;
 	}

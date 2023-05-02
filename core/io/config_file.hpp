@@ -9,7 +9,8 @@ namespace Pnu
 	{
 		DEFINE_CLASS(ConfigFile, Resource);
 
-		Map<String, Map<String, String>> m_data{};
+		using Section = HashMap<String, String>;
+		HashMap<String, Section> m_data{};
 
 	public:
 		ConfigFile() noexcept {}

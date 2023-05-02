@@ -17,7 +17,7 @@ namespace Pnu
 		using typename base_type::Notification_;
 
 	private:
-		friend class TYPE;
+		friend class TypeRef;
 		friend class Internals;
 		friend class _EmbedClassHelper<TypeObject>;
 		friend struct DefaultDelete<TypeObject>;
@@ -31,9 +31,9 @@ namespace Pnu
 
 		virtual void _initialize_classv() override;
 
-		virtual StringView _get_classv() const noexcept override { return get_class_static(); }
+		virtual StringView _get_class_namev() const noexcept override { return get_class_name_static(); }
 
-		virtual TYPE _get_typev() const noexcept override;
+		virtual TypeRef _get_typev() const noexcept override;
 
 		FORCE_INLINE void (Object::*_get_notification() const)(i32) { return (void (Object::*)(i32))&TypeObject::_notification; }
 
@@ -51,9 +51,9 @@ namespace Pnu
 		}
 
 	public:
-		static constexpr StringView get_class_static() noexcept { return __name_static; }
+		static constexpr StringView get_class_name_static() noexcept { return __name_static; }
 
-		static TYPE get_type_static() noexcept;
+		static TypeRef get_type_static() noexcept;
 
 		TypeObject() noexcept {}
 
@@ -65,12 +65,12 @@ namespace Pnu
 			tp_flags = flags;
 			tp_base = baseof<T>();
 			tp_del = (DelFunc)memdelete<T>;
-			tp_bind = (BindClassFunc)[](TYPE t) -> TYPE { return t; };
-			tp_hash = (HashFunc)[](OBJ o) -> size_t { return Hasher<intptr_t>{}((intptr_t)*o); };
-			tp_cmp = (CmpFunc)[](OBJ a, OBJ b) -> i32 { return compare((intptr_t)*a, (intptr_t)*b); };
+			tp_bind = (BindClassFunc)[](TypeRef t) -> TypeRef { return t; };
+			tp_hash = (HashFunc)[](ObjectRef o) -> size_t { return Hasher<intptr_t>{}((intptr_t)*o); };
+			tp_cmp = (CmpFunc)[](ObjectRef a, ObjectRef b) -> i32 { return compare((intptr_t)*a, (intptr_t)*b); };
 
 			if constexpr (std::is_default_constructible_v<T>) {
-				tp_new = (NewFunc)[](TYPE, OBJ) -> OBJ { return memnew(T); };
+				tp_new = (NewFunc)[](TypeRef, ObjectRef) -> ObjectRef { return memnew(T); };
 			}
 
 			if constexpr (std::is_base_of_v<TypeObject, T>) { tp_flags |= TypeFlags_Type_Subclass; }
@@ -111,16 +111,16 @@ namespace Pnu
 		ReprFunc			tp_str				{};
 		VectorCallFunc		tp_vectorcall		{};
 		
-		Ref<TypeObject>		tp_base				{ /* TYPE */ };
-		OBJ					tp_bases			{ /* LIST */ };
-		OBJ					tp_dict				{ /* DICT */ };
-		OBJ					tp_mro				{ /* LIST */ };
-		OBJ					tp_subclasses		{ /* DICT */ };
+		Ref<TypeObject>		tp_base				{ /* TypeRef */ };
+		ObjectRef					tp_bases			{ /* ListRef */ };
+		ObjectRef					tp_dict				{ /* DictRef */ };
+		ObjectRef					tp_mro				{ /* ListRef */ };
+		ObjectRef					tp_subclasses		{ /* DictRef */ };
 
 	public:
 		NODISCARD bool ready();
-		NODISCARD OBJ lookup(OBJ const & name) const;
-		NODISCARD bool is_subtype(TYPE const & value) const;
+		NODISCARD ObjectRef lookup(ObjectRef const & name) const;
+		NODISCARD bool is_subtype(TypeRef const & value) const;
 
 	protected:
 		void cleanup();
@@ -131,8 +131,8 @@ namespace Pnu
 		Error_ add_getsets(GetSetDef * getsets);
 		void inherit_slots(TypeObject * base);
 		void modified();
-		bool mro_internal(OBJ * old_mro);
-		Error_ update_slot(STR const & name);
+		bool mro_internal(ObjectRef * old_mro);
+		Error_ update_slot(StringRef const & name);
 
 	protected:
 		template <class Slot> bool slot_defined(TypeObject * base, Slot TypeObject:: * slot) const
@@ -151,9 +151,9 @@ namespace Pnu
 		}
 
 	public:
-		static OBJ type_getattro(TYPE type, OBJ name);
+		static ObjectRef type_getattro(TypeRef type, ObjectRef name);
 
-		static Error_ type_setattro(TYPE type, OBJ name, OBJ value);
+		static Error_ type_setattro(TypeRef type, ObjectRef name, ObjectRef value);
 	};
 
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
@@ -167,27 +167,27 @@ namespace Pnu
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 	// type ref
-	class TYPE : public Ref<TypeObject>
+	class TypeRef : public Ref<TypeObject>
 	{
-		REF_CLASS(TYPE, OBJECT_CHECK_TYPE);
+		REF_CLASS(TypeRef, OBJECT_CHECK_TYPE);
 
 	public:
 		NODISCARD bool ready() const { return m_ptr->ready(); }
 
 		NODISCARD bool has_feature(TypeFlags_ flag) const { return flag_read(m_ptr->tp_flags, flag); }
 
-		NODISCARD bool is_subtype(TYPE const & value) const { return m_ptr->is_subtype(value); }
+		NODISCARD bool is_subtype(TypeRef const & value) const { return m_ptr->is_subtype(value); }
 
-		NODISCARD OBJ lookup(OBJ const & name) const { return m_ptr->lookup(name); }
+		NODISCARD ObjectRef lookup(ObjectRef const & name) const { return m_ptr->lookup(name); }
 
-		template <class Name = cstring, class Value = OBJ
+		template <class Name = cstring, class Value = ObjectRef
 		> void add_object(Name && name, Value && value) noexcept
 		{
 			if (!m_ptr || !m_ptr->tp_dict || !m_ptr->ready()) { return; }
 
-			STR str_name{ FWD(name) };
+			StringRef str_name{ FWD(name) };
 
-			((DICT &)m_ptr->tp_dict)[str_name] = FWD(value); // modify tp_dict directly
+			((DictRef &)m_ptr->tp_dict)[str_name] = FWD(value); // modify tp_dict directly
 
 			m_ptr->modified();
 
@@ -208,7 +208,7 @@ namespace Pnu
 	> size_t hash(T const & o) noexcept
 	{
 		if (!o) { return 0; }
-		TYPE t{ typeof(o) };
+		TypeRef t{ typeof(o) };
 		return t->tp_hash ? t->tp_hash(o) : Hasher<intptr_t>{}((intptr_t)o);
 	}
 
@@ -216,32 +216,32 @@ namespace Pnu
 	> ssize_t length(T const & o) noexcept
 	{
 		if (!o) { return -1; }
-		TYPE t{ typeof(o) };
+		TypeRef t{ typeof(o) };
 		return t->tp_len ? t->tp_len(o) : -1;
 	}
 
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-	inline OBJ * get_dict_ptr(TYPE const & t, OBJ const & o)
+	inline ObjectRef * get_dict_ptr(TypeRef const & t, ObjectRef const & o)
 	{
 		if (t && o && 0 < t->tp_dictoffset)
 		{
-			return reinterpret_cast<OBJ *>(reinterpret_cast<char *>(*o) + t->tp_dictoffset);
+			return reinterpret_cast<ObjectRef *>(reinterpret_cast<char *>(*o) + t->tp_dictoffset);
 		}
 		else
 		{
-			return (OBJ *)nullptr;
+			return (ObjectRef *)nullptr;
 		}
 	}
 
-	inline OBJ * get_dict_ptr(OBJ const & o) noexcept
+	inline ObjectRef * get_dict_ptr(ObjectRef const & o) noexcept
 	{
 		return o ? get_dict_ptr(typeof(o), o) : nullptr;
 	}
 
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-	inline VectorCallFunc get_vectorcall_func(TYPE const & t, OBJ const & o)
+	inline VectorCallFunc get_vectorcall_func(TypeRef const & t, ObjectRef const & o)
 	{
 		if (t && o && 0 < t->tp_vectorcalloffset)
 		{
@@ -253,7 +253,7 @@ namespace Pnu
 		}
 	}
 
-	inline VectorCallFunc get_vectorcall_func(OBJ const & o) noexcept
+	inline VectorCallFunc get_vectorcall_func(ObjectRef const & o) noexcept
 	{
 		return o ? get_vectorcall_func(typeof(o), o) : nullptr;
 	}

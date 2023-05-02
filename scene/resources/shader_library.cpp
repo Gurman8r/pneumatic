@@ -36,7 +36,7 @@ Error_ load_shader_default(std::ifstream & file, RD::ShaderStageData (&spec)[RD:
 	RD::ShaderStage_ stage_index{ RD::ShaderStage_MAX };
 
 	String line;
-	while (std::getline(file, line))
+	while (std::getline(file, line.native()))
 	{
 		bool should_write{ true };
 		if (line.erase_duplicates(' ').empty()) { continue; }

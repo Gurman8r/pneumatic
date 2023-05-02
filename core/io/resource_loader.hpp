@@ -13,7 +13,6 @@ namespace Pnu
 		virtual ~ResourceFormatLoader() noexcept override = default;
 		NODISCARD virtual RES load(String const & path, Error_ * error = nullptr) = 0;
 		NODISCARD virtual void get_recognized_extensions(Vector<String> * out) const = 0;
-		NODISCARD virtual TYPE get_resource_type(String const & path) const = 0;
 		NODISCARD virtual bool recognize_path(String const & path, String const & hint = {}) const;
 	};
 }

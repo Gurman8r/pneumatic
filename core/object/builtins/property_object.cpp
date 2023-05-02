@@ -7,14 +7,14 @@ namespace Pnu
 
 	EMBED_CLASS(PropertyObject, t, TypeFlags_MethodDescriptor)
 	{
-		t.tp_descr_get = (DescrGetFunc)[](OBJ self, OBJ obj, OBJ cls) -> OBJ
+		t.tp_descr_get = (DescrGetFunc)[](ObjectRef self, ObjectRef obj, ObjectRef cls) -> ObjectRef
 		{
-			return ((PROPERTY &)self).get(obj);
+			return ((PropertyRef &)self).get(obj);
 		};
 
-		t.tp_descr_set = (DescrSetFunc)[](OBJ self, OBJ obj, OBJ value) -> Error_
+		t.tp_descr_set = (DescrSetFunc)[](ObjectRef self, ObjectRef obj, ObjectRef value) -> Error_
 		{
-			return ((PROPERTY &)self).set(obj, value);
+			return ((PropertyRef &)self).set(obj, value);
 		};
 	}
 

@@ -27,7 +27,7 @@ namespace Pnu
 		virtual Error_ open_internal(String const & path, FileMode_ mode) override;
 		virtual FileAccessWindows & flush() override;
 		virtual FileAccessWindows & close() override;
-		virtual bool exists(String const & path) override;
+		virtual bool file_exists(String const & path) override;
 		virtual bool is_open() const override;
 		virtual String get_path() const override;
 		virtual String get_path_abs() const override;

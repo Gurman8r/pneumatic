@@ -25,7 +25,7 @@ namespace Pnu
 
 		if (m_script)
 		{
-			if (OBJ callback{ getattr(m_script, &ID__initialize) })
+			if (ObjectRef callback{ getattr(m_script, &ID__initialize) })
 			{
 				call_object(callback);
 			}
@@ -40,11 +40,11 @@ namespace Pnu
 
 		if (m_script)
 		{
-			if (OBJ callback{ getattr(m_script, &ID__process) })
+			if (ObjectRef callback{ getattr(m_script, &ID__process) })
 			{
 				static FloatObject arg0; arg0 = dt.count();
 				static ListObject args{ &arg0, };
-				OBJ result{ call_object(callback, &args) };
+				ObjectRef result{ call_object(callback, &args) };
 				if (result && result.cast<bool>())
 				{
 					should_close = true;
@@ -61,7 +61,7 @@ namespace Pnu
 
 		if (m_script)
 		{
-			if (OBJ callback{ getattr(m_script, &ID__finalize) })
+			if (ObjectRef callback{ getattr(m_script, &ID__finalize) })
 			{
 				call_object(callback);
 			}

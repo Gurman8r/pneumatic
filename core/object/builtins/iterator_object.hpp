@@ -12,7 +12,7 @@ namespace Pnu
 	{
 		DEFINE_CLASS(IteratorObject, Object);
 
-		friend class ITERATOR;
+		friend class IteratorRef;
 
 	public:
 	};
@@ -24,9 +24,9 @@ namespace Pnu
 #define OBJECT_CHECK_TUPLE(o) (Pnu::typeof(o).has_feature(Pnu::TypeFlags_Tuple_Subclass))
 
 	// iterator ref
-	class ITERATOR : public Ref<IteratorObject>
+	class IteratorRef : public Ref<IteratorObject>
 	{
-		REF_CLASS(ITERATOR, OBJECT_CHECK_TUPLE);
+		REF_CLASS(IteratorRef, OBJECT_CHECK_TUPLE);
 
 	public:
 	};

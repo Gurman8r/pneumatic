@@ -2,6 +2,7 @@
 #define _PNU_ERROR_MACROS_HPP_
 
 #include <core/error/error.hpp>
+#include <core/string/print_string.hpp>
 #include <cassert>
 #include <stdexcept>
 

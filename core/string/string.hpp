@@ -1,11 +1,715 @@
 #ifndef _PNU_STRING_HPP_
 #define _PNU_STRING_HPP_
 
-#include <core/error/error_macros.hpp>
+#include <core/templates/optional.hpp>
 #include <core/string/string_view.hpp>
 #include <core/templates/vector.hpp>
-
 #include <string>
+
+namespace Pnu
+{
+	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+	// string base
+	template <class C = char
+	> using _StringBase = std::basic_string<C, std::char_traits<C>, PolymorphicAllocator<C>>;
+
+	// basic string
+	template <class C
+	> class BasicString
+	{
+	public:
+		using self_type					= typename BasicString<C>;
+		using base_type					= typename _StringBase<C>;
+		using value_type				= typename base_type::value_type;
+		using traits_type				= typename base_type::traits_type;
+		using pointer					= typename base_type::pointer;
+		using const_pointer				= typename base_type::const_pointer;
+		using reference					= typename base_type::reference;
+		using const_reference			= typename base_type::const_reference;
+		using iterator					= typename base_type::iterator;
+		using const_iterator			= typename base_type::const_iterator;
+		using reverse_iterator			= typename base_type::reverse_iterator;
+		using const_reverse_iterator	= typename base_type::const_reverse_iterator;
+		using size_type					= typename base_type::size_type;
+		using difference_type			= typename base_type::difference_type;
+		using allocator_type			= typename base_type::allocator_type;
+
+		static constexpr size_type npos{ static_cast<size_type>(-1) };
+
+		static constexpr bool is_narrow{ 1 == sizeof(C) };
+
+	public:
+		base_type m_string{};
+
+		BasicString() noexcept : m_string{} {}
+
+		explicit BasicString(allocator_type const & alloc) : m_string{ alloc } {}
+
+		explicit BasicString(base_type const & value) : m_string{ value } {}
+
+		explicit BasicString(base_type && value) : m_string{ std::move(value) } {}
+
+		BasicString(self_type const & value) : m_string{ value.m_string } {}
+
+		BasicString(self_type const & value, allocator_type const & alloc) : m_string{ value.m_string, alloc } {}
+
+		BasicString(self_type const & value, size_type const offset, allocator_type const & alloc) : m_string{ value.m_string, offset, alloc } {}
+
+		BasicString(self_type const & value, size_type const offset, size_type const count, allocator_type const & alloc) : m_string{ value.m_string, offset, count, alloc } {}
+
+		BasicString(const_pointer const data, size_type const size) : m_string{ data, size } {}
+
+		BasicString(const_pointer const data, size_type const size, allocator_type const & alloc) : m_string{ data, size, alloc } {}
+
+		BasicString(const_pointer const data) : m_string{ data } {}
+
+		BasicString(const_pointer const data, allocator_type const & alloc) : m_string{ data, alloc } {}
+
+		BasicString(size_type const count, value_type const elem, allocator_type const & alloc) : m_string{ count, elem, alloc } {}
+
+		template <class Iter, std::enable_if_t<std::_Is_iterator_v<Iter>, int> = 0
+		> BasicString(Iter first, Iter last, allocator_type const & alloc = {}) : m_string{ first, last, alloc } {}
+		
+		BasicString(self_type && value) noexcept : m_string{ std::move(value.m_string) } {}
+
+		BasicString(self_type && value, allocator_type const & alloc) noexcept : m_string{ std::move(value.m_string), alloc } {}
+
+		BasicString(BasicStringView<value_type> const view, allocator_type const & alloc = {}) : m_string{ view.data(), view.size(), alloc } {}
+
+		BasicString(std::initializer_list<value_type> value, allocator_type const & alloc = {}) : m_string{ value, alloc } {}
+
+	public:
+		NODISCARD auto operator[](size_type const i) noexcept -> reference { return m_string[i]; }
+
+		NODISCARD auto operator[](size_type const i) const noexcept -> const_reference { return m_string[i]; }
+
+		NODISCARD auto at(size_type const i) -> reference { return m_string.at(i); }
+
+		NODISCARD auto at(size_type const i) const -> const_reference { return m_string.at(i); }
+
+		NODISCARD auto back() noexcept -> reference { return m_string.back(); }
+
+		NODISCARD auto back() const noexcept -> const_reference { return m_string.back(); }
+
+		NODISCARD auto front() noexcept -> reference { return m_string.front(); }
+
+		NODISCARD auto front() const noexcept -> const_reference { return m_string.front(); }
+
+		NODISCARD auto c_str() const noexcept -> const_pointer { return m_string.c_str(); }
+
+		NODISCARD auto data() noexcept -> pointer { return m_string.data(); }
+
+		NODISCARD auto data() const noexcept -> const_pointer { return m_string.data(); }
+
+		NODISCARD bool empty() const noexcept { return m_string.empty(); }
+
+		NODISCARD auto get_allocator() const noexcept -> allocator_type { return m_string.get_allocator(); }
+
+		NODISCARD auto max_size() const noexcept -> size_type { return m_string.max_size(); }
+
+		NODISCARD auto size() const noexcept -> size_type { return m_string.size(); }
+
+		NODISCARD auto native() & -> base_type & { return m_string; }
+
+		NODISCARD auto native() && -> base_type && { return std::move(m_string); }
+
+		NODISCARD auto native() const & -> base_type const & { return m_string; }
+
+		NODISCARD operator void * () const noexcept { return !empty() ? (void *)data() : nullptr; }
+
+		NODISCARD auto hash_code() const noexcept { return hash_representation(data(), size()); }
+
+		NODISCARD auto view() const noexcept { return BasicStringView<value_type>{ data(), size() }; }
+
+		NODISCARD operator BasicStringView<value_type>() const noexcept { return { data(), size() }; }
+
+	public:
+		NODISCARD auto begin() noexcept -> iterator { return m_string.begin(); }
+
+		NODISCARD auto end() noexcept -> iterator { return m_string.end(); }
+
+		NODISCARD auto begin() const noexcept -> const_iterator { return m_string.begin(); }
+
+		NODISCARD auto end() const noexcept -> const_iterator { return m_string.end(); }
+
+		NODISCARD auto cbegin() const noexcept -> const_iterator { return m_string.begin(); }
+
+		NODISCARD auto cend() const noexcept -> const_iterator { return m_string.begin(); }
+
+		NODISCARD auto rbegin() noexcept -> reverse_iterator { return m_string.rbegin(); }
+
+		NODISCARD auto rend() noexcept -> reverse_iterator { return m_string.rend(); }
+
+		NODISCARD auto rbegin() const noexcept -> const_reverse_iterator { return m_string.rbegin(); }
+
+		NODISCARD auto rend() const noexcept -> const_reverse_iterator { return m_string.rend(); }
+
+		NODISCARD auto crbegin() const noexcept -> const_reverse_iterator { return m_string.crbegin(); }
+
+		NODISCARD auto crend() const noexcept -> const_reverse_iterator { return m_string.crend(); }
+
+	public:
+		self_type & assign(self_type && value) noexcept { return (m_string = std::move(value.m_string)), (*this); }
+
+		self_type & assign(std::initializer_list<value_type> value) { return m_string.assign(value), (*this); }
+
+		self_type & assign(self_type const & value) { return (m_string = value.m_string), (*this); }
+
+		self_type & assign(const_pointer const value) { return (m_string = value), (*this); }
+
+		self_type & operator=(std::initializer_list<value_type> const value) { return (m_string = value), (*this); }
+
+		self_type & operator=(self_type && value) noexcept { return (m_string = std::move(value.m_string)), (*this); }
+
+		self_type & operator=(self_type const & value) { return (m_string = value.m_string), (*this); }
+
+		self_type & operator=(const_pointer const value) { return (m_string = value), (*this); }
+
+	public:
+		self_type & append(std::initializer_list<value_type> value) { return m_string.append(value), (*this); }
+
+		self_type & append(self_type const & value) { return m_string.append(value.m_string), (*this); }
+		
+		self_type & append(const_pointer const value) { return m_string.append(value), (*this); }
+		
+		self_type & append(value_type const value) { return m_string.push_back(value), (*this); }
+
+		self_type & operator+=(std::initializer_list<value_type> const value) { return (m_string += value), (*this); }
+
+		self_type & operator+=(self_type const & value) { return (m_string += value.m_string), (*this); }
+
+		self_type & operator+=(const_pointer const value) { return (m_string += value), (*this); }
+
+		self_type & operator+=(value_type const value) { return (m_string += value), (*this); }
+
+	public:
+		self_type & clear() noexcept { return m_string.clear(), (*this); }
+
+		self_type & erase(size_type const offset = 0) { return m_string.erase(offset), (*this); }
+
+		self_type & erase(size_type const offset, size_type const count) { return m_string.erase(offset, count), (*this); }
+
+		self_type & erase(const_iterator first) { return m_string.erase(offset, count), (*this); }
+
+		self_type & erase(const_iterator first, const_iterator last) { return m_string.erase(first, last), (*this); }
+
+		self_type & erase_duplicates(value_type const a) { return m_string.erase(std::unique(begin(), end(), [a](value_type a, value_type b) { return (a == b) && (a == a); }), end()), (*this); }
+
+	public:
+		self_type & insert(size_type const index, value_type const value) { return m_string.insert(index, value), (*this); }
+		
+		self_type & insert(iterator it, value_type const value) { return m_string.insert(index, value), (*this); }
+		
+		self_type & insert(const_iterator it, value_type const value) { return m_string.insert(index, value), (*this); }
+
+		self_type & insert(size_type const index, self_type const & value) { return m_string.insert(index, value.m_string), (*this); }
+		
+		self_type & insert(iterator it, self_type const & value) { return m_string.insert(index, value.m_string), (*this); }
+		
+		self_type & insert(const_iterator it, self_type const & value) { return m_string.insert(index, value.m_string), (*this); }
+
+	public:
+		self_type & push_front(value_type const value) noexcept { return m_string.insert(begin(), value), (this); }
+
+		self_type & push_back(value_type const value) noexcept { return m_string.push_back(value), (*this); }
+
+		self_type & pop_front() { return m_string.erase(begin()), (*this); }
+
+		self_type & pop_back() { return m_string.pop_back(), (*this); }
+
+		self_type & resize(size_type const count, value_type const elem = value_type{}) { return m_string.resize(count, elem), (*this); }
+
+		self_type & reserve(size_type const count) { return m_string.reserve(count), (*this); }
+
+		self_type & shrink_to_fit() noexcept { return m_string.shrink_to_fit(), (*this); }
+
+		self_type & swap(self_type & value) noexcept { return BRANCHLESS_IF((this != std::addressof(value)), m_string.swap(value.m_string)), (*this); }
+
+		template <class Fn = value_type(*)(value_type)
+		> self_type & transform(Fn fn) noexcept { return std::transform(begin(), end(), begin(), fn), (*this); }
+
+	public:
+		NODISCARD self_type substr(size_type const offset, size_type const count = npos) const { return self_type{ m_string.substr(offset, count) }; }
+
+		NODISCARD auto compare(self_type const & value) const noexcept { if (this == std::addressof(value)) { return 0; } return m_string.compare(value.m_string); }
+
+		NODISCARD bool equal_to(self_type const & value) const noexcept { return (this == std::addressof(value)) || m_string._Equal(value.m_string); }
+
+	public:
+		NODISCARD size_type find(value_type const value, size_type const offset = 0) const { return m_string.find(value, offset); }
+		
+		NODISCARD size_type find(self_type const & value, size_type const offset = 0) const { return m_string.find(value.m_string, offset); }
+
+		NODISCARD size_type rfind(value_type const value, size_type const offset = 0) const { return m_string.rfind(value, offset); }
+		
+		NODISCARD size_type rfind(self_type const & value, size_type const offset = 0) const { return m_string.rfind(value.m_string, offset); }
+
+		NODISCARD size_type find_first_of(value_type const value, size_type const offset = 0) const { return m_string.find_first_of(value, offset); }
+		
+		NODISCARD size_type find_first_of(self_type const & value, size_type const offset = 0) const { return m_string.find_first_of(value.m_string, offset); }
+
+		NODISCARD size_type find_first_not_of(value_type const value, size_type const offset = 0) const { return m_string.find_first_not_of(value, offset); }
+		
+		NODISCARD size_type find_first_not_of(self_type const & value, size_type const offset = 0) const { return m_string.find_first_not_of(value.m_string, offset); }
+
+		NODISCARD size_type find_last_of(value_type const value, size_type const offset = 0) const { return m_string.find_last_of(value, offset); }
+		
+		NODISCARD size_type find_last_of(self_type const & value, size_type const offset = 0) const { return m_string.find_last_of(value.m_string, offset); }
+
+		NODISCARD size_type find_last_not_of(value_type const value, size_type const offset = 0) const { return m_string.find_last_not_of(value, offset); }
+		
+		NODISCARD size_type find_last_not_of(self_type const & value, size_type const offset = 0) const { return m_string.find_last_not_of(value.m_string, offset); }
+
+		NODISCARD bool contains(value_type const value) const noexcept { return m_string.find(value) != npos; }
+		
+		NODISCARD bool contains(self_type const & value) const noexcept { return m_string.find(value.m_string) != npos; }
+
+		NODISCARD bool has_prefix(value_type const a) const noexcept { return !empty() && front() == a; }
+		
+		NODISCARD bool has_prefix(self_type const & a) const noexcept { return (a.size() <= size()) && (a == substr(0, a.size())); }
+
+		NODISCARD bool has_suffix(value_type const a) const noexcept { return !empty() && back() == a; }
+		
+		NODISCARD bool has_suffix(self_type const & a) const noexcept { return (a.size() <= size()) && (a == substr(size() - a.size(), a.size())); }
+
+	public:
+		NODISCARD auto narrow() const noexcept -> std::conditional_t<is_narrow, BasicString<char> const &, BasicString<char>> {
+			if constexpr (is_narrow) {
+				return (*this);
+			}
+			else {
+				BasicString<char> temp;
+				temp.reserve(size());
+				for (auto const c : *this) { temp.push_back(static_cast<char>(c)); }
+				return temp;
+			}
+		}
+
+		NODISCARD auto widen() const -> std::conditional_t<!is_narrow, BasicString<wchar_t> const &, BasicString<wchar_t>> {
+			if constexpr (!is_narrow) {
+				return (*this);
+			}
+			else {
+				BasicString<wchar_t> temp;
+				temp.reserve(size());
+				for (auto const c : *this) { temp.push_back(static_cast<wchar_t>(c)); }
+				return temp;
+			}
+		}
+
+	public:
+		NODISCARD self_type to_upper() const {
+			self_type temp;
+			temp.reserve(size());
+			for (auto const c : *this) { temp.push_back(std::toupper(c)); }
+			return temp;
+		}
+
+		NODISCARD self_type to_lower() const {
+			self_type temp;
+			temp.reserve(size());
+			for (auto const c : *this) { temp.push_back(std::tolower(c)); }
+			return temp;
+		}
+
+	public:
+		template <class Fn = int(*)(int)
+		> auto & trim_back(Fn fn = std::isspace) {
+			while (!empty() && fn(back())) { pop_back(); }
+			return (*this);
+		}
+
+		template <class Fn = int(*)(int)
+		> auto & trim_front(Fn fn = std::isspace) {
+			while (!empty() && fn(front())) { pop_front(); }
+			return (*this);
+		}
+
+		template <class Fn = int(*)(int)
+		> auto & trim(Fn fn = std::isspace) {
+			while (!empty() && fn(back())) { pop_back(); }
+			while (!empty() && fn(front())) { pop_front(); }
+			return (*this);
+		}
+
+	public:
+		NODISCARD static auto split(self_type s, value_type const delimiter) {
+			Vector<self_type> v{};
+			size_type i{};
+			while ((i = s.find(delimiter)) != npos) {
+				v.push_back(s.substr(0, i));
+				s.erase(0, i + 1);
+			}
+			v.push_back(s);
+			return v;
+		}
+
+		NODISCARD static auto split(self_type s, cstring delimiter) {
+			Vector<self_type> v{};
+			size_type i{};
+			while ((i = s.find(delimiter)) != npos) {
+				v.push_back(s.substr(0, i));
+				s.erase(0, i + std::strlen(delimiter));
+			}
+			v.push_back(s);
+			return v;
+		}
+
+		NODISCARD static auto split(self_type s, self_type const & delimiter) {
+			Vector<self_type> v{};
+			size_type i{};
+			while ((i = s.find(delimiter)) != npos) {
+				v.push_back(s.substr(0, i));
+				s.erase(0, i + delimiter.size());
+			}
+			v.push_back(s);
+			return v;
+		}
+
+		NODISCARD auto split(value_type const delimiter) const noexcept { return split(*this, delimiter); }
+
+		NODISCARD auto split(value_type const * delimiter) const noexcept { return split(*this, delimiter); }
+
+		NODISCARD auto split(self_type const & delimiter) const noexcept { return split(*this, delimiter); }
+
+	public:
+		NODISCARD auto root_name() const noexcept -> self_type { return util::parse_root_name(narrow().view()); }
+		
+		NODISCARD auto root_directory() const noexcept -> self_type { return util::parse_root_directory(narrow().view()); }
+		
+		NODISCARD auto root_path() const noexcept -> self_type { return util::parse_root_path(narrow().view()); }
+		
+		NODISCARD auto relative_path() const noexcept -> self_type { return util::parse_relative_path(narrow().view()); }
+		
+		NODISCARD auto parent_path() const noexcept -> self_type { return util::parse_parent_path(narrow().view()); }
+		
+		NODISCARD auto filename() const noexcept -> self_type { return util::parse_filename(narrow().view()); }
+		
+		NODISCARD auto stem() const noexcept -> self_type { return util::parse_stem(narrow().view()); }
+		
+		NODISCARD auto extension() const noexcept -> self_type { return util::parse_extension(narrow().view()); }
+
+		NODISCARD bool has_root_name() const noexcept { return !util::parse_root_name(narrow().view()).empty(); }
+		
+		NODISCARD bool has_root_directory() const noexcept { return !util::parse_root_directory(narrow().view()).empty(); }
+		
+		NODISCARD bool has_root_path() const noexcept { return !util::parse_root_path(narrow().view()).empty(); }
+		
+		NODISCARD bool has_relative_path() const noexcept { return !util::parse_relative_path(narrow().view()).empty(); }
+		
+		NODISCARD bool has_parent_path() const noexcept { return !util::parse_parent_path(narrow().view()).empty(); }
+		
+		NODISCARD bool has_filename() const noexcept { return !util::parse_filename(narrow().view()).empty(); }
+		
+		NODISCARD bool has_stem() const noexcept { return !util::parse_stem(narrow().view()).empty(); }
+		
+		NODISCARD bool has_extension() const noexcept { return !util::parse_extension(narrow().view()).empty(); }
+
+	public:
+		template <size_type buffer_size = 0
+		> static i32 format(self_type & s, const_pointer fmt, va_list args)
+		{
+			// select the correct formatter
+			auto _formatter = [](auto ... v) noexcept {
+				if constexpr (is_narrow) { return std::vsnprintf(v...); }
+				else { return std::vswprintf(v...); }
+			};
+
+			// static buffer size
+			if constexpr (0 < buffer_size)
+			{
+				value_type buffer[buffer_size]{};
+				i32 const ns{ _formatter(buffer, buffer_size, fmt, args) };
+				if (0 < ns) {
+					s = self_type{ buffer, buffer + (size_type)ns + 1, allocator_type{} };
+				}
+				return ns;
+			}
+			// dynamic buffer size
+			else
+			{
+				va_list args_copy;
+				va_copy(args_copy, args);
+				i32 const ns{ _formatter(nullptr, 0, fmt, args_copy) };
+				va_end(args_copy);
+				if (0 < ns) {
+					s.resize((size_type)ns + 1);
+					_formatter(s.data(), s.size(), fmt, args);
+				}
+				return ns;
+			}
+		}
+
+		template <size_type buffer_size = 0
+		> static i32 format(self_type & s, const_pointer fmt, ...) noexcept {
+			va_list args;
+			va_start(args, fmt);
+			i32 const n{ format<buffer_size>(s, fmt, args) };
+			va_end(args);
+			return n;
+		}
+
+		template <size_type buffer_size = 0
+		> NODISCARD static self_type format(const_pointer fmt, va_list args) noexcept {
+			self_type s;
+			format<buffer_size>(s, fmt, args);
+			return s;
+		}
+
+		template <size_type buffer_size = 0
+		> NODISCARD static self_type format(const_pointer fmt, ...) noexcept {
+			va_list args;
+			va_start(args, fmt);
+			auto const s{ format<buffer_size>(fmt, args) };
+			va_end(args);
+			return s;
+		}
+	};
+
+	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+	// string
+	using String = BasicString<char>;
+
+	// unicode (wide string)
+	using Unicode = BasicString<wchar_t>;
+
+	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+	namespace mpl { template <class C> constexpr bool is_string_v<BasicString<C>>{ true }; }
+
+	inline String operator "" _s(cstring s, size_t n) noexcept { return String{ s, n }; }
+
+	inline Unicode operator "" _s(cwstring s, size_t n) noexcept { return Unicode{ s, n }; }
+
+	template <class C> struct Hasher<BasicString<C>> { size_t operator()(BasicString<C> const & s) const noexcept { return s.hash_code(); } };
+
+	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+	template <class C> NODISCARD BasicString<C> operator+(BasicString<C> const & a, BasicString<C> const & b) { return BasicString<C>{ a.m_string + b.m_string }; }
+	
+	template <class C> NODISCARD BasicString<C> operator+(C const * const a, BasicString<C> const & b) { return BasicString<C>{ a + b.m_string }; }
+	
+	template <class C> NODISCARD BasicString<C> operator+(C const a, BasicString<C> const & b) { return BasicString<C>{ a + b.m_string }; }
+	
+	template <class C> NODISCARD BasicString<C> operator+(BasicString<C> const & a, C const * const b) { return BasicString<C>{ a.m_string + b }; }
+	
+	template <class C> NODISCARD BasicString<C> operator+(BasicString<C> const & a, C const b) { return BasicString<C>{ a.m_string + b }; }
+	
+	template <class C> NODISCARD BasicString<C> operator+(BasicString<C> const & a, BasicString<C> && b) { return BasicString<C>{ a.m_string + std::move(b.m_string) }; }
+	
+	template <class C> NODISCARD BasicString<C> operator+(BasicString<C> && a, BasicString<C> const & b) { return BasicString<C>{ std::move(a.m_string) + b.m_string }; }
+	
+	template <class C> NODISCARD BasicString<C> operator+(BasicString<C> && a, BasicString<C> && b) { return BasicString<C>{ std::move(a.m_string) + std::move(b.m_string) }; }
+	
+	template <class C> NODISCARD BasicString<C> operator+(C const * const a, BasicString<C> && b) { return BasicString<C>{ a + std::move(b.m_string) }; }
+	
+	template <class C> NODISCARD BasicString<C> operator+(C const a, BasicString<C> && b) { return BasicString<C>{ a + std::move(b.m_string) }; }
+	
+	template <class C> NODISCARD BasicString<C> operator+(BasicString<C> && a, C const * const b) { return BasicString<C>{ std::move(a.m_string) + b }; }
+	
+	template <class C> NODISCARD BasicString<C> operator+(BasicString<C> && a, C const b) { return BasicString<C>{ std::move(a.m_string) + b }; }
+
+	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+	template <class C> NODISCARD bool operator==(BasicString<C> const & a, BasicString<C> const & b) noexcept { return a.equal_to(b); }
+
+	template <class C> NODISCARD bool operator==(BasicString<C> const & a, C const * const b) { return a.equal_to(b); }
+
+	template <class C> NODISCARD bool operator==(C const * const a, BasicString<C> const & b) { return b.equal_to(a); }
+
+	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+	template <class C> NODISCARD bool operator!=(BasicString<C> const & a, BasicString<C> const & b) noexcept { return !(a == b); }
+	
+	template <class C> NODISCARD bool operator!=(C const * const a, BasicString<C> const & b) { return !(a == b); }
+	
+	template <class C> NODISCARD bool operator!=(BasicString<C> const & a, C const * const b) { return !(a == b); }
+
+	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+	template <class C> NODISCARD bool operator<(BasicString<C> const & a, BasicString<C> const & b) noexcept { return a.compare(b) < 0; }
+	
+	template <class C> NODISCARD bool operator<(C const * const a, BasicString<C> const & b) { return b.compare(a) > 0; }
+	
+	template <class C> NODISCARD bool operator<(BasicString<C> const & a, C const * const b) { return a.compare(b) < 0; }
+
+	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+	template <class C> NODISCARD bool operator>(BasicString<C> const & a, BasicString<C> const & b) noexcept { return b < a; }
+	
+	template <class C> NODISCARD bool operator>(C const * const a, BasicString<C> const & b) { return b < a; }
+	
+	template <class C> NODISCARD bool operator>(BasicString<C> const & a, C const * const b) { return b < a; }
+
+	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+	template <class C> NODISCARD bool operator<=(BasicString<C> const & a, BasicString<C> const & b) noexcept { return !(b < a); }
+	
+	template <class C> NODISCARD bool operator<=(C const * const a, BasicString<C> const & b) { return !(b < a); }
+	
+	template <class C> NODISCARD bool operator<=(BasicString<C> const & a, C const * const b) { return !(b < a); }
+
+	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+	template <class C> NODISCARD bool operator>=(BasicString<C> const & a, BasicString<C> const & b) noexcept { return !(a < b); }
+	
+	template <class C> NODISCARD bool operator>=(C const * const a, BasicString<C> const & b) { return !(a < b); }
+	
+	template <class C> NODISCARD bool operator>=(BasicString<C> const & a, C const * const b) { return !(a < b); }
+
+	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+}
+
+namespace Pnu::util
+{
+	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+	template <class T, class Fn, class ... Args
+	> Optional<T> parse_answer(cstring ptr, Fn && fn, Args && ... args) noexcept
+	{
+		char * end{};
+		auto const answer{ FWD(fn)(ptr, &end, FWD(args)...) };
+		if (!(*end != 0 || end == ptr)) {
+			return static_cast<T>(answer);
+		}
+		else {
+			return nullopt;
+		}
+	}
+
+	template <class T
+	> char * uintegral_to_buffer(char * next, T value) noexcept
+	{
+		if constexpr (sizeof(T) > 4)
+		{
+			while (value > 0xFFFFFFFFU) {
+				auto chunk{ static_cast<u32>(value % 1000000000) };
+				value /= 1000000000;
+				for (i32 i = 0; i != 9; ++i) {
+					*--next = static_cast<char>('0' + chunk % 10);
+					chunk /= 10;
+				}
+			}
+		}
+		auto trunc{ static_cast<u32>(value) };
+		do {
+			*--next = static_cast<char>('0' + trunc % 10);
+			trunc /= 10;
+		} while (trunc != 0);
+		return next;
+	}
+
+	template <class T
+	> String integral_to_string(T value) noexcept
+	{
+		static_assert(std::is_integral_v<T>);
+		char			buf[21]{ /* can hold 2^64 - 1, plus NUL */ };
+		char * const	end{ std::end(buf) };
+		char * next{ end };
+		auto const		uval{ static_cast<std::make_unsigned_t<T>>(value) };
+		if (value < 0) {
+			next = uintegral_to_buffer(next, 0 - uval);
+			*--next = '-';
+		}
+		else {
+			next = uintegral_to_buffer(next, uval);
+		}
+		return String{ next, end };
+	}
+
+	template <class T
+	> String uintegral_to_string(T value) noexcept
+	{
+		static_assert(std::is_integral_v<T>, "T must be integral");
+		static_assert(std::is_unsigned_v<T>, "T must be unsigned");
+		char buf[21]{ /* can hold 2^64 - 1, plus NUL */ };
+		char * const end{ std::end(buf) };
+		char * const next{ uintegral_to_buffer(end, value) };
+		return String{ next, end };
+	}
+
+	template <class T
+	> String floating_point_to_string(T value) noexcept
+	{
+		static_assert(std::is_floating_point_v<T>);
+		auto const n{ static_cast<size_t>(_scprintf("%f", value)) };
+		String temp{ n, '\0', String::allocator_type{} };
+		sprintf_s(temp.data(), n + 1, "%f", value);
+		return temp;
+	}
+
+	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+	inline Optional<i8> to_i8(String const & value, i32 base = 10) noexcept { return parse_answer<i8>(value.c_str(), &strtol, base); }
+
+	inline Optional<i16> to_i16(String const & value, i32 base = 10) noexcept { return parse_answer<i16>(value.c_str(), &strtol, base); }
+
+	inline Optional<i32> to_i32(String const & value, i32 base = 10) noexcept { return parse_answer<i32>(value.c_str(), &strtol, base); }
+
+	inline Optional<i64> to_i64(String const & value, i32 base = 10) noexcept { return parse_answer<i64>(value.c_str(), &strtoll, base); }
+
+	inline Optional<u8> to_u8(String const & value, i32 base = 10) noexcept { return parse_answer<u8>(value.c_str(), &strtoul, base); }
+
+	inline Optional<u16> to_u16(String const & value, i32 base = 10) noexcept { return parse_answer<u16>(value.c_str(), &strtoul, base); }
+
+	inline Optional<u32> to_u32(String const & value, i32 base = 10) noexcept { return parse_answer<u32>(value.c_str(), &strtoul, base); }
+
+	inline Optional<u64> to_u64(String const & value, i32 base = 10) noexcept { return parse_answer<u64>(value.c_str(), &strtoull, base); }
+
+	inline Optional<f32> to_f32(String const & value) noexcept { return parse_answer<f32>(value.c_str(), &strtod); }
+
+	inline Optional<f64> to_f64(String const & value) noexcept { return parse_answer<f64>(value.c_str(), &strtod); }
+
+	inline Optional<f80> to_f80(String const & value) noexcept { return parse_answer<f80>(value.c_str(), &strtold); }
+
+	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+	inline String to_string(i8 value) noexcept { return integral_to_string(value); }
+
+	inline String to_string(i16 value) noexcept { return integral_to_string(value); }
+
+	inline String to_string(i32 value) noexcept { return integral_to_string(value); }
+
+	inline String to_string(i64 value) noexcept { return integral_to_string(value); }
+
+	inline String to_string(u8 value) noexcept { return uintegral_to_string(value); }
+
+	inline String to_string(u16 value) noexcept { return uintegral_to_string(value); }
+
+	inline String to_string(u32 value) noexcept { return uintegral_to_string(value); }
+
+	inline String to_string(u64 value) noexcept { return uintegral_to_string(value); }
+
+	inline String to_string(f32 value) noexcept { return floating_point_to_string(value); }
+
+	inline String to_string(f64 value) noexcept { return floating_point_to_string(value); }
+
+	inline String to_string(f80 value) noexcept { return floating_point_to_string(value); }
+
+	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+	inline Optional<bool> to_bool(String const & value) noexcept
+	{
+		switch (value.to_lower().hash_code()) {
+		case "1"_hash:
+		case "yes"_hash:
+		case "true"_hash: return make_optional(true);
+		case "0"_hash:
+		case "no"_hash:
+		case "false"_hash: return make_optional(false);
+		}
+		return nullopt;
+	}
+
+	inline String to_string(bool value) noexcept
+	{
+		return value ? "true"_s : "false"_s;
+	}
+
+	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+}
 
 namespace Pnu::util
 {
@@ -182,398 +886,6 @@ namespace Pnu::util
 		auto const extension{ find_extension(filename, ads) };
 		return { extension, static_cast<size_t>(ads - extension) };
 	}
-
-	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-}
-
-namespace Pnu
-{
-	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-
-	// string base
-	template <class C = char
-	> using _StringBase = std::basic_string<C, std::char_traits<C>, PolymorphicAllocator<C>>;
-
-	// basic string
-	template <class C = char
-	> class BasicString : public _StringBase<C>
-	{
-	public:
-		using self_type = typename BasicString<C>;
-		using base_type = typename _StringBase<C>;
-		using traits_type = typename base_type::traits_type;
-		using value_type = typename base_type::value_type;
-		using pointer = typename base_type::pointer;
-		using const_pointer = typename base_type::const_pointer;
-		using reference = typename base_type::reference;
-		using const_reference = typename base_type::const_reference;
-		using iterator = typename base_type::iterator;
-		using const_iterator = typename base_type::const_iterator;
-		using reverse_iterator = typename base_type::reverse_iterator;
-		using const_reverse_iterator = typename base_type::const_reverse_iterator;
-		using size_type = typename base_type::size_type;
-		using difference_type = typename base_type::difference_type;
-
-	public:
-		using base_type::base_type;
-		using base_type::operator=;
-		BasicString(BasicStringView<C> const v) : base_type{ v.data(), v.size() } {}
-
-	public:
-		static constexpr bool is_narrow{ 1 == sizeof(C) };
-		NODISCARD operator void * () const noexcept { return !empty() ? (void *)data() : nullptr; }
-		NODISCARD auto hash_code() const noexcept { return hash_representation(data(), size()); }
-		NODISCARD auto view() const noexcept { return BasicStringView<C>{ data(), size() }; }
-		NODISCARD operator BasicStringView<C>() const noexcept { return { data(), size() }; }
-		template <class T> self_type & operator+=(T && a) noexcept { return base_type::operator+=(FWD(a)), (*this); }
-
-	public:
-		NODISCARD bool contains(C const a) const noexcept { return find(a) != npos; }
-		NODISCARD bool contains(C const * a) const noexcept { return find(a) != npos; }
-		NODISCARD bool contains(self_type const & a) const noexcept { return find(a) != npos; }
-
-		NODISCARD bool begins_with(C const a) const noexcept { return !empty() && front() == a; }
-		NODISCARD bool begins_with(self_type const & a) const noexcept { return (a.size() <= size()) && (a == substr(0, a.size())); }
-
-		NODISCARD bool ends_with(C const a) const noexcept { return !empty() && back() == a; }
-		NODISCARD bool ends_with(self_type const & a) const noexcept { return (a.size() <= size()) && (a == substr(size() - a.size(), a.size())); }
-
-	public:
-		auto & replace_first(self_type const & a, self_type const & b) {
-			if (size_t const i{ find(a, 0) }; i != npos) {
-				replace(i, a.size(), b);
-			}
-			return (*this);
-		}
-
-		auto & replace_all(self_type const & a, self_type const & b) {
-			for (size_t i{}; (i = find(a, i)) != npos;) {
-				replace(i, a.size(), b);
-				i += a.size();
-			}
-			return (*this);
-		}
-
-		auto replace_first(self_type const & a, self_type const & b) const noexcept { return String{ *this }.replace_first(a, b); }
-		auto replace_all(self_type const & a, self_type const & b) const noexcept { return String{ *this }.replace_all(a, b); }
-
-	public:
-		auto & erase_duplicates(C const a) { return erase(std::unique(begin(), end(), [a](C a, C b) { return (a == b) && (a == a); }), end()), (*this); }
-
-		template <class Fn = C(*)(C)
-		> auto & transform(Fn fn) noexcept { return std::transform(begin(), end(), begin(), fn), (*this); }
-
-	public:
-		template <class = std::enable_if_t<is_narrow>
-		> auto const & narrow() const noexcept { return (*this); }
-
-		template <class = std::enable_if_t<!is_narrow>
-		> auto const & widen() const noexcept { return (*this); }
-
-		template <class = std::enable_if_t<!is_narrow>
-		> auto narrow() const {
-			BasicString<char> temp;
-			temp.reserve(size());
-			for (auto const c : *this) { temp.push_back(static_cast<char>(c)); }
-			return temp;
-		}
-
-		template <class = std::enable_if_t<is_narrow>
-		> auto widen() const {
-			BasicString<wchar_t> temp;
-			temp.reserve(size());
-			for (auto const c : *this) { temp.push_back(static_cast<wchar_t>(c)); }
-			return temp;
-		}
-
-		auto to_upper() const {
-			self_type temp;
-			temp.reserve(size());
-			for (auto const c : *this) { temp.push_back(std::toupper(c)); }
-			return temp;
-		}
-
-		auto to_lower() const {
-			self_type temp;
-			temp.reserve(size());
-			for (auto const c : *this) { temp.push_back(std::tolower(c)); }
-			return temp;
-		}
-		
-	public:
-		template <class Fn = int(*)(int)
-		> auto & trim_back(Fn fn = std::isspace) {
-			while (!empty() && fn(back())) { pop_back(); }
-			return (*this);
-		}
-
-		template <class Fn = int(*)(int)
-		> auto & trim_front(Fn fn = std::isspace) {
-			while (!empty() && fn(front())) { erase(begin()); }
-			return (*this);
-		}
-
-		template <class Fn = int(*)(int)
-		> auto & trim(Fn fn = std::isspace) {
-			while (!empty() && fn(back())) { pop_back(); }
-			while (!empty() && fn(front())) { erase(begin()); }
-			return (*this);
-		}
-
-	public:
-		NODISCARD static auto split(self_type s, C const delimiter)
-		{
-			Vector<self_type> v{};
-			size_t i{};
-			while ((i = s.find(delimiter)) != npos) {
-				v.push_back((self_type)s.substr(0, i));
-				s.erase(0, i + 1);
-			}
-			v.push_back(s);
-			return v;
-		}
-
-		NODISCARD static auto split(self_type s, cstring delimiter)
-		{
-			Vector<self_type> v{};
-			size_t i{};
-			while ((i = s.find(delimiter)) != npos) {
-				v.push_back((self_type)s.substr(0, i));
-				s.erase(0, i + std::strlen(delimiter));
-			}
-			v.push_back(s);
-			return v;
-		}
-
-		NODISCARD static auto split(self_type s, self_type const & delimiter)
-		{
-			Vector<self_type> v{};
-			size_t i{};
-			while ((i = s.find(delimiter)) != npos) {
-				v.push_back((self_type)s.substr(0, i));
-				s.erase(0, i + delimiter.size());
-			}
-			v.push_back(s);
-			return v;
-		}
-
-		NODISCARD auto split(C const delimiter) const noexcept { return split(*this, delimiter); }
-
-		NODISCARD auto split(C const * delimiter) const noexcept { return split(*this, delimiter); }
-
-		NODISCARD auto split(self_type const & delimiter) const noexcept { return split(*this, delimiter); }
-
-	public:
-		template <size_t buffer_size = 0
-		> static i32 format(self_type & s, cstring fmt, va_list args)
-		{
-			if constexpr (0 < buffer_size)
-			{
-				C buffer[buffer_size]{};
-				i32 const n{ std::vsnprintf(buffer, buffer_size, fmt, args) };
-				if (0 < n) {
-					s = self_type{ buffer, buffer + (size_t)n, allocator_type{} };
-				}
-				return n;
-			}
-			else
-			{
-				va_list args_copy;
-				va_copy(args_copy, args);
-				i32 const n{ std::vsnprintf(nullptr, 0, fmt, args_copy) };
-				va_end(args_copy);
-				if (0 < n) {
-					s.resize((size_t)n + 1);
-					std::vsnprintf(s.data(), s.size(), fmt, args);
-				}
-				return n;
-			}
-		}
-
-		template <size_t buffer_size = 0
-		> static i32 format(self_type & s, cstring fmt, ...) noexcept {
-			va_list args;
-			va_start(args, fmt);
-			i32 const n{ format<buffer_size>(s, fmt, args) };
-			va_end(args);
-			return n;
-		}
-
-		template <size_t buffer_size = 0
-		> NODISCARD static self_type format(cstring fmt, va_list args) noexcept {
-			self_type s;
-			format<buffer_size>(s, fmt, args);
-			return s;
-		}
-
-		template <size_t buffer_size = 0
-		> NODISCARD static self_type format(cstring fmt, ...) noexcept {
-			va_list args;
-			va_start(args, fmt);
-			auto const s{ format<buffer_size>(fmt, args) };
-			va_end(args);
-			return s;
-		}
-
-	public:
-		NODISCARD auto root_name() const noexcept -> self_type { return util::parse_root_name(narrow().view()); }
-		NODISCARD auto root_directory() const noexcept -> self_type { return util::parse_root_directory(narrow().view()); }
-		NODISCARD auto root_path() const noexcept -> self_type { return util::parse_root_path(narrow().view()); }
-		NODISCARD auto relative_path() const noexcept -> self_type { return util::parse_relative_path(narrow().view()); }
-		NODISCARD auto parent_path() const noexcept -> self_type { return util::parse_parent_path(narrow().view()); }
-		NODISCARD auto filename() const noexcept -> self_type { return util::parse_filename(narrow().view()); }
-		NODISCARD auto stem() const noexcept -> self_type { return util::parse_stem(narrow().view()); }
-		NODISCARD auto extension() const noexcept -> self_type { return util::parse_extension(narrow().view()); }
-
-		NODISCARD bool has_root_name() const noexcept { return !util::parse_root_name(narrow().view()).empty(); }
-		NODISCARD bool has_root_directory() const noexcept { return !util::parse_root_directory(narrow().view()).empty(); }
-		NODISCARD bool has_root_path() const noexcept { return !util::parse_root_path(narrow().view()).empty(); }
-		NODISCARD bool has_relative_path() const noexcept { return !util::parse_relative_path(narrow().view()).empty(); }
-		NODISCARD bool has_parent_path() const noexcept { return !util::parse_parent_path(narrow().view()).empty(); }
-		NODISCARD bool has_filename() const noexcept { return !util::parse_filename(narrow().view()).empty(); }
-		NODISCARD bool has_stem() const noexcept { return !util::parse_stem(narrow().view()).empty(); }
-		NODISCARD bool has_extension() const noexcept { return !util::parse_extension(narrow().view()).empty(); }
-	};
-
-	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-
-	// string
-	using String = BasicString<char>;
-
-	// unicode
-	using Unicode = BasicString<wchar_t>;
-
-	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-
-	namespace mpl { template <class C> constexpr bool is_string_v<BasicString<C>>{ true }; }
-
-	inline String operator "" _s(cstring s, size_t n) noexcept { return String{ s, n }; }
-
-	inline Unicode operator "" _s(cwstring s, size_t n) noexcept { return Unicode{ s, n }; }
-
-	template <class C> struct Hasher<BasicString<C>> { size_t operator()(BasicString<C> const & s) const noexcept { return s.hash_code(); } };
-
-	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-
-	template <class C
-	> NODISCARD BasicString<C> operator+(BasicString<C> const & a, BasicString<C> const & b) {
-		const auto a_size = a.size();
-		const auto b_size = b.size();
-		if (a.max_size() - a_size < b_size) {
-			std::_Xlen_string();
-		}
-		return { std::_String_constructor_concat_tag{}, a, a.c_str(), a_size, b.c_str(), b_size };
-	}
-
-	template <class C
-	> NODISCARD BasicString<C> operator+(C const * const a, BasicString<C> const & b) {
-		using _Traits = typename BasicString<C>::traits_type;
-		using _Size_type = typename BasicString<C>::size_type;
-		const auto a_size = std::_Convert_size<_Size_type>(_Traits::length(a));
-		const auto b_size = b.size();
-		if (b.max_size() - b_size < a_size) {
-			std::_Xlen_string();
-		}
-		return { std::_String_constructor_concat_tag{}, b, a, a_size, b.c_str(), b_size };
-	}
-
-	template <class C
-	> NODISCARD BasicString<C> operator+(C const a, BasicString<C> const & b) {
-		const auto b_size = b.size();
-		if (b_size == b.max_size()) {
-			std::_Xlen_string();
-		}
-		return { std::_String_constructor_concat_tag{}, b, std::addressof(a), 1, b.c_str(), b_size };
-	}
-
-	template <class C
-	> NODISCARD BasicString<C> operator+(BasicString<C> const & a, C const * const b) {
-		using _Traits = typename BasicString<C>::traits_type;
-		using _Size_type = typename BasicString<C>::size_type;
-		const auto a_size = a.size();
-		const auto b_size = std::_Convert_size<_Size_type>(_Traits::length(b));
-		if (a.max_size() - a_size < b_size) {
-			std::_Xlen_string();
-		}
-		return { std::_String_constructor_concat_tag{}, a, a.c_str(), a_size, b, b_size };
-	}
-
-	template <class C
-	> NODISCARD BasicString<C> operator+(BasicString<C> const & a, C const b) {
-		const auto a_size = a.size();
-		if (a_size == a.max_size()) {
-			std::_Xlen_string();
-		}
-		return { std::_String_constructor_concat_tag{}, a, a.c_str(), a_size, std::addressof(b), 1 };
-	}
-
-	template <class C
-	> NODISCARD BasicString<C> operator+(BasicString<C> const & a, BasicString<C> && b) {
-		return b.insert(0, a), std::move(b);
-	}
-
-	template <class C
-	> NODISCARD BasicString<C> operator+(BasicString<C> && a, BasicString<C> const & b) {
-		return a.append(b), std::move(a);
-	}
-
-	template <class C
-	> NODISCARD BasicString<C> operator+(BasicString<C> && a, BasicString<C> && b) {
-#if _ITERATOR_DEBUG_LEVEL == 2
-		_STL_VERIFY(std::addressof(a) != std::addressof(b),
-			"You cannot concatenate the same moved string to itself. See N4910 16.4.5.9 [res.on.arguments]/1.3: "
-			"If a function argument is bound to an rvalue reference parameter, the implementation may assume that "
-			"this parameter is a unique reference to this argument, except that the argument passed to "
-			"a move-assignment operator may be a reference to *this (16.4.6.15 [lib.types.movedfrom]).");
-#endif // _ITERATOR_DEBUG_LEVEL == 2
-		return { std::_String_constructor_concat_tag{}, a, b };
-	}
-
-	template <class C
-	> NODISCARD BasicString<C> operator+(C const * const a, BasicString<C> && b) {
-		return b.insert(0, a), std::move(b);
-	}
-
-	template <class C
-	> NODISCARD BasicString<C> operator+(C const a, BasicString<C> && b) {
-		return b.insert(0, 1, a), std::move(b);
-	}
-
-	template <class C
-	> NODISCARD BasicString<C> operator+(BasicString<C> && a, C const * const b) {
-		return a.append(b), std::move(a);
-	}
-
-	template <class C
-	> NODISCARD BasicString<C> operator+(BasicString<C> && a, C const b) {
-		return a.push_back(b), std::move(a);
-	}
-
-	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-
-	template <class C> NODISCARD bool operator==(BasicString<C> const & a, BasicString<C> const & b) noexcept { return a._Equal(b); }
-	template <class C> NODISCARD bool operator==(BasicString<C> const & a, C const * const b) { return a._Equal(b); }
-	template <class C> NODISCARD bool operator==(C const * const a, BasicString<C> const & b) { return b._Equal(a); }
-
-	template <class C> NODISCARD bool operator!=(BasicString<C> const & a, BasicString<C> const & b) noexcept { return !(a == b); }
-	template <class C> NODISCARD bool operator!=(C const * const a, BasicString<C> const & b) { return !(a == b); }
-	template <class C> NODISCARD bool operator!=(BasicString<C> const & a, C const * const b) { return !(a == b); }
-
-	template <class C> NODISCARD bool operator<(BasicString<C> const & a, BasicString<C> const & b) noexcept { return a.compare(b) < 0; }
-	template <class C> NODISCARD bool operator<(C const * const a, BasicString<C> const & b) { return b.compare(a) > 0; }
-	template <class C> NODISCARD bool operator<(BasicString<C> const & a, C const * const b) { return a.compare(b) < 0; }
-
-	template <class C> NODISCARD bool operator>(BasicString<C> const & a, BasicString<C> const & b) noexcept { return b < a; }
-	template <class C> NODISCARD bool operator>(C const * const a, BasicString<C> const & b) { return b < a; }
-	template <class C> NODISCARD bool operator>(BasicString<C> const & a, C const * const b) { return b < a; }
-
-	template <class C> NODISCARD bool operator<=(BasicString<C> const & a, BasicString<C> const & b) noexcept { return !(b < a); }
-	template <class C> NODISCARD bool operator<=(C const * const a, BasicString<C> const & b) { return !(b < a); }
-	template <class C> NODISCARD bool operator<=(BasicString<C> const & a, C const * const b) { return !(b < a); }
-
-	template <class C> NODISCARD bool operator>=(BasicString<C> const & a, BasicString<C> const & b) noexcept { return !(a < b); }
-	template <class C> NODISCARD bool operator>=(C const * const a, BasicString<C> const & b) { return !(a < b); }
-	template <class C> NODISCARD bool operator>=(BasicString<C> const & a, C const * const b) { return !(a < b); }
 
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 }

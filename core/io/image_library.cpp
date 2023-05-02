@@ -63,10 +63,5 @@ namespace Pnu
 		out->push_back(".bmp");
 	}
 
-	TYPE ImageFormatLoader::get_resource_type(String const & path) const
-	{
-		return nullptr;
-	}
-
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 }

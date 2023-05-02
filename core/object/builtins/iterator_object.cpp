@@ -7,7 +7,7 @@ namespace Pnu
 
 	EMBED_CLASS(IteratorObject, t)
 	{
-		t.tp_cmp = (CmpFunc)[](OBJ self, OBJ other) -> i32
+		t.tp_cmp = (CmpFunc)[](ObjectRef self, ObjectRef other) -> i32
 		{
 			return compare(*self, *other);
 		};

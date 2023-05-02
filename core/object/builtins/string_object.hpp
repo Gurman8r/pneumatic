@@ -11,7 +11,7 @@ namespace Pnu
 	{
 		DEFINE_CLASS(StringObject, Object);
 
-		friend class STR;
+		friend class StringRef;
 
 	public:
 		String m_string{};
@@ -48,11 +48,11 @@ namespace Pnu
 
 		template <class T> StringObject(Ref<T> const & value) : m_string{}
 		{
-			if (STR::check_(value))
+			if (StringRef::check_(value))
 			{
-				m_string = (storage_type)(STR)value;
+				m_string = (storage_type)(StringRef)value;
 			}
-			else if (TYPE t{ typeof(value) }; t->tp_str)
+			else if (TypeRef t{ typeof(value) }; t->tp_str)
 			{
 				m_string = (storage_type)t->tp_str(value);
 			}
@@ -90,9 +90,9 @@ namespace Pnu
 #define OBJECT_CHECK_STR(o) (Pnu::typeof(o).has_feature(Pnu::TypeFlags_Str_Subclass))
 
 	// string ref
-	class STR : public Ref<StringObject>
+	class StringRef : public Ref<StringObject>
 	{
-		REF_CLASS(STR, OBJECT_CHECK_STR);
+		REF_CLASS(StringRef, OBJECT_CHECK_STR);
 
 	public:
 		using storage_type		= value_type::storage_type;
@@ -126,7 +126,7 @@ namespace Pnu
 		auto end() const -> const_iterator { return VALIDATE(m_ptr)->end(); }
 
 		template <class T, class = std::enable_if_t<mpl::is_string_v<T>> // std::is_convertible_v<T, storage_type>
-		> STR & operator=(T && value) noexcept
+		> StringRef & operator=(T && value) noexcept
 		{
 			if (VALIDATE(m_ptr)) { VALIDATE(m_ptr)->m_string = FWD(value); }
 			else { instance(FWD(value)); }
@@ -139,11 +139,11 @@ namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-	template <class T> STR repr(Ref<T> const & o) noexcept
+	template <class T> StringRef repr(Ref<T> const & o) noexcept
 	{
 		if (!o) { return nullptr; }
 
-		TYPE t{ typeof(o) };
+		TypeRef t{ typeof(o) };
 
 		return t->tp_repr ? t->tp_repr(o) : nullptr;
 	}
@@ -151,11 +151,11 @@ namespace Pnu
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 	// "__x__"
-	inline bool is_dunder_name(OBJ name)
+	inline bool is_dunder_name(ObjectRef name)
 	{
-		if (!STR::check_(name)) { return false; }
+		if (!StringRef::check_(name)) { return false; }
 
-		String const & s{ STR(name) };
+		String const & s{ StringRef(name) };
 
 		size_t const n{ s.size() };
 

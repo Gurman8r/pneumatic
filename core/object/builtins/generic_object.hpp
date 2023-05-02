@@ -8,25 +8,25 @@
 namespace Pnu
 {
 	// generic object
-	class GenericObject : public Object
+	class GenericTypeObject : public Object
 	{
-		DEFINE_CLASS(GenericObject, Object);
+		DEFINE_CLASS(GenericTypeObject, Object);
 
-		friend class GENERIC;
+		friend class GenericTypeRef;
 
 	public:
 	};
 
 	// generic delete
-	template <> struct DefaultDelete<GenericObject> : DefaultDelete<Object> {};
+	template <> struct DefaultDelete<GenericTypeObject> : DefaultDelete<Object> {};
 
 	// generic check
-#define OBJECT_CHECK_GENERIC(o) (isinstance<GENERIC>(o))
+#define OBJECT_CHECK_GENERIC(o) (isinstance<GenericTypeRef>(o))
 
 	// generic ref
-	class GENERIC : public Ref<GenericObject>
+	class GenericTypeRef : public Ref<GenericTypeObject>
 	{
-		REF_CLASS(GENERIC, OBJECT_CHECK_GENERIC);
+		REF_CLASS(GenericTypeRef, OBJECT_CHECK_GENERIC);
 
 	public:
 	};

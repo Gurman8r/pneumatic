@@ -238,7 +238,7 @@ namespace Pnu
 		{
 		case Notification_Process: {
 
-			get_tree()->get_root()->set_title(String::format<48>("Pneumatic @ %.3f fps", get_tree()->get_fps().value));
+			get_tree()->get_root()->set_title(String::format<48>("Pnu @ %.3f fps", get_tree()->get_fps().value));
 
 			Duration const delta_time{ get_tree()->get_delta_time() };
 

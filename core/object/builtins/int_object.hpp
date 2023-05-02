@@ -4,9 +4,9 @@
 #include <core/object/builtins/type_object.hpp>
 
 // bool
-#define TRUE_OBJ		(Pnu::INT(&Pnu::IntObject::g_True))
-#define FALSE_OBJ		(Pnu::INT(&Pnu::IntObject::g_False))
-#define BOOL_OBJ(b)		((b) ? TRUE_OBJ : FALSE_OBJ)
+#define TrueRef		(Pnu::IntRef(&Pnu::IntObject::g_True))
+#define FalseRef	(Pnu::IntRef(&Pnu::IntObject::g_False))
+#define BoolRef(b)	((b) ? TrueRef : FalseRef)
 
 // int
 namespace Pnu
@@ -16,7 +16,7 @@ namespace Pnu
 	{
 		DEFINE_CLASS(IntObject, Object);
 
-		friend class INT;
+		friend class IntRef;
 
 	public:
 		i64 m_int{};
@@ -49,21 +49,21 @@ namespace Pnu
 #define OBJECT_CHECK_INT(o) (Pnu::typeof(o).has_feature(Pnu::TypeFlags_Int_Subclass))
 
 	// int ref
-	class INT : public Ref<IntObject>
+	class IntRef : public Ref<IntObject>
 	{
-		REF_CLASS(INT, OBJECT_CHECK_INT);
+		REF_CLASS(IntRef, OBJECT_CHECK_INT);
 
 	public:
 		using storage_type = value_type::storage_type;
 
 		template <class T, class = std::enable_if_t<std::is_integral_v<T>>
-		> INT(T const value) noexcept { instance(value); }
+		> IntRef(T const value) noexcept { instance(value); }
 
 		template <class T, class = std::enable_if_t<std::is_integral_v<T>>
 		> operator T () const { return (T)(**VALIDATE(m_ptr)); }
 
 		template <class T, class = std::enable_if_t<std::is_integral_v<T>>
-		> INT & operator=(T const value) noexcept
+		> IntRef & operator=(T const value) noexcept
 		{
 			if (m_ptr) { m_ptr->m_int = value; }
 			else { instance(value); }

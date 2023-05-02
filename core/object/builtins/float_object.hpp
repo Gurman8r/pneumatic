@@ -11,7 +11,7 @@ namespace Pnu
 	{
 		DEFINE_CLASS(FloatObject, Object);
 
-		friend class FLT;
+		friend class FloatRef;
 
 	public:
 		f64 m_float{};
@@ -39,21 +39,21 @@ namespace Pnu
 #define OBJECT_CHECK_FLOAT(o) (Pnu::typeof(o).has_feature(Pnu::TypeFlags_Float_Subclass))
 
 	// float ref
-	class FLT : public Ref<FloatObject>
+	class FloatRef : public Ref<FloatObject>
 	{
-		REF_CLASS(FLT, OBJECT_CHECK_FLOAT);
+		REF_CLASS(FloatRef, OBJECT_CHECK_FLOAT);
 
 	public:
 		using storage_type = value_type::storage_type;
 
 		template <class T, class = std::enable_if_t<std::is_floating_point_v<T>>
-		> FLT(T const value) noexcept { instance(value); }
+		> FloatRef(T const value) noexcept { instance(value); }
 
 		template <class T, class = std::enable_if_t<std::is_floating_point_v<T>>
 		> operator T () const { return (T)(**VALIDATE(m_ptr)); }
 
 		template <class T, class = std::enable_if_t<std::is_floating_point_v<T>>
-		> FLT & operator=(T const value) noexcept
+		> FloatRef & operator=(T const value) noexcept
 		{
 			if (m_ptr) { m_ptr->m_float = value; }
 			else { instance(value); }

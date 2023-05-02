@@ -24,6 +24,7 @@ namespace Pnu
 	static ExtensionManager *	extensions{};
 	static ScriptServer *		scripts{};
 
+	static Ref<ExtensionFormatLoader> extension_format_loader{};
 	static Ref<ImageFormatLoader> image_format_loader{};
 
 	void register_core_types()
@@ -34,6 +35,7 @@ namespace Pnu
 		extensions = memnew(ExtensionManager);
 		scripts = memnew(ScriptServer);
 
+		extension_format_loader.instance(); get_resource_loader()->add(extension_format_loader);
 		image_format_loader.instance(); get_resource_loader()->add(image_format_loader);
 
 		REGISTER_CLASS
@@ -53,13 +55,13 @@ namespace Pnu
 			MethodObject,
 			PropertyObject,
 			ModuleObject,
-			GenericObject,
+			GenericTypeObject,
 
 			Resource,
 
 			ScriptServer, Script, ScriptInstance, ScriptLanguage, PlaceholderScriptInstance,
 
-			Extension, ExtensionManager,
+			Extension, ExtensionFormatLoader, ExtensionManager,
 
 			DirAccess, FileAccess, FileAccessPack, FileAccessZip,
 
@@ -105,6 +107,7 @@ namespace Pnu
 	void unregister_core_types()
 	{
 		get_resource_loader()->remove(image_format_loader); image_format_loader = nullptr;
+		get_resource_loader()->remove(extension_format_loader); extension_format_loader = nullptr;
 
 		memdelete(loader);
 		memdelete(saver);

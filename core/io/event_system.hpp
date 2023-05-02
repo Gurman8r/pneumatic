@@ -55,7 +55,7 @@ private:																		\
 	DEFINE_CLASS(m_class, m_inherits);											\
 																				\
 public:																			\
-	enum : Pnu::EventID { ID = m_class::get_class_static().hash_code() };		\
+	enum : Pnu::EventID { ID = m_class::get_class_name_static().hash_code() };		\
 																				\
 	virtual Pnu::EventID get_event_id() const override { return m_class::ID; }	\
 																				\

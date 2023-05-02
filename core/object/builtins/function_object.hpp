@@ -11,10 +11,10 @@ namespace Pnu
 	{
 		DEFINE_CLASS(FunctionObject, Object);
 
-		friend class FUNCTION;
+		friend class FunctionRef;
 
 	public:
-		OBJ m_dict{};
+		ObjectRef m_dict{};
 
 		VectorCallFunc m_vectorcall{};
 
@@ -22,7 +22,7 @@ namespace Pnu
 		virtual ~FunctionObject() noexcept override = default;
 		FunctionObject(VectorCallFunc vectorcall = nullptr);
 
-		NODISCARD OBJ cpp_function() const noexcept; // in cppfunction_object.hpp
+		NODISCARD ObjectRef cpp_function() const noexcept; // in cppfunction_object.hpp
 		NODISCARD bool is_cpp_function() const noexcept { return cpp_function().is_valid(); }
 	};
 
@@ -30,15 +30,15 @@ namespace Pnu
 	template <> struct DefaultDelete<FunctionObject> : DefaultDelete<Object> {};
 
 	// function check
-#define OBJECT_CHECK_FUNCTION(o) (isinstance<FUNCTION>(o))
+#define OBJECT_CHECK_FUNCTION(o) (isinstance<FunctionRef>(o))
 
 	// function ref
-	class FUNCTION : public Ref<FunctionObject>
+	class FunctionRef : public Ref<FunctionObject>
 	{
-		REF_CLASS(FUNCTION, OBJECT_CHECK_FUNCTION);
+		REF_CLASS(FunctionRef, OBJECT_CHECK_FUNCTION);
 
 	public:
-		NODISCARD OBJ cpp_function() const noexcept { return VALIDATE(m_ptr)->cpp_function(); }
+		NODISCARD ObjectRef cpp_function() const noexcept { return VALIDATE(m_ptr)->cpp_function(); }
 		NODISCARD bool is_cpp_function() const noexcept { return VALIDATE(m_ptr)->is_cpp_function(); }
 	};
 }

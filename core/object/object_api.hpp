@@ -20,11 +20,11 @@ namespace Pnu
 		template <class Index = cstring
 		> auto operator[](Index && i) const { return ItemAccessor<Index>{ derived().ptr(), FWD(i) }; }
 
-		template <class Value = OBJ
+		template <class Value = ObjectRef
 		> bool contains(Value && value) const { return attr("__contains__")(FWD(value)).cast<bool>(); }
 
 		template <ReturnValuePolicy_ policy = ReturnValuePolicy_AutomaticReference, class ... Args
-		> OBJ operator()(Args && ... args) const; // call.hpp
+		> ObjectRef operator()(Args && ... args) const; // call.hpp
 
 	public:
 		bool is(ObjectAPI const & other) const noexcept { return derived().ptr() == other.derived().ptr(); }

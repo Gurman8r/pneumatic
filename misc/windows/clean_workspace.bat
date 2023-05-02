@@ -2,9 +2,9 @@
 
 rem CLEANUP PROJECT FILES
 
-if exist ..\..\pneumatic_vs2017.sln del /q ..\..\pneumatic_vs2017.sln
-if exist ..\..\pneumatic_vs2019.sln del /q ..\..\pneumatic_vs2019.sln
-if exist ..\..\pneumatic_vs2022.sln del /q ..\..\pneumatic_vs2022.sln
+if exist ..\..\pneumatic_sdk_vs2017.sln del /q ..\..\pneumatic_sdk_vs2017.sln
+if exist ..\..\pneumatic_sdk_vs2019.sln del /q ..\..\pneumatic_sdk_vs2019.sln
+if exist ..\..\pneumatic_sdk_vs2022.sln del /q ..\..\pneumatic_sdk_vs2022.sln
 
 if exist ..\..\.vs rd /s /q ..\..\.vs
 if exist ..\..\project rd /s /q ..\..\project

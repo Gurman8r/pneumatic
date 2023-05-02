@@ -3,10 +3,10 @@
 
 #include <core/typedefs.hpp>
 
-using PnuExtensionInterfacePtr = void *;
-using PnuExtensionPtr = void *;
-using PnuExtensionInitializationPtr = void *;
-using PnuExtensionInitializationLevel = int;
+using PneuExtensionInterfacePtr = void *;
+using PneuExtensionPtr = void *;
+using PneuExtensionInitializationPtr = void *;
+using PneuExtensionInitializationLevel = int;
 
 namespace Pnu
 {
@@ -39,13 +39,13 @@ namespace Pnu
 	{
 		ExtensionInitializationLevel_ minimum_level{};
 		void * user{};
-		void(*initialize)(void * user, PnuExtensionInitializationLevel level) {};
-		void(*finalize)(void * user, PnuExtensionInitializationLevel level) {};
+		void(*initialize)(void * user, PneuExtensionInitializationLevel level) {};
+		void(*finalize)(void * user, PneuExtensionInitializationLevel level) {};
 	};
 
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-	using ExtensionInitializationFunc = bool(*)(PnuExtensionInterfacePtr iface, PnuExtensionPtr library, PnuExtensionInitializationPtr init);
+	using ExtensionInitializationFunc = bool(*)(PneuExtensionInterfacePtr iface, PneuExtensionPtr library, PneuExtensionInitializationPtr init);
 
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 }

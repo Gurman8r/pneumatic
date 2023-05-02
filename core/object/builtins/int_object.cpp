@@ -7,17 +7,17 @@ namespace Pnu
 
 	EMBED_CLASS(IntObject, t)
 	{
-		t.tp_hash = (HashFunc)[](OBJ self) -> size_t { return Hasher<i64>()(***(INT &)self); };
+		t.tp_hash = (HashFunc)[](ObjectRef self) -> size_t { return Hasher<i64>()(***(IntRef &)self); };
 
-		t.tp_repr = (ReprFunc)[](OBJ self) -> STR { return STR(util::to_string(***(INT &)self)); };
+		t.tp_repr = (ReprFunc)[](ObjectRef self) -> StringRef { return StringRef(util::to_string(***(IntRef &)self)); };
 
-		t.tp_str = (ReprFunc)[](OBJ self) -> STR { return STR(util::to_string(***(INT &)self)); };
+		t.tp_str = (ReprFunc)[](ObjectRef self) -> StringRef { return StringRef(util::to_string(***(IntRef &)self)); };
 
-		t.tp_cmp = (CmpFunc)[](OBJ self, OBJ other) -> i32
+		t.tp_cmp = (CmpFunc)[](ObjectRef self, ObjectRef other) -> i32
 		{
 			if (self.is(other)) { return 0; }
 
-			else if (INT::check_(self) && INT::check_(other)) { return compare(***(INT &)self, ***(INT &)other); }
+			else if (IntRef::check_(self) && IntRef::check_(other)) { return compare(***(IntRef &)self, ***(IntRef &)other); }
 
 			else { return compare((intptr_t)*self, (intptr_t)*other); }
 		};

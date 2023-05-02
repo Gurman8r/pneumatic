@@ -7,6 +7,8 @@
 
 namespace Pnu
 {
+	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
 	class PNU_API Extension : public Resource
 	{
 		DEFINE_CLASS(Extension, Resource);
@@ -30,10 +32,20 @@ namespace Pnu
 		void finalize_library(ExtensionInitializationLevel_ level);
 
 	public:
-		static Ref<Extension> open(String const & path, String const & entry_symbol);
 		static void initialize_interface();
 		static String get_extension_list_config_file();
 	};
+
+	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+	class PNU_API ExtensionFormatLoader : public ResourceFormatLoader {
+		DEFINE_CLASS(ExtensionFormatLoader, ResourceFormatLoader);
+	public:
+		virtual RES load(String const & path, Error_ * error = nullptr) override;
+		virtual void get_recognized_extensions(Vector<String> * out) const override;
+	};
+
+	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 }
 
 #endif // !_PNU_EXTENSION_HPP_

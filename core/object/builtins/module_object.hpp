@@ -11,21 +11,21 @@ namespace Pnu
 	{
 		DEFINE_CLASS(ModuleObject, Object);
 
-		friend class MODULE;
+		friend class ModuleRef;
 
 	public:
-		DICT m_dict{};
+		DictRef m_dict{};
 
-		STR m_name{};
+		StringRef m_name{};
 
 		ModuleObject() noexcept {}
 
-		ModuleObject(STR const & name) : m_dict{ DICT::new_() }, m_name{ name } {}
+		ModuleObject(StringRef const & name) : m_dict{ DictRef::new_() }, m_name{ name } {}
 
-		template <class Value = OBJ
+		template <class Value = ObjectRef
 		> void add_object(cstring name, Value && value, bool overwrite = false)
 		{
-			STR str_name{ name };
+			StringRef str_name{ name };
 			ASSERT(overwrite || !hasattr(this, str_name));
 			m_dict[str_name] = FWD(value);
 		}
@@ -33,7 +33,7 @@ namespace Pnu
 		template <class Func, class ... Extra
 		> ModuleObject & def(cstring name, Func && func, Extra && ... extra) noexcept
 		{
-			CPP_FUNCTION cf({
+			CppFunctionRef cf({
 				FWD(func),
 				attr::name(name),
 				attr::scope(this),
@@ -42,39 +42,39 @@ namespace Pnu
 			return add_object(name, cf, true), (*this);
 		}
 
-		MODULE def_submodule(cstring name);
+		ModuleRef def_submodule(cstring name);
 
 		void reload();
 
 	public:
-		static OBJ module_getattro(MODULE m, OBJ name);
+		static ObjectRef module_getattro(ModuleRef m, ObjectRef name);
 	};
 
 	// module delete
 	template <> struct DefaultDelete<ModuleObject> : DefaultDelete<Object> {};
 
 	// module check
-#define OBJECT_CHECK_MODULE(o) (isinstance<MODULE>(o))
+#define OBJECT_CHECK_MODULE(o) (isinstance<ModuleRef>(o))
 
 	// module ref
-	class MODULE : public Ref<ModuleObject>
+	class ModuleRef : public Ref<ModuleObject>
 	{
-		REF_CLASS(MODULE, OBJECT_CHECK_MODULE);
+		REF_CLASS(ModuleRef, OBJECT_CHECK_MODULE);
 
 	public:
-		template <class Value = OBJ
+		template <class Value = ObjectRef
 		> void add_object(cstring name, Value && value, bool overwrite = false)
 		{
 			VALIDATE(m_ptr)->add_object(name, FWD(value), overwrite);
 		}
 
 		template <class Func, class ... Extra
-		> MODULE & def(cstring name, Func && func, Extra && ... extra) noexcept
+		> ModuleRef & def(cstring name, Func && func, Extra && ... extra) noexcept
 		{
 			return VALIDATE(m_ptr)->def(name, FWD(func), FWD(extra)...), (*this);
 		}
 
-		MODULE def_submodule(cstring name)
+		ModuleRef def_submodule(cstring name)
 		{
 			return VALIDATE(m_ptr)->def_submodule(name);
 		}
@@ -91,27 +91,27 @@ namespace Pnu
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 	template <class Name = cstring
-	> MODULE create_extension_module(Name && name) noexcept
+	> ModuleRef create_extension_module(Name && name) noexcept
 	{
-		DICT modules{ get_internals()->get_module_dict() };
-		STR str_name{ FWD_OBJ(name) };
+		DictRef modules{ get_internals()->get_module_dict() };
+		StringRef str_name{ FWD_OBJ(name) };
 		if (modules.contains(str_name)) { return nullptr; }
-		return modules[str_name] = MODULE({ str_name });
+		return modules[str_name] = ModuleRef({ str_name });
 	}
 
 	template <class Name = cstring
-	> MODULE import_module(Name && name) noexcept
+	> ModuleRef import_module(Name && name) noexcept
 	{
-		DICT modules{ get_internals()->get_module_dict() };
-		STR str_name{ FWD_OBJ(name) };
+		DictRef modules{ get_internals()->get_module_dict() };
+		StringRef str_name{ FWD_OBJ(name) };
 		return modules.lookup(name);
 	}
 
-	inline DICT globals() noexcept
+	inline DictRef globals() noexcept
 	{
 		STR_IDENTIFIER(__main__);
 		STR_IDENTIFIER(__dict__);
-		MODULE m{ import_module(&ID___main__) };
+		ModuleRef m{ import_module(&ID___main__) };
 		if (!m) { return nullptr; }
 		return getattr(m, &ID___dict__);
 	}

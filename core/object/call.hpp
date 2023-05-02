@@ -8,12 +8,12 @@ namespace Pnu
 {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-	inline OBJ call_object(OBJ callable)
+	inline ObjectRef call_object(ObjectRef callable)
 	{
 		if (!callable) { return nullptr; }
 		else
 		{
-			TYPE type{ typeof(callable) };
+			TypeRef type{ typeof(callable) };
 
 			if (VectorCallFunc vcall{ get_vectorcall_func(type, callable) })
 			{
@@ -30,12 +30,12 @@ namespace Pnu
 		}
 	}
 
-	inline OBJ call_object(OBJ callable, LIST args)
+	inline ObjectRef call_object(ObjectRef callable, ListRef args)
 	{
 		if (!callable) { return nullptr; }
 		else
 		{
-			TYPE type{ typeof(callable) };
+			TypeRef type{ typeof(callable) };
 
 			if (VectorCallFunc vcall{ get_vectorcall_func(type, callable) })
 			{
@@ -59,12 +59,12 @@ namespace Pnu
 		}
 	}
 
-	inline OBJ call_object(OBJ callable, OBJ const * argv, size_t argc)
+	inline ObjectRef call_object(ObjectRef callable, ObjectRef const * argv, size_t argc)
 	{
 		if (!callable) { return nullptr; }
 		else
 		{
-			TYPE type{ typeof(callable) };
+			TypeRef type{ typeof(callable) };
 
 			if (VectorCallFunc vcall{ get_vectorcall_func(type, callable) })
 			{
@@ -101,14 +101,14 @@ namespace Pnu
 			, FWD(args)...);
 		}
 
-		OBJ const * argv() const { return m_argv; }
+		ObjectRef const * argv() const { return m_argv; }
 
 		size_t argc() const { return m_argc; }
 
-		OBJ call(OBJ const & callable) noexcept { return call_object(callable, m_argv, m_argc); }
+		ObjectRef call(ObjectRef const & callable) noexcept { return call_object(callable, m_argv, m_argc); }
 
 	private:
-		OBJ m_argv[MAX_ARGUMENTS]{};
+		ObjectRef m_argv[MAX_ARGUMENTS]{};
 		size_t m_argc{};
 	};
 
@@ -127,7 +127,7 @@ namespace Pnu
 
 		std::tuple<make_caster<Args>...> argcasters{};
 
-		bool load_args(Batch<OBJ, bool> & args) { return impl_load_args(args, indices); }
+		bool load_args(Batch<ObjectRef, bool> & args) { return impl_load_args(args, indices); }
 
 		template <class Return, class Guard, class Func
 		> auto call(Func && func) && -> return_type<Return, mpl::void_type, Return>
@@ -145,11 +145,11 @@ namespace Pnu
 		}
 
 	private:
-		static bool impl_load_args(Batch<OBJ, bool> &, std::index_sequence<>) noexcept { return true; }
+		static bool impl_load_args(Batch<ObjectRef, bool> &, std::index_sequence<>) noexcept { return true; }
 
-		template <size_t ... I> bool impl_load_args(Batch<OBJ, bool> & args, std::index_sequence<I...>)
+		template <size_t ... I> bool impl_load_args(Batch<ObjectRef, bool> & args, std::index_sequence<I...>)
 		{
-			return !(... || !std::get<I>(argcasters).load(args.get<OBJ>(I), args.get<bool>(I)));
+			return !(... || !std::get<I>(argcasters).load(args.get<ObjectRef>(I), args.get<bool>(I)));
 		}
 
 		template <class Return, class Func, size_t ... I, class Guard
@@ -166,7 +166,7 @@ namespace Pnu
 	{
 		String name{};
 
-		OBJ value{};
+		ObjectRef value{};
 
 		bool convert{}, none{};
 	};
@@ -180,7 +180,7 @@ namespace Pnu
 
 		String name{}, signature{};
 
-		OBJ(*impl)(struct FunctionCall &){};
+		ObjectRef(*impl)(struct FunctionCall &){};
 
 		void * data[3]{};
 
@@ -204,7 +204,7 @@ namespace Pnu
 	// function call
 	struct FunctionCall final
 	{
-		explicit FunctionCall(FunctionRecord const & record, OBJ const & parent)
+		explicit FunctionCall(FunctionRecord const & record, ObjectRef const & parent)
 			: record{ record }
 			, parent{ parent }
 			, args{ record.argument_count }
@@ -214,15 +214,15 @@ namespace Pnu
 
 		FunctionRecord const & record;
 		
-		OBJ parent;
+		ObjectRef parent;
 
-		Batch<OBJ, bool> args;
+		Batch<ObjectRef, bool> args;
 
 		bool try_next_overload : 1;
 
-		OBJ operator()()
+		ObjectRef operator()()
 		{
-			OBJ result;
+			ObjectRef result;
 			{
 				priv::LoaderLifeSupport guard{};
 				result = record.impl(*this);
@@ -259,7 +259,7 @@ namespace Pnu
 	// object call operator
 	template <class Derived
 	> template <ReturnValuePolicy_ Policy, class ...Args
-	> inline OBJ ObjectAPI<Derived>::operator()(Args && ... args) const
+	> inline ObjectRef ObjectAPI<Derived>::operator()(Args && ... args) const
 	{
 		return ArgumentCollector<Policy>(FWD(args)...).call(derived().ptr());
 	}
@@ -280,7 +280,7 @@ namespace Pnu::attr
 		using type = typename T;
 		static void init(FunctionRecord &, T &&) noexcept {}
 		static void precall(FunctionCall &) noexcept {}
-		static void postcall(FunctionCall &, OBJ) noexcept {}
+		static void postcall(FunctionCall &, ObjectRef) noexcept {}
 	};
 
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
@@ -297,19 +297,19 @@ namespace Pnu::attr
 	};
 
 	// sibling
-	struct sibling { Object * value; sibling(Object * value) : value{ value } {} sibling(OBJ value) : value{ *value } {} };
+	struct sibling { Object * value; sibling(Object * value) : value{ value } {} sibling(ObjectRef value) : value{ *value } {} };
 	template <> struct process_attribute<sibling> : process_attribute_default<sibling> {
 		static void init(FunctionRecord & r, sibling const & a) noexcept { r.sibling = a.value; }
 	};
 
 	// is_method
-	struct is_method { Object * value; is_method(Object * value) : value{ value } {} is_method(OBJ value) : value{ *value } {} };
+	struct is_method { Object * value; is_method(Object * value) : value{ value } {} is_method(ObjectRef value) : value{ *value } {} };
 	template <> struct process_attribute<is_method> : process_attribute_default<is_method> {
 		static void init(FunctionRecord & r, is_method const & a) noexcept { r.is_method = true; r.scope = a.value; }
 	};
 
 	// scope
-	struct scope { Object * value; scope(Object * value) : value{ value } {} scope(OBJ value) : value{ *value } {} };
+	struct scope { Object * value; scope(Object * value) : value{ value } {} scope(ObjectRef value) : value{ *value } {} };
 	template <> struct process_attribute<scope> : process_attribute_default<scope> {
 		static void init(FunctionRecord & r, scope const & a) noexcept { r.scope = a.value; }
 	};
@@ -392,7 +392,7 @@ namespace Pnu::attr
 			SINK(0, (process_attribute<std::decay_t<Args>>::precall(call), 0) ...);
 		}
 
-		static void postcall(FunctionCall & call, OBJ retv) noexcept {
+		static void postcall(FunctionCall & call, ObjectRef retv) noexcept {
 			SINK(0, (process_attribute<std::decay_t<Args>>::postcall(call, retv), 0) ...);
 		}
 	};

@@ -30,19 +30,19 @@ namespace Pnu::priv
 
 		~LoaderLifeSupport() noexcept
 		{
-			Vector<OBJ> & stack{ get_internals()->get_loader_stack() };
+			Vector<ObjectRef> & stack{ get_internals()->get_loader_stack() };
 			ASSERT(!stack.empty());
-			OBJ & ptr{ stack.back() };
+			ObjectRef & ptr{ stack.back() };
 			stack.pop_back();
 			ptr = nullptr;
 		}
 
-		static void add(OBJ const & value) noexcept
+		static void add(ObjectRef const & value) noexcept
 		{
-			Vector<OBJ> & stack{ get_internals()->get_loader_stack()};
+			Vector<ObjectRef> & stack{ get_internals()->get_loader_stack()};
 			ASSERT(!stack.empty());
-			LIST & list{ (LIST &)stack.back() };
-			if (!list) { list = LIST::new_(); }
+			ListRef & list{ (ListRef &)stack.back() };
+			if (!list) { list = ListRef::new_(); }
 			list.append(value);
 		}
 	};
@@ -126,13 +126,13 @@ public:																							\
 	template <class T_> using cast_op_type = movable_cast_op_type<T_>;							\
 																								\
 	template <class T_, std::enable_if_t<std::is_same_v<m_type, std::remove_cv_t<T_>>, int> = 0	\
-	> static OBJ cast(T_ * src, ReturnValuePolicy_ policy, OBJ const & parent)					\
+	> static ObjectRef cast(T_ * src, ReturnValuePolicy_ policy, ObjectRef const & parent)		\
 	{																							\
 		if (!src) {																				\
 			return nullptr;																		\
 		}																						\
 		else if (policy == ReturnValuePolicy_TakeOwnership) {									\
-			OBJ h{ cast(std::move(*src), policy, parent) };										\
+			ObjectRef h{ cast(std::move(*src), policy, parent) };								\
 			memdelete(src);																		\
 			return h;																			\
 		}																						\
@@ -149,9 +149,9 @@ public:																							\
 
 		caster_t subcaster;
 
-		bool load(OBJ const & src, bool convert) { return subcaster.load(src, convert); }
+		bool load(ObjectRef const & src, bool convert) { return subcaster.load(src, convert); }
 
-		static OBJ cast(std::reference_wrapper<T> const & src) { return caster_t::cast(src.get()); }
+		static ObjectRef cast(std::reference_wrapper<T> const & src) { return caster_t::cast(src.get()); }
 	};
 
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
@@ -164,22 +164,22 @@ public:																							\
 		using _type1 = std::conditional_t<std::is_signed_v<T>, _type0, std::make_unsigned_t<_type0>>;
 		using _convt = std::conditional_t<std::is_floating_point_v<T>, f64, _type1>;
 
-		bool load(OBJ const & src, bool convert)
+		bool load(ObjectRef const & src, bool convert)
 		{
 			if (!src) { return false; }
 			
-			else if (FLT::check_(src)) { return (value = (_convt)(_ftype)FLT(src)), true; }
+			else if (FloatRef::check_(src)) { return (value = (_convt)(_ftype)FloatRef(src)), true; }
 			
-			else if (INT::check_(src)) { return (value = (_convt)(_itype)INT(src)), true; }
+			else if (IntRef::check_(src)) { return (value = (_convt)(_itype)IntRef(src)), true; }
 			
 			else { return false; }
 		}
 
-		static OBJ cast(T src, ReturnValuePolicy_, OBJ const &)
+		static ObjectRef cast(T src, ReturnValuePolicy_, ObjectRef const &)
 		{
-			if constexpr (std::is_floating_point_v<T>) { return FLT(static_cast<_ftype>(src)); }
+			if constexpr (std::is_floating_point_v<T>) { return FloatRef(static_cast<_ftype>(src)); }
 
-			else { return INT(static_cast<_itype>(src)); }
+			else { return IntRef(static_cast<_itype>(src)); }
 		}
 
 		TYPE_CASTER_COMMON(T, std::is_floating_point_v<T> ? "float" : "int");
@@ -187,20 +187,20 @@ public:																							\
 
 	template <> struct TypeCaster<Duration>
 	{
-		bool load(OBJ const & src, bool convert)
+		bool load(ObjectRef const & src, bool convert)
 		{
 			if (!src) { return false; }
 
-			if (FLT::check_(src)) { return (value = Duration{ (f32)(***(FLT &)src) }), true; }
+			if (FloatRef::check_(src)) { return (value = Duration{ (f32)(***(FloatRef &)src) }), true; }
 
-			else if (INT::check_(src)) { return (value = Duration{ (f32)(***(INT &)src) }), true; }
+			else if (IntRef::check_(src)) { return (value = Duration{ (f32)(***(IntRef &)src) }), true; }
 
 			else { return false; }
 		}
 
-		static OBJ cast(Duration const & src, ReturnValuePolicy_, OBJ const &)
+		static ObjectRef cast(Duration const & src, ReturnValuePolicy_, ObjectRef const &)
 		{
-			return FLT(src.count());
+			return FloatRef(src.count());
 		}
 
 		TYPE_CASTER_COMMON(Duration, "duration");
@@ -210,9 +210,9 @@ public:																							\
 
 	template <class T> struct VoidCaster
 	{
-		bool load(OBJ const & src, bool) { return src.is_valid(); }
+		bool load(ObjectRef const & src, bool) { return src.is_valid(); }
 
-		static OBJ cast(T, ReturnValuePolicy_, OBJ const &) { return OBJ{}; }
+		static ObjectRef cast(T, ReturnValuePolicy_, ObjectRef const &) { return ObjectRef{}; }
 
 		TYPE_CASTER_COMMON(T, "none");
 	};
@@ -225,18 +225,18 @@ public:																							\
 	{
 		using TypeCaster<mpl::void_type>::cast;
 
-		bool load(OBJ const & src, bool)
+		bool load(ObjectRef const & src, bool)
 		{
 			if (src.is_null()) { return (value = nullptr), true; }
 
-			else if (CAPSULE::check_(src)) { return (value = CAPSULE(src)), true; }
+			else if (CapsuleRef::check_(src)) { return (value = CapsuleRef(src)), true; }
 			
 			else { return false; }
 		}
 
-		static OBJ cast(void const * src, ReturnValuePolicy_, OBJ const &)
+		static ObjectRef cast(void const * src, ReturnValuePolicy_, ObjectRef const &)
 		{
-			return src ? CAPSULE({ static_cast<void const *>(src) }) : nullptr;
+			return src ? CapsuleRef({ static_cast<void const *>(src) }) : nullptr;
 		}
 		
 		static constexpr auto name{ "capsule" };
@@ -253,16 +253,16 @@ public:																							\
 
 	template <> struct TypeCaster<bool>
 	{
-		bool load(OBJ const & src, bool convert)
+		bool load(ObjectRef const & src, bool convert)
 		{
-			if (src == TRUE_OBJ) { return (value = true), true; }
+			if (src == TrueRef) { return (value = true), true; }
 			
-			else if (src == FALSE_OBJ) { return (value = false), true; }
+			else if (src == FalseRef) { return (value = false), true; }
 			
 			else { return (value = src.is_valid()), true; }
 		}
 
-		static OBJ cast(bool src, ReturnValuePolicy_, OBJ const &) { return BOOL_OBJ(src); }
+		static ObjectRef cast(bool src, ReturnValuePolicy_, ObjectRef const &) { return BoolRef(src); }
 
 		TYPE_CASTER_COMMON(bool, "bool");
 	};
@@ -271,15 +271,15 @@ public:																							\
 
 	template <class T> struct StringCaster
 	{
-		bool load(OBJ const & src, bool convert)
+		bool load(ObjectRef const & src, bool convert)
 		{
 			if (!src) { return false; }
 
-			else if (STR::check_(src)) { return (value = STR(src)), true; }
+			else if (StringRef::check_(src)) { return (value = StringRef(src)), true; }
 
 			else
 			{
-				TYPE t{ typeof(src) };
+				TypeRef t{ typeof(src) };
 
 				if (t->tp_str) { return (value = t->tp_str(src)), true; }
 
@@ -289,9 +289,9 @@ public:																							\
 			}
 		}
 
-		static OBJ cast(T const & src, ReturnValuePolicy_, OBJ const &) { return STR({ src }); }
+		static ObjectRef cast(T const & src, ReturnValuePolicy_, ObjectRef const &) { return StringRef({ src }); }
 
-		static OBJ cast(T && src, ReturnValuePolicy_, OBJ const &) noexcept { return STR({ std::move(src) }); }
+		static ObjectRef cast(T && src, ReturnValuePolicy_, ObjectRef const &) noexcept { return StringRef({ std::move(src) }); }
 
 		template <class U> operator U * () { return (U *)(&***value); }
 
@@ -304,7 +304,7 @@ public:																							\
 		static constexpr auto name{ "string" };
 
 	protected:
-		STR value{};
+		StringRef value{};
 	};
 
 	template <class Ch
@@ -321,28 +321,28 @@ public:																							\
 	{
 		TypeCaster<BasicString<T>> str_caster;
 
-		bool load(OBJ const & src, bool convert)
+		bool load(ObjectRef const & src, bool convert)
 		{
 			return str_caster.load(src, convert);
 		}
 
-		static OBJ cast(T const * src, ReturnValuePolicy_, OBJ const &) { return STR({ src }); }
+		static ObjectRef cast(T const * src, ReturnValuePolicy_, ObjectRef const &) { return StringRef({ src }); }
 
-		static OBJ cast(T const src, ReturnValuePolicy_, OBJ const &) { return INT({ src }); }
+		static ObjectRef cast(T const src, ReturnValuePolicy_, ObjectRef const &) { return IntRef({ src }); }
 	};
 
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 	template <class T> struct RefCaster
 	{
-		bool load(OBJ const & src, bool)
+		bool load(ObjectRef const & src, bool)
 		{
 			if (!isinstance<T>(src)) { return false; }
 
 			else { return (value = src), true; }
 		}
 
-		static OBJ cast(OBJ const & src, ReturnValuePolicy_, OBJ const &) { return src; }
+		static ObjectRef cast(ObjectRef const & src, ReturnValuePolicy_, ObjectRef const &) { return src; }
 
 		TYPE_CASTER_COMMON(T, "ref");
 	};
@@ -353,7 +353,7 @@ public:																							\
 
 	template <class T> struct ObjectCaster
 	{
-		bool load(OBJ const & src, bool)
+		bool load(ObjectRef const & src, bool)
 		{
 			if (!isinstance<T>(src)) { return false; }
 			else
@@ -364,9 +364,9 @@ public:																							\
 			}
 		}
 
-		static OBJ cast(T && src, ReturnValuePolicy_, OBJ const &) noexcept { return Ref<T>{ std::move(src) }; }
-		static OBJ cast(T const * src, ReturnValuePolicy_, OBJ const &) { return Ref<T>{ (T *)src }; }
-		static OBJ cast(T const & src, ReturnValuePolicy_, OBJ const &) { return Ref<T>{ (T *)&src }; }
+		static ObjectRef cast(T && src, ReturnValuePolicy_, ObjectRef const &) noexcept { return Ref<T>{ std::move(src) }; }
+		static ObjectRef cast(T const * src, ReturnValuePolicy_, ObjectRef const &) { return Ref<T>{ (T *)src }; }
+		static ObjectRef cast(T const & src, ReturnValuePolicy_, ObjectRef const &) { return Ref<T>{ (T *)&src }; }
 
 		template <class U> operator U ()
 		{
@@ -391,7 +391,7 @@ public:																							\
 		static constexpr auto name{ "object" };
 
 	protected:
-		OBJ value{};
+		ObjectRef value{};
 	};
 
 	template <class T> struct TypeCaster<T, std::enable_if_t<is_base_object_v<T>>> : ObjectCaster<T> {};
@@ -407,7 +407,7 @@ public:																							\
 		using function_type = Return(*)(Args...);
 
 	public:
-		bool load(OBJ const & src, bool convert)
+		bool load(ObjectRef const & src, bool convert)
 		{
 			if (!src && !convert) {
 				return false;
@@ -415,12 +415,12 @@ public:																							\
 			else if (!src && convert) {
 				return true;
 			}
-			else if (!FUNCTION::check_(src)) {
+			else if (!FunctionRef::check_(src)) {
 				return false;
 			}
 			else {
-				auto func{ (FUNCTION)src };
-				if (CPP_FUNCTION cfunc{ func.cpp_function() }) {
+				auto func{ (FunctionRef)src };
+				if (CppFunctionRef cfunc{ func.cpp_function() }) {
 					auto rec{ cfunc->get_function_record() };
 					while (rec != nullptr) {
 						if (rec->is_stateless && rtti::same_type(typeid(function_type), *reinterpret_cast<std::type_info const *>(rec->data[1]))) {
@@ -437,16 +437,16 @@ public:																							\
 		}
 
 		template <class Func
-		> static OBJ cast(Func && src, ReturnValuePolicy_ policy, OBJ const &)
+		> static ObjectRef cast(Func && src, ReturnValuePolicy_ policy, ObjectRef const &)
 		{
 			if (!src) {
 				return nullptr;
 			}
 			else if (auto result{ src.template target<function_type>() }) {
-				return CPP_FUNCTION({ *result, policy });
+				return CppFunctionRef({ *result, policy });
 			}
 			else {
-				return CPP_FUNCTION({ FWD(src), policy });
+				return CppFunctionRef({ FWD(src), policy });
 			}
 		}
 
@@ -542,16 +542,16 @@ namespace Pnu
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 	template <class T, class SFINAE
-	> auto load_type(TypeCaster<T, SFINAE> & convt, OBJ const & o) -> TypeCaster<T, SFINAE> &
+	> auto load_type(TypeCaster<T, SFINAE> & convt, ObjectRef const & o) -> TypeCaster<T, SFINAE> &
 	{
 		if (!convt.load(o, true)) {
-			CRASH("TYPE CONVERSION FAILED");
+			CRASH("TypeRef CONVERSION FAILED");
 		}
 		return convt;
 	}
 
 	template <class T
-	> auto load_type(OBJ const & o) -> make_caster<T>
+	> auto load_type(ObjectRef const & o) -> make_caster<T>
 	{
 		make_caster<T> convt{};
 		load_type(convt, o);
@@ -562,7 +562,7 @@ namespace Pnu
 
 	// api -> c++
 	template <class T, std::enable_if_t<!is_object_api_v<T>, int> = 0
-	> T cast(OBJ const & o) { return cast_op<T>(load_type<T>(o)); }
+	> T cast(ObjectRef const & o) { return cast_op<T>(load_type<T>(o)); }
 
 	// api -> api
 	template <class T, class O, std::enable_if_t<is_object_api_v<T> && is_object_api_v<O>, int> = 0
@@ -580,7 +580,7 @@ namespace Pnu
 
 	// c++ -> api
 	template <class T, std::enable_if_t<!is_object_api_v<T>, int> = 0
-	> OBJ cast(T && o, ReturnValuePolicy_ policy = ReturnValuePolicy_AutomaticReference, OBJ const & parent = {})
+	> ObjectRef cast(T && o, ReturnValuePolicy_ policy = ReturnValuePolicy_AutomaticReference, ObjectRef const & parent = {})
 	{
 		if (policy == ReturnValuePolicy_Automatic)
 		{
@@ -598,13 +598,13 @@ namespace Pnu
 					? ReturnValuePolicy_Copy
 					: ReturnValuePolicy_Move));
 		}
-		return OBJ{ make_caster<T>::cast(FWD(o), policy, parent) };
+		return ObjectRef{ make_caster<T>::cast(FWD(o), policy, parent) };
 	}
 
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 	template <class T
-	> auto move(OBJ && o) -> std::enable_if_t<!move_never_v<T>, T>
+	> auto move(ObjectRef && o) -> std::enable_if_t<!move_never_v<T>, T>
 	{
 		if (o && o->get_ref_count() > 1) {
 			CRASH("Unable to cast instance to C++ rvalue: instance has multiple references (compile in debug mode for details)");
@@ -614,13 +614,13 @@ namespace Pnu
 	}
 
 	template <class T
-	> auto cast(OBJ && o) -> std::enable_if_t<move_always_v<T>, T>
+	> auto cast(ObjectRef && o) -> std::enable_if_t<move_always_v<T>, T>
 	{
 		return move<T>(std::move(o));
 	}
 
 	template <class T
-	> auto cast(OBJ && o) -> std::enable_if_t<move_if_unreferenced_v<T>, T>
+	> auto cast(ObjectRef && o) -> std::enable_if_t<move_if_unreferenced_v<T>, T>
 	{
 		if (o && o->has_references())
 		{
@@ -633,7 +633,7 @@ namespace Pnu
 	}
 
 	template <class T
-	> auto cast(OBJ && o) -> std::enable_if_t<move_never_v<T>, T>
+	> auto cast(ObjectRef && o) -> std::enable_if_t<move_never_v<T>, T>
 	{
 		return cast<T>(o);
 	}
@@ -642,7 +642,7 @@ namespace Pnu
 
 	// object or cast
 	template <class T, std::enable_if_t<!is_object_api_v<T>, int>
-	> OBJ object_or_cast(T && o)
+	> ObjectRef object_or_cast(T && o)
 	{
 		return Pnu::cast(FWD(o));
 	}

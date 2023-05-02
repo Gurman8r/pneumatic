@@ -82,7 +82,7 @@ namespace Pnu
 
 		virtual void alert(String const & message, String const & title = "ALERT!");
 
-		virtual Error_ open_dynamic_library(String const & path, void *& instance) = 0;
+		virtual Error_ open_dynamic_library(String path, void *& instance, bool set_library_path = false, String * resolved_path = nullptr) = 0;
 		virtual Error_ close_dynamic_library(void * instance) = 0;
 		virtual Error_ get_dynamic_library_symbol(void * instance, String const & name, void *& symbol, bool is_optional = false) = 0;
 

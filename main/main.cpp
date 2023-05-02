@@ -82,7 +82,7 @@ namespace Pnu
 
 		get_os()->set_cmdline(exepath, args);
 
-		display = DS::create("Pneumatic", DS::WindowMode_Maximized, { 0, 0 }, { 1280, 720 }, 0, error);
+		display = DS::create("Pnu", DS::WindowMode_Maximized, { 0, 0 }, { 1280, 720 }, 0, error);
 		graphics = RS::create();
 		text = memnew(TextServer);
 		physics = memnew(PhysicsServer);
@@ -129,7 +129,7 @@ namespace Pnu
 
 		if (editor) { main_loop = memnew(SceneTree); }
 
-		TYPE main_loop_type{};
+		TypeRef main_loop_type{};
 
 		if (script) {
 			/* TODO: load main loop from script */
@@ -140,7 +140,7 @@ namespace Pnu
 		}
 
 		if (!main_loop) {
-			ASSERT(TYPE::check_(main_loop_type));
+			ASSERT(TypeRef::check_(main_loop_type));
 			main_loop = main_loop_type();
 			ASSERT(main_loop);
 		}
@@ -177,17 +177,13 @@ namespace Pnu
 
 		// TODO: physics stuff goes here
 
-		get_input()->iteration(delta_time);
-
+		input->iteration(delta_time);
 		ImGui_BeginFrame(imgui_context);
-
 		if (get_os()->get_main_loop()->process(delta_time)) { should_close = true; }
-
 		ImGui::Render();
 		RENDERING_DEVICE->draw_list_begin_for_screen();
 		ImGui_RenderDrawData(&imgui_context->Viewports[0]->DrawDataP);
 		RENDERING_DEVICE->draw_list_end();
-
 		ImGui_EndFrame(imgui_context);
 	
 		return should_close;

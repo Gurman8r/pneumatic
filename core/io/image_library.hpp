@@ -23,7 +23,6 @@ namespace Pnu
 	public:
 		virtual RES load(String const & path, Error_ * error = nullptr) override;
 		virtual void get_recognized_extensions(Vector<String> * out) const override;
-		virtual TYPE get_resource_type(String const & path) const override;
 	};
 
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */

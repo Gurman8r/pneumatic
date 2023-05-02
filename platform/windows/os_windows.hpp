@@ -36,7 +36,7 @@ namespace Pnu
 
 		virtual String get_stdin_string(bool block = true) override;
 
-		virtual Error_ open_dynamic_library(String const & path, void *& instance) override;
+		virtual Error_ open_dynamic_library(String path, void *& instance, bool set_library_path = false, String * resolved_path = nullptr) override;
 		virtual Error_ close_dynamic_library(void * instance) override;
 		virtual Error_ get_dynamic_library_symbol(void * instance, String const & name, void *& symbol, bool is_optional = false) override;
 

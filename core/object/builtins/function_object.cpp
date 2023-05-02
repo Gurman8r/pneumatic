@@ -22,7 +22,7 @@ namespace Pnu
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 	FunctionObject::FunctionObject(VectorCallFunc vectorcall)
-		: m_dict{ DICT::new_() }
+		: m_dict{ DictRef::new_() }
 		, m_vectorcall{ vectorcall }
 	{
 	}

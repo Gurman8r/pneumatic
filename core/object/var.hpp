@@ -38,7 +38,7 @@ namespace Pnu
 			f32, Vec2f, Vec3f, Vec4f, Mat2f, Mat3f, Mat4f,
 			f64, Vec2d, Vec3d, Vec4d, Mat2d, Mat3d, Mat4d,
 			RID,
-			OBJ
+			ObjectRef
 		>;
 
 		using storage_type = mpl::rename<std::variant, data_types>;
@@ -80,7 +80,7 @@ namespace Pnu
 		template <> static constexpr VarType_ type_v<Mat3d>{ VarType_Mat3d };
 		template <> static constexpr VarType_ type_v<Mat4d>{ VarType_Mat4d };
 		template <> static constexpr VarType_ type_v<RID>{ VarType_RID };
-		template <> static constexpr VarType_ type_v<OBJ>{ VarType_OBJ };
+		template <> static constexpr VarType_ type_v<ObjectRef>{ VarType_OBJ };
 
 		static constexpr size_t get_size_static(VarType_ const type) noexcept
 		{
@@ -117,7 +117,7 @@ namespace Pnu
 			case VarType_Mat3d: return sizeof(Mat3d);
 			case VarType_Mat4d: return sizeof(Mat4d);
 			case VarType_RID: return sizeof(RID);
-			case VarType_OBJ: return sizeof(OBJ);
+			case VarType_OBJ: return sizeof(ObjectRef);
 			}
 			return 0;
 		}
@@ -157,7 +157,7 @@ namespace Pnu
 			case VarType_Mat3d: return &std::get<Mat3d>(data);
 			case VarType_Mat4d: return &std::get<Mat4d>(data);
 			case VarType_RID: return &std::get<RID>(data);
-			case VarType_OBJ: return &std::get<OBJ>(data);
+			case VarType_OBJ: return &std::get<ObjectRef>(data);
 			}
 			return nullptr;
 		}

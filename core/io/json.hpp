@@ -26,13 +26,13 @@ namespace Pnu
 	{
 	public:
 		template <class T
-		> static DICT to_json(T const & value)
+		> static DictRef to_json(T const & value)
 		{
 			return {};
 		}
 
 		template <class T
-		> static Optional<T> from_json(DICT const & json)
+		> static Optional<T> from_json(DictRef const & json)
 		{
 			return nullopt;
 		}

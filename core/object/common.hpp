@@ -6,7 +6,7 @@
 #include <core/os/time.hpp>
 #include <core/math/color.hpp>
 #include <core/math/rect.hpp>
-#include <core/string/print_string.hpp>
+#include <core/error/error_macros.hpp>
 #include <core/templates/batch.hpp>
 #include <core/templates/buffer.hpp>
 #include <core/templates/flat_map.hpp>
@@ -60,7 +60,7 @@ namespace Pnu
 	class PropertyObject;
 	class CppFunctionObject;
 	class ModuleObject;
-	class GenericObject;
+	class GenericTypeObject;
 
 	template <class T
 	> constexpr bool is_base_object_v{ std::is_base_of_v<Object, mpl::intrinsic_t<T>> };
@@ -76,22 +76,22 @@ namespace Pnu
 
 	template <class T> class Ref;
 
-	class OBJ;
-	class TYPE;
-	class INT;
-	class FLT;
-	class ITERATOR;
-	class STR;
-	class TUPLE;
-	class LIST;
-	class DICT;
-	class CAPSULE;
-	class FUNCTION;
-	class METHOD;
-	class PROPERTY;
-	class CPP_FUNCTION;
-	class MODULE;
-	class GENERIC;
+	class ObjectRef;
+	class TypeRef;
+	class IntRef;
+	class FloatRef;
+	class IteratorRef;
+	class StringRef;
+	class TupleRef;
+	class ListRef;
+	class DictRef;
+	class CapsuleRef;
+	class FunctionRef;
+	class MethodRef;
+	class PropertyRef;
+	class CppFunctionRef;
+	class ModuleRef;
+	class GenericTypeRef;
 
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
@@ -110,32 +110,32 @@ namespace Pnu
 
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-	using UnaryFunc =		OBJ(*)(OBJ a);
-	using BinaryFunc =		OBJ(*)(OBJ a, OBJ b);
-	using TernaryFunc =		OBJ(*)(OBJ a, OBJ b, OBJ c);
+	using UnaryFunc =		ObjectRef(*)(ObjectRef a);
+	using BinaryFunc =		ObjectRef(*)(ObjectRef a, ObjectRef b);
+	using TernaryFunc =		ObjectRef(*)(ObjectRef a, ObjectRef b, ObjectRef c);
 
-	using InquiryFunc =		bool(*)(OBJ obj);
-	using SizeArgFunc =		OBJ(*)(OBJ obj, ssize_t i);
-	using SizeSizeArgFunc =	OBJ(*)(OBJ obj, ssize_t i, ssize_t j);
-	using ObjObjFunc =		i32(*)(OBJ lhs, OBJ rhs);
+	using InquiryFunc =		bool(*)(ObjectRef obj);
+	using SizeArgFunc =		ObjectRef(*)(ObjectRef obj, ssize_t i);
+	using SizeSizeArgFunc =	ObjectRef(*)(ObjectRef obj, ssize_t i, ssize_t j);
+	using ObjObjFunc =		i32(*)(ObjectRef lhs, ObjectRef rhs);
 
-	using GetAttrFunc =		OBJ(*)(OBJ obj, cstring name);
-	using SetAttrFunc =		Error_(*)(OBJ obj, cstring name, OBJ value);
-	using GetAttrOFunc =	OBJ(*)(OBJ obj, OBJ name);
-	using SetAttrOFunc =	Error_(*)(OBJ obj, OBJ name, OBJ value);
-	using DescrGetFunc =	OBJ(*)(OBJ descr, OBJ obj, OBJ cls);
-	using DescrSetFunc =	Error_(*)(OBJ descr, OBJ obj, OBJ value);
+	using GetAttrFunc =		ObjectRef(*)(ObjectRef obj, cstring name);
+	using SetAttrFunc =		Error_(*)(ObjectRef obj, cstring name, ObjectRef value);
+	using GetAttrOFunc =	ObjectRef(*)(ObjectRef obj, ObjectRef name);
+	using SetAttrOFunc =	Error_(*)(ObjectRef obj, ObjectRef name, ObjectRef value);
+	using DescrGetFunc =	ObjectRef(*)(ObjectRef descr, ObjectRef obj, ObjectRef cls);
+	using DescrSetFunc =	Error_(*)(ObjectRef descr, ObjectRef obj, ObjectRef value);
 
-	using BindClassFunc =	TYPE(*)(TYPE type);
-	using NewFunc =			OBJ(*)(TYPE type, OBJ args);
+	using BindClassFunc =	TypeRef(*)(TypeRef type);
+	using NewFunc =			ObjectRef(*)(TypeRef type, ObjectRef args);
 	using DelFunc =			void(*)(Object * ptr);
-	using CmpFunc =			i32(*)(OBJ lhs, OBJ rhs);
-	using HashFunc =		size_t(*)(OBJ obj);
-	using LenFunc =			ssize_t(*)(OBJ obj);
-	using ReprFunc =		STR(*)(OBJ obj);
-	using VectorCallFunc =	OBJ(*)(OBJ self, OBJ const * argv, size_t argc);
-	using GetterFunc =		OBJ(*)(OBJ obj, void * closure);
-	using SetterFunc =		Error_(*)(OBJ obj, OBJ value, void * closure);
+	using CmpFunc =			i32(*)(ObjectRef lhs, ObjectRef rhs);
+	using HashFunc =		size_t(*)(ObjectRef obj);
+	using LenFunc =			ssize_t(*)(ObjectRef obj);
+	using ReprFunc =		StringRef(*)(ObjectRef obj);
+	using VectorCallFunc =	ObjectRef(*)(ObjectRef self, ObjectRef const * argv, size_t argc);
+	using GetterFunc =		ObjectRef(*)(ObjectRef obj, void * closure);
+	using SetterFunc =		Error_(*)(ObjectRef obj, ObjectRef value, void * closure);
 
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 

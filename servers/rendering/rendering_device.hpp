@@ -742,7 +742,7 @@ namespace Pnu
 		virtual void render_pipeline_destroy(RID pipeline) = 0;
 		
 	public:
-		/* DRAW LIST */
+		/* DRAW ListRef */
 		using DrawListID = typename size_t;
 
 		enum InitialAction_

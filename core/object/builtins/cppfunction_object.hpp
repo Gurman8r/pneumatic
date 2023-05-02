@@ -11,7 +11,7 @@ namespace Pnu
 	{
 		DEFINE_CLASS(CppFunctionObject, FunctionObject);
 
-		friend class CPP_FUNCTION;
+		friend class CppFunctionRef;
 
 	public:
 		FunctionRecord * m_record{};
@@ -102,7 +102,7 @@ namespace Pnu
 			}
 
 			// convert function arguments and perform the actual function call
-			rec->impl = [](FunctionCall & call) -> OBJ
+			rec->impl = [](FunctionCall & call) -> ObjectRef
 			{
 				ArgumentLoader<Args...> args{};
 				if (!args.load_args(call.args)) { call.try_next_overload = true; return nullptr; }
@@ -115,7 +115,7 @@ namespace Pnu
 
 				using Guard = attr::extract_guard_t<Extra...>;
 				using Yield = make_caster<std::conditional_t<std::is_void_v<Return>, mpl::void_type, Return>>;
-				OBJ result{ Yield::cast(std::move(args).call<Return, Guard>(capture->value), policy, call.parent) };
+				ObjectRef result{ Yield::cast(std::move(args).call<Return, Guard>(capture->value), policy, call.parent) };
 
 				attr::process_attributes<Extra...>::postcall(call, result); // postcall
 
@@ -142,19 +142,19 @@ namespace Pnu
 		}
 
 	public:
-		static OBJ cppfunction_vectorcall(OBJ callable, OBJ const * argv, size_t argc);
+		static ObjectRef cppfunction_vectorcall(ObjectRef callable, ObjectRef const * argv, size_t argc);
 	};
 
 	// cppfunction delete
 	template <> struct DefaultDelete<CppFunctionObject> : DefaultDelete<Object> {};
 
 	// cppfunction check
-#define OBJECT_CHECK_CPPFUNCTION(o) (isinstance<CPP_FUNCTION>(o))
+#define OBJECT_CHECK_CPPFUNCTION(o) (isinstance<CppFunctionRef>(o))
 
 	// cppfunction ref
-	class CPP_FUNCTION : public Ref<CppFunctionObject>
+	class CppFunctionRef : public Ref<CppFunctionObject>
 	{
-		REF_CLASS(CPP_FUNCTION, OBJECT_CHECK_CPPFUNCTION);
+		REF_CLASS(CppFunctionRef, OBJECT_CHECK_CPPFUNCTION);
 
 	public:
 		NODISCARD auto name() const noexcept { return attr("__name__"); }
@@ -164,9 +164,9 @@ namespace Pnu
 
 namespace Pnu
 {
-	inline OBJ FunctionObject::cpp_function() const noexcept
+	inline ObjectRef FunctionObject::cpp_function() const noexcept
 	{
-		return CPP_FUNCTION::check_((Object *)this) ? CPP_FUNCTION((CppFunctionObject *)this) : nullptr;
+		return CppFunctionRef::check_((Object *)this) ? CppFunctionRef((CppFunctionObject *)this) : nullptr;
 	}
 }
 

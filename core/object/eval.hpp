@@ -5,7 +5,7 @@
 
 namespace Pnu
 {
-	PNU_API_FUNC(OBJ) evaluate(String text);
+	PNU_API_FUNC(ObjectRef) evaluate(String text);
 }
 
 #endif // !_PNU_EVAL_HPP_

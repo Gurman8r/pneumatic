@@ -12,7 +12,7 @@ namespace Pnu
 	{
 		DEFINE_CLASS(TupleObject, Object);
 
-		friend class TUPLE;
+		friend class TupleRef;
 
 	public:
 	};
@@ -24,9 +24,9 @@ namespace Pnu
 #define OBJECT_CHECK_TUPLE(o) (Pnu::typeof(o).has_feature(Pnu::TypeFlags_Tuple_Subclass))
 
 	// tuple ref
-	class TUPLE : public Ref<TupleObject>
+	class TupleRef : public Ref<TupleObject>
 	{
-		REF_CLASS(TUPLE, OBJECT_CHECK_TUPLE);
+		REF_CLASS(TupleRef, OBJECT_CHECK_TUPLE);
 
 	public:
 	};

@@ -19,12 +19,12 @@ namespace Pnu
 		TypeObject::initialize_class();
 	}
 
-	TYPE TypeObject::_get_typev() const noexcept
+	TypeRef TypeObject::_get_typev() const noexcept
 	{
 		return get_type_static();
 	}
 
-	TYPE TypeObject::get_type_static() noexcept
+	TypeRef TypeObject::get_type_static() noexcept
 	{
 		return &__type_static;
 	}
@@ -47,12 +47,12 @@ namespace Pnu
 	{
 		{
 			"some_property",
-			(GetterFunc)[](OBJ obj, auto) -> OBJ
+			(GetterFunc)[](ObjectRef obj, auto) -> ObjectRef
 			{
 				if (!obj) { return nullptr; }
 				return nullptr;
 			},
-			(SetterFunc)[](OBJ obj, OBJ value, auto) -> Error_
+			(SetterFunc)[](ObjectRef obj, ObjectRef value, auto) -> Error_
 			{
 				if (!obj) { return Error_Unknown; }
 				return Error_OK;
@@ -77,24 +77,24 @@ namespace Pnu
 
 		t.tp_setattro = (SetAttrOFunc)&TypeObject::type_setattro;
 
-		t.tp_hash = (HashFunc)[](OBJ self) -> size_t { return ((TYPE)self)->tp_name.hash_code(); };
+		t.tp_hash = (HashFunc)[](ObjectRef self) -> size_t { return ((TypeRef)self)->tp_name.hash_code(); };
 
-		t.tp_repr = (ReprFunc)[](OBJ self) -> STR { return STR(TYPE(self)->tp_name); };
+		t.tp_repr = (ReprFunc)[](ObjectRef self) -> StringRef { return StringRef(TypeRef(self)->tp_name); };
 
-		t.tp_str = (ReprFunc)[](OBJ self) -> STR { return STR(TYPE(self)->tp_name); };
+		t.tp_str = (ReprFunc)[](ObjectRef self) -> StringRef { return StringRef(TypeRef(self)->tp_name); };
 
-		t.tp_call = (BinaryFunc)[](OBJ self, OBJ args) -> OBJ
+		t.tp_call = (BinaryFunc)[](ObjectRef self, ObjectRef args) -> ObjectRef
 		{
-			ASSERT(TYPE::check_(self));
-			NewFunc fn{ TYPE(self)->tp_new };
+			ASSERT(TypeRef::check_(self));
+			NewFunc fn{ TypeRef(self)->tp_new };
 			return fn ? fn(self, args) : nullptr;
 		};
 
 		t.tp_bind = BIND_CLASS(TypeObject, t)
 		{
 			return t
-				.def_static("__instancecheck__", [](OBJ const & obj, OBJ const & type) { return isinstance(obj, type); })
-				.def("__contains__", [](TypeObject const & self, OBJ const & value) { return DICT(self.tp_dict).contains(value); })
+				.def_static("__instancecheck__", [](ObjectRef const & obj, ObjectRef const & type) { return isinstance(obj, type); })
+				.def("__contains__", [](TypeObject const & self, ObjectRef const & value) { return DictRef(self.tp_dict).contains(value); })
 				.def("__subclasscheck__", &TypeObject::is_subtype)
 				.def_readonly("__base__", &TypeObject::tp_base)
 				.def_readonly("__bases__", &TypeObject::tp_bases)
@@ -105,8 +105,8 @@ namespace Pnu
 				.def_readwrite("__name__", &TypeObject::tp_name)
 				.def_readonly("__size__", &TypeObject::tp_size)
 				.def_readonly("__vectorcalloffset__", &TypeObject::tp_vectorcalloffset)
-				.def_property_readonly("__text_signature__", [](TypeObject const & self) { return STR(/* TODO */); })
-				.def_property_readonly("__qualname__", [](TypeObject const & self) { return STR(/* TODO */); })
+				.def_property_readonly("__text_signature__", [](TypeObject const & self) { return StringRef(/* TODO */); })
+				.def_property_readonly("__qualname__", [](TypeObject const & self) { return StringRef(/* TODO */); })
 				;
 		};
 	}
@@ -133,14 +133,14 @@ namespace Pnu
 			set_type(tp_base->get_type());
 		}
 	
-		tp_bases = LIST::new_();
+		tp_bases = ListRef::new_();
 
 		if (tp_base) {
-			((LIST &)tp_bases).append(tp_base);
+			((ListRef &)tp_bases).append(tp_base);
 		}
 
 		if (!tp_dict) {
-			tp_dict = DICT::new_();
+			tp_dict = DictRef::new_();
 		}
 
 		ASSERT(add_operators() == Error_OK);
@@ -171,19 +171,19 @@ namespace Pnu
 			copy_val(*tp_base, &TypeObject::tp_dictoffset);
 		}
 
-		for (TYPE const & base : (LIST &)tp_mro)
+		for (TypeRef const & base : (ListRef &)tp_mro)
 		{
 			inherit_slots(*base);
 		}
 
-		for (TYPE const & base : (LIST &)tp_bases)
+		for (TypeRef const & base : (ListRef &)tp_bases)
 		{
 			if (!base->tp_subclasses)
 			{
-				base->tp_subclasses = DICT::new_();
+				base->tp_subclasses = DictRef::new_();
 			}
 
-			((DICT &)base->tp_subclasses)[TYPE(this)] = TYPE(this);
+			((DictRef &)base->tp_subclasses)[TypeRef(this)] = TypeRef(this);
 		}
 
 		tp_flags = (tp_flags & ~TypeFlags_Readying) | TypeFlags_Ready;
@@ -191,17 +191,17 @@ namespace Pnu
 		return true;
 	}
 
-	OBJ TypeObject::lookup(OBJ const & name) const
+	ObjectRef TypeObject::lookup(ObjectRef const & name) const
 	{
-		if (!name || !LIST::check_(tp_mro))
+		if (!name || !ListRef::check_(tp_mro))
 		{
 			return nullptr;
 		}
 		else
 		{
-			for (TYPE const & base : (LIST &)tp_mro)
+			for (TypeRef const & base : (ListRef &)tp_mro)
 			{
-				if (OBJ item{ ((DICT &)(base->tp_dict)).lookup(name) })
+				if (ObjectRef item{ ((DictRef &)(base->tp_dict)).lookup(name) })
 				{
 					return item;
 				}
@@ -210,11 +210,11 @@ namespace Pnu
 		}
 	}
 
-	bool TypeObject::is_subtype(TYPE const & value) const
+	bool TypeObject::is_subtype(TypeRef const & value) const
 	{
-		if (LIST::check_(tp_mro))
+		if (ListRef::check_(tp_mro))
 		{
-			for (TYPE const & base : (LIST &)tp_mro)
+			for (TypeRef const & base : (ListRef &)tp_mro)
 			{
 				if (value.is(base)) { return true; }
 			}
@@ -240,10 +240,10 @@ namespace Pnu
 
 	void TypeObject::cleanup()
 	{
-		if (LIST::check_(tp_bases)) {
-			for (TYPE const & base : (LIST &)tp_bases) {
-				if (DICT::check_(base->tp_subclasses)) {
-					((DICT &)base->tp_subclasses).del(this);
+		if (ListRef::check_(tp_bases)) {
+			for (TypeRef const & base : (ListRef &)tp_bases) {
+				if (DictRef::check_(base->tp_subclasses)) {
+					((DictRef &)base->tp_subclasses).del(this);
 				}
 			}
 		}
@@ -259,11 +259,11 @@ namespace Pnu
 		// don't check static types before ready()
 		if (!(tp_flags & TypeFlags_Ready)) { return true; }
 
-		ASSERT(TYPE::check_(ptr()));
+		ASSERT(TypeRef::check_(ptr()));
 
 		ASSERT(!(tp_flags & TypeFlags_Readying));
 
-		ASSERT(DICT::check_(tp_dict));
+		ASSERT(DictRef::check_(tp_dict));
 
 		return true;
 	}
@@ -317,7 +317,7 @@ namespace Pnu
 		{
 			STR_IDENTIFIER(__eq__);
 			STR_IDENTIFIER(__hash__);
-			if (DICT dict{ tp_dict }; dict && !dict.contains(&ID___eq__) && !dict.contains(&ID___hash__))
+			if (DictRef dict{ tp_dict }; dict && !dict.contains(&ID___eq__) && !dict.contains(&ID___hash__))
 			{
 				tp_cmp = base->tp_cmp;
 				tp_hash = base->tp_hash;
@@ -340,17 +340,17 @@ namespace Pnu
 	{
 	}
 
-	bool TypeObject::mro_internal(OBJ * in_old_mro)
+	bool TypeObject::mro_internal(ObjectRef * in_old_mro)
 	{
-		OBJ old_mro{ tp_mro };
+		ObjectRef old_mro{ tp_mro };
 
-		OBJ new_mro{ std::invoke([&]() {
+		ObjectRef new_mro{ std::invoke([&]() {
 			// mro_implementation
-			ASSERT(LIST::check_(tp_bases));
-			LIST result{ LIST::new_() };
-			result.reserve(((LIST &)tp_bases).size() + 1);
+			ASSERT(ListRef::check_(tp_bases));
+			ListRef result{ ListRef::new_() };
+			result.reserve(((ListRef &)tp_bases).size() + 1);
 			result.append(this);
-			for (TYPE const & base : (LIST &)tp_bases) { result.append(base); }
+			for (TypeRef const & base : (ListRef &)tp_bases) { result.append(base); }
 			return result;
 		}) };
 	
@@ -367,7 +367,7 @@ namespace Pnu
 		return true;
 	}
 
-	Error_ TypeObject::update_slot(STR const & name)
+	Error_ TypeObject::update_slot(StringRef const & name)
 	{
 		if (!name || name.empty()) {
 			return Error_Unknown;
@@ -385,9 +385,9 @@ namespace Pnu
 		/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 		case "__new__"_hash: {
-			tp_new = (NewFunc)[](TYPE type, OBJ args) -> OBJ {
+			tp_new = (NewFunc)[](TypeRef type, ObjectRef args) -> ObjectRef {
 				STR_IDENTIFIER(__new__);
-				if (OBJ f{ type.lookup(&ID___new__) }) { return call_object(f, args); }
+				if (ObjectRef f{ type.lookup(&ID___new__) }) { return call_object(f, args); }
 				return nullptr;
 			};
 		} break;
@@ -395,64 +395,64 @@ namespace Pnu
 		case "__del__"_hash: {
 			tp_del = (DelFunc)[](Object * obj) -> void {
 				STR_IDENTIFIER(__del__);
-				if (OBJ f{ typeof(obj).lookup(&ID___del__) }) { /* TODO */ }
+				if (ObjectRef f{ typeof(obj).lookup(&ID___del__) }) { /* TODO */ }
 			};
 		} break;
 
 		/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 		case "__call__"_hash: {
-			tp_call = (BinaryFunc)[](OBJ self, OBJ args) -> OBJ {
+			tp_call = (BinaryFunc)[](ObjectRef self, ObjectRef args) -> ObjectRef {
 				STR_IDENTIFIER(__call__);
-				if (OBJ f{ typeof(self).lookup(&ID___call__) }) { return call_object(f, args); }
+				if (ObjectRef f{ typeof(self).lookup(&ID___call__) }) { return call_object(f, args); }
 				return nullptr;
 			};
 		} break;
 
 		case "__hash__"_hash: {
-			tp_hash = (HashFunc)[](OBJ self) -> size_t {
+			tp_hash = (HashFunc)[](ObjectRef self) -> size_t {
 				STR_IDENTIFIER(__hash__);
-				if (OBJ f{ typeof(self).lookup(&ID___hash__) }) { return call_object(f, self).cast<size_t>(); }
+				if (ObjectRef f{ typeof(self).lookup(&ID___hash__) }) { return call_object(f, self).cast<size_t>(); }
 				return 0;
 			};
 		} break;
 
 		case "__len__"_hash: {
-			tp_len = (LenFunc)[](OBJ self) -> ssize_t {
+			tp_len = (LenFunc)[](ObjectRef self) -> ssize_t {
 				STR_IDENTIFIER(__len__);
-				if (OBJ f{ typeof(self).lookup(&ID___len__) }) { return call_object(f, self).cast<ssize_t>(); }
+				if (ObjectRef f{ typeof(self).lookup(&ID___len__) }) { return call_object(f, self).cast<ssize_t>(); }
 				return -1;
 			};
 		} break;
 
 		case "__repr__"_hash: {
-			tp_repr = (ReprFunc)[](OBJ self) -> STR {
+			tp_repr = (ReprFunc)[](ObjectRef self) -> StringRef {
 				STR_IDENTIFIER(__repr__);
-				if (OBJ f{ typeof(self).lookup(&ID___repr__) }) { return call_object(f, self); }
+				if (ObjectRef f{ typeof(self).lookup(&ID___repr__) }) { return call_object(f, self); }
 				return nullptr;
 			};
 		} break;
 
 		case "__str__"_hash: {
-			tp_str = (ReprFunc)[](OBJ self) -> STR {
+			tp_str = (ReprFunc)[](ObjectRef self) -> StringRef {
 				STR_IDENTIFIER(__str__);
-				if (OBJ f{ typeof(self).lookup(&ID___str__) }) { return call_object(f, self); }
+				if (ObjectRef f{ typeof(self).lookup(&ID___str__) }) { return call_object(f, self); }
 				return nullptr;
 			};
 		} break;
 
 		case "__get__"_hash: {
-			tp_descr_get = (DescrGetFunc)[](OBJ self, OBJ obj, OBJ type) -> OBJ {
+			tp_descr_get = (DescrGetFunc)[](ObjectRef self, ObjectRef obj, ObjectRef type) -> ObjectRef {
 				STR_IDENTIFIER(__get__);
-				if (OBJ f{ typeof(self).lookup(&ID___get__) }) { /* TODO */ }
+				if (ObjectRef f{ typeof(self).lookup(&ID___get__) }) { /* TODO */ }
 				return nullptr;
 			};
 		} break;
 
 		case "__set__"_hash: {
-			tp_descr_set = (DescrSetFunc)[](OBJ self, OBJ obj, OBJ type) -> Error_ {
+			tp_descr_set = (DescrSetFunc)[](ObjectRef self, ObjectRef obj, ObjectRef type) -> Error_ {
 				STR_IDENTIFIER(__set__);
-				if (OBJ f{ typeof(self).lookup(&ID___set__) }) { /* TODO */ }
+				if (ObjectRef f{ typeof(self).lookup(&ID___set__) }) { /* TODO */ }
 				return Error_Unknown;
 			};
 		} break;
@@ -493,14 +493,14 @@ namespace Pnu
 
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-	OBJ TypeObject::type_getattro(TYPE type, OBJ name)
+	ObjectRef TypeObject::type_getattro(TypeRef type, ObjectRef name)
 	{
 		return generic_getattr_with_dict(type, name, nullptr);
 	}
 
-	Error_ TypeObject::type_setattro(TYPE type, OBJ name, OBJ value)
+	Error_ TypeObject::type_setattro(TypeRef type, ObjectRef name, ObjectRef value)
 	{
-		ASSERT(STR::check_(name));
+		ASSERT(StringRef::check_(name));
 
 		Error_ err{ generic_setattr_with_dict(type, name, value, nullptr) };
 

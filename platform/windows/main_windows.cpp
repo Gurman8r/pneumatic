@@ -9,22 +9,22 @@
 
 int _main()
 {
-	Pnu::OS_Windows os{ (HINSTANCE)NULL };
+	using namespace Pnu;
 
-	switch (Pnu::Main::setup(__argv[0], __argc, __argv)) {
-	case Pnu::Error_OK: break;
+	OS_Windows os{ (HINSTANCE)nullptr };
+
+	switch (Main::setup(__argv[0], __argc, __argv)) {
+	case Error_OK: break;
 	/* TODO: additional error checking goes here */
-	case Pnu::Error_Unknown:
+	case Error_Unknown:
 	default: {
-		CRASH("An unknown error occurred during setup. The program was unable to start.");
+		CRASH("An error occurred during setup and program was unable to start.");
 	} break;
 	}
 
-	if (Pnu::Main::start()) {
-		os.run();
-	}
+	if (Main::start()) { os.run(); }
 
-	Pnu::Main::cleanup();
+	Main::cleanup();
 
 	return os.get_exit_code();
 }

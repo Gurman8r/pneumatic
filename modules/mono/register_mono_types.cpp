@@ -1,16 +1,14 @@
 #include <modules/mono/register_mono_types.hpp>
-#include <modules/mono/mono_script.hpp>
-#include <modules/mono/mono_behavior.hpp>
+#include <modules/mono/csharp.hpp>
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 using namespace Pnu;
 
-static MonoLanguage * mono_language{};
+static CSharpLanguage * cs_language{};
+static Ref<CSharpScriptFormatLoader> cs_loader{};
 
-static Ref<MonoScriptFormatLoader> cs_loader{};
-
-bool open_mono_library(PnuExtensionInterfacePtr iface, PnuExtensionPtr library, PnuExtensionInitializationPtr initialization)
+bool open_mono_library(PneuExtensionInterfacePtr iface, PneuExtensionPtr library, PneuExtensionInitializationPtr initialization)
 {
 	if (!iface || !library || !initialization) { return false; }
 	PRINT_LINE("open mono module");
@@ -22,21 +20,21 @@ bool open_mono_library(PnuExtensionInterfacePtr iface, PnuExtensionPtr library, 
 	return true;
 }
 
-void initialize_mono_module(void * user, PnuExtensionInitializationLevel level)
+void initialize_mono_module(void * user, PneuExtensionInitializationLevel level)
 {
 	if (level != ExtensionInitializationLevel_Scene) { return; }
 	PRINT_LINE("initialize mono module");
 	cs_loader.instance(); get_resource_loader()->add(cs_loader);
-	REGISTER_CLASS(MonoLanguage, MonoScript, MonoInstance, MonoBehavior);
-	mono_language = memnew(MonoLanguage); get_script_server()->register_language(mono_language);
+	REGISTER_CLASS(CSharpLanguage, CSharpScript, CSharpInstance);
+	cs_language = memnew(CSharpLanguage); get_script_server()->register_language(cs_language);
 }
 
-void finalize_mono_module(void * user, PnuExtensionInitializationLevel level)
+void finalize_mono_module(void * user, PneuExtensionInitializationLevel level)
 {
 	if (level != ExtensionInitializationLevel_Scene) { return; }
 	PRINT_LINE("finalize mono module");
-	get_script_server()->unregister_language(mono_language); memdelete(mono_language);
-	UNREGISTER_CLASS(MonoLanguage, MonoScript, MonoInstance, MonoBehavior);
+	get_script_server()->unregister_language(cs_language); memdelete(cs_language);
+	UNREGISTER_CLASS(CSharpLanguage, CSharpScript, CSharpInstance);
 	get_resource_loader()->remove(cs_loader); cs_loader = nullptr;
 }
 

@@ -54,14 +54,10 @@ namespace Pnu
 
 	String ConfigFile::get_string(String const & section, String const & name, String const & default_value) const
 	{
-		if (auto const s{ util::getptr(m_data, section) })
-		{
-			if (auto const v{ util::getptr(*s, name) })
-			{
-				return *v;
-			}
-		}
-		return default_value;
+		Section const * s;
+		String const * v;
+		if ((s = util::getptr(m_data, section)) && (v = util::getptr(*s, name))) { return *v; }
+		else { return default_value; }
 	}
 
 	bool ConfigFile::set_string(String const & section, String const & name, String const & value)

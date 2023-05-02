@@ -20,10 +20,10 @@ namespace Pnu
 	Ref<FileAccess> FileAccess::create_for_path(String const & path)
 	{
 		Ref<FileAccess> file;
-		if (path.begins_with("res://")) {
+		if (path.has_prefix("res://")) {
 			file = create(FileAccessType_Resources);
 		}
-		else if (path.begins_with("usr://")) {
+		else if (path.has_prefix("usr://")) {
 			file = create(FileAccessType_User);
 		}
 		else {
@@ -99,7 +99,7 @@ namespace Pnu
 		u8 c{ read_8() };
 		while (!eof_reached()) {
 			if (c == ' ' && !token.empty()) { break; }
-			else { token.push_back(c); }
+			else { token += c; }
 			c = read_8();
 		}
 		return token;
@@ -110,11 +110,15 @@ namespace Pnu
 		String line{};
 		u8 c{ read_8() };
 		while (!eof_reached()) {
-			if (c == '\n' || c == '\0') { return line.push_back(0), line; }
-			else if (c != '\r') { line.push_back(c); }
+			if (c == '\0' || c == '\n') {
+				line += '\n';
+				return line;
+			}
+			else if (c != '\r') {
+				line += c;
+			}
 			c = read_8();
 		}
-		if (!line.empty()) { line.push_back(0); }
 		return line;
 	}
 
@@ -196,6 +200,12 @@ namespace Pnu
 	{
 		if (buffer.empty()) { return (*this); }
 		else { return write_buffer(buffer.data(), buffer.size()); }
+	}
+
+	bool FileAccess::exists(String const & path)
+	{
+		return (get_packed_data() && get_packed_data()->has_path(path))
+			|| open(path, FileMode_Read).is_valid();
 	}
 
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */

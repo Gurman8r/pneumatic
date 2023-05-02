@@ -57,7 +57,7 @@ namespace Pnu
 
 		virtual FileAccess & flush() = 0;
 		virtual FileAccess & close() = 0;
-		NODISCARD virtual bool exists(String const & path) = 0;
+		NODISCARD virtual bool file_exists(String const & path) = 0;
 		NODISCARD virtual bool is_open() const = 0;
 		virtual FileAccess & seek(u64 position) = 0;
 		virtual FileAccess & seek_end(i64 position = 0) = 0;
@@ -93,6 +93,9 @@ namespace Pnu
 		virtual FileAccess & write_line(String const & value);
 		virtual FileAccess & write_buffer(u8 const * data, size_t const size);
 		FileAccess & write_buffer(DynamicBuffer const & buffer);
+
+	public:
+		static bool exists(String const & path);
 	};
 
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */

@@ -1,14 +1,10 @@
 #include <modules/lua/register_lua_types.hpp>
-#include <modules/lua/lua_script.hpp>
-#include <modules/lua/lua_behavior.hpp>
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 using namespace Pnu;
 
-static LuaLanguage * lua_language{};
-
-bool open_lua_library(PnuExtensionInterfacePtr iface, PnuExtensionPtr library, PnuExtensionInitializationPtr initialization)
+bool open_lua_library(PneuExtensionInterfacePtr iface, PneuExtensionPtr library, PneuExtensionInitializationPtr initialization)
 {
 	if (!iface || !library || !initialization) { return false; }
 	PRINT_LINE("open lua module");
@@ -20,22 +16,16 @@ bool open_lua_library(PnuExtensionInterfacePtr iface, PnuExtensionPtr library, P
 	return true;
 }
 
-void initialize_lua_module(void * user, PnuExtensionInitializationLevel level)
+void initialize_lua_module(void * user, PneuExtensionInitializationLevel level)
 {
 	if (level != ExtensionInitializationLevel_Scene) { return; }
 	PRINT_LINE("initialize lua module");
-	REGISTER_CLASS(LuaLanguage, LuaScript, LuaInstance, LuaBehavior);
-	lua_language = memnew(LuaLanguage);
-	get_script_server()->register_language(lua_language);
 }
 
-void finalize_lua_module(void * user, PnuExtensionInitializationLevel level)
+void finalize_lua_module(void * user, PneuExtensionInitializationLevel level)
 {
 	if (level != ExtensionInitializationLevel_Scene) { return; }
 	PRINT_LINE("finalize lua module");
-	get_script_server()->unregister_language(lua_language);
-	memdelete(lua_language);
-	UNREGISTER_CLASS(LuaLanguage, LuaScript, LuaInstance, LuaBehavior);
 }
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */

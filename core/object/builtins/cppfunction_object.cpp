@@ -11,17 +11,17 @@ namespace Pnu
 
 		t.tp_vectorcalloffset = offsetof(CppFunctionObject, m_vectorcall);
 
-		t.tp_descr_get = (DescrGetFunc)[](OBJ self, OBJ obj, OBJ cls) -> OBJ
+		t.tp_descr_get = (DescrGetFunc)[](ObjectRef self, ObjectRef obj, ObjectRef cls) -> ObjectRef
 		{
-			return !obj ? self : (OBJ)METHOD({ self, obj });
+			return !obj ? self : (ObjectRef)MethodRef({ self, obj });
 		};
 
 		t.tp_bind = BIND_CLASS(CppFunctionObject, t)
 		{
 			// manually add this first because it's used by CLASS_
-			t.add_object("__name__", PROPERTY({
-				CPP_FUNCTION({ [](CppFunctionObject const & self) -> String const & { return self->name; }, attr::is_method(t) }),
-				CPP_FUNCTION({ [](CppFunctionObject & self, String const & value) { self->name = value; }, attr::is_method(t) }),
+			t.add_object("__name__", PropertyRef({
+				CppFunctionRef({ [](CppFunctionObject const & self) -> String const & { return self->name; }, attr::is_method(t) }),
+				CppFunctionRef({ [](CppFunctionObject & self, String const & value) { self->name = value; }, attr::is_method(t) }),
 				}));
 
 			return t
@@ -47,7 +47,7 @@ namespace Pnu
 
 	void CppFunctionObject::initialize_generic(FunctionRecord * rec, std::type_info const * const * info_in, size_t argc_in, bool prepend)
 	{
-		ASSERT("BAD FUNCTION RECORD" && (rec && !rec->next));
+		ASSERT("BAD FunctionRef RECORD" && (rec && !rec->next));
 		m_record = rec;
 
 		// argument info
@@ -63,7 +63,7 @@ namespace Pnu
 		}
 
 		// overload chaining
-		if (CPP_FUNCTION::check_(rec->sibling))
+		if (CppFunctionRef::check_(rec->sibling))
 		{
 			if (CppFunctionObject & sibling{ *VALIDATE((CppFunctionObject *)rec->sibling) }
 			; sibling.m_record->scope == rec->scope)
@@ -87,15 +87,15 @@ namespace Pnu
 
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-	OBJ CppFunctionObject::cppfunction_vectorcall(OBJ callable, OBJ const * argv, size_t argc)
+	ObjectRef CppFunctionObject::cppfunction_vectorcall(ObjectRef callable, ObjectRef const * argv, size_t argc)
 	{
 		ASSERT(argc < MAX_ARGUMENTS);
 
-		if (!CPP_FUNCTION::check_(callable)) { return nullptr; }
+		if (!CppFunctionRef::check_(callable)) { return nullptr; }
 
-		OBJ parent{ 0 < argc ? argv[0] : nullptr };
+		ObjectRef parent{ 0 < argc ? argv[0] : nullptr };
 
-		FunctionRecord const * overloads{ ((CPP_FUNCTION)callable)->get_function_record() }, * it{ overloads };
+		FunctionRecord const * overloads{ ((CppFunctionRef)callable)->get_function_record() }, * it{ overloads };
 
 		for (; it; it = it->next)
 		{
@@ -143,7 +143,7 @@ namespace Pnu
 			}
 
 			// execute call
-			if (OBJ result{ call() }; !call.try_next_overload)
+			if (ObjectRef result{ call() }; !call.try_next_overload)
 			{
 				return result;
 			}
